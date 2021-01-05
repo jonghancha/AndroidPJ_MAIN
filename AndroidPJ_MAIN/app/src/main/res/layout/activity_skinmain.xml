@@ -5,7 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.MainActivity">
+    tools:context=".Skin.SkinMainActivity">
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000DFF"
+        android:layout_alignParentBottom="true"
+        app:tabTextColor="@color/black"
+        app:tabSelectedTextColor="@color/white"
+        app:tabGravity="fill"
+        app:tabIndicatorFullWidth="true"
+        app:tabIndicatorGravity="top"
+        app:tabIndicatorHeight="5dp"
+        android:id="@+id/skinTab">
+    </com.google.android.material.tabs.TabLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,20 +27,8 @@
         <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/pageViewId">
+            android:id="@+id/skinView">
         </androidx.viewpager.widget.ViewPager>
     </LinearLayout>
-    <com.google.android.material.tabs.TabLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FF0000"
-        android:layout_alignParentBottom="true"
-        app:tabTextColor="@color/black"
-        app:tabSelectedTextColor="@color/white"
-        app:tabGravity="fill"
-        app:tabIndicatorFullWidth="true"
-        app:tabIndicatorGravity="top"
-        app:tabIndicatorHeight="5dp"
-        android:id="@+id/tabLayout_id">
-    </com.google.android.material.tabs.TabLayout>
+
 </LinearLayout>
