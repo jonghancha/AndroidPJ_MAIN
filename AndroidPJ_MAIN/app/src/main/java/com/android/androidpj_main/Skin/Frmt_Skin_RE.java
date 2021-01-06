@@ -11,20 +11,20 @@ import androidx.fragment.app.Fragment;
 
 import com.android.androidpj_main.R;
 
-public class Frmt_Skin_Body extends Fragment {
+public class Frmt_Skin_RE extends Fragment {
 
     View v;
     final static String TAG = "Frmt_Skin_Clean";
 
 
-    public Frmt_Skin_Body() {
+    public Frmt_Skin_RE() {
 
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.frmt_skin_body,container,false);
+        v = inflater.inflate(R.layout.frmt_skin_re,container,false);
 
         return v;
     }
