@@ -1,4 +1,4 @@
-package com.android.androidpj_main.Skin;
+package com.android.androidpj_main.Lip;
 
 
 import android.os.Bundle;
@@ -11,20 +11,20 @@ import androidx.fragment.app.Fragment;
 
 import com.android.androidpj_main.R;
 
-public class Frmt_Skin_Tot extends Fragment {
+public class Frmt_Lip_Bam extends Fragment {
 
     View v;
-    final static String TAG = "Frmt_Skin_Tot";
+    final static String TAG = "Frmt_Skin_Clean";
 
 
-    public Frmt_Skin_Tot() {
+    public Frmt_Lip_Bam() {
 
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.frmt_skin_tot,container,false);
+        v = inflater.inflate(R.layout.frmt_lip_bam,container,false);
 
         return v;
     }

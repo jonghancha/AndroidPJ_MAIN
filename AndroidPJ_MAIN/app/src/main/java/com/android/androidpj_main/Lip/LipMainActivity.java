@@ -1,4 +1,4 @@
-package com.android.androidpj_main.Skin;
+package com.android.androidpj_main.Lip;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import com.android.androidpj_main.Adapter.ViewPageAdapter;
 import com.android.androidpj_main.R;
 import com.google.android.material.tabs.TabLayout;
 
-public class SkinMainActivity extends AppCompatActivity {
+public class LipMainActivity extends AppCompatActivity {
 
 
     private TabLayout skinTab;
@@ -21,7 +21,7 @@ public class SkinMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_skinmain);
+        setContentView(R.layout.activity_lipmain);
 
 
 
@@ -31,13 +31,11 @@ public class SkinMainActivity extends AppCompatActivity {
         VPSkinAdapter = new ViewPageAdapter(getSupportFragmentManager());
 
         //     Add Fragment
-        VPSkinAdapter.AddFrmt(new Frmt_Skin_Tot(),"");
-        VPSkinAdapter.AddFrmt(new Frmt_Skin_ST(),"");
-        VPSkinAdapter.AddFrmt(new Frmt_Skin_RE(),"");
-        VPSkinAdapter.AddFrmt(new Frmt_Skin_EAS(),"");
-        VPSkinAdapter.AddFrmt(new Frmt_Skin_C(),"");
-        VPSkinAdapter.AddFrmt(new Frmt_Skin_M(),"");
-        VPSkinAdapter.AddFrmt(new Frmt_Skin_P(),"");
+        VPSkinAdapter.AddFrmt(new Frmt_Lip_Tot(),"");   // 립전체
+        VPSkinAdapter.AddFrmt(new Frmt_Lip_Tick(),""); // 립스틱
+        VPSkinAdapter.AddFrmt(new Frmt_Lip_Tin(),""); // 립틴트
+        VPSkinAdapter.AddFrmt(new Frmt_Lip_Rose(),""); // 립글로즈
+        VPSkinAdapter.AddFrmt(new Frmt_Lip_Bam(),""); // 립케어/립밤
 
         skinViewPager.setAdapter(VPSkinAdapter);
         skinTab.setupWithViewPager(skinViewPager);
@@ -46,12 +44,10 @@ public class SkinMainActivity extends AppCompatActivity {
 
 
         skinTab.getTabAt(0).setText("전체");      // Frmt_Skin_Tot
-        skinTab.getTabAt(1).setText("스킨/토너");  // Frmt_Skin_ST
-        skinTab.getTabAt(2).setText("로션/에멀젼");      // Frmt_Skin_RE
-        skinTab.getTabAt(3).setText("에센스/앰플/세럼");      // Frmt_Skin_EAS
-        skinTab.getTabAt(4).setText("크림");      // Frmt_Skin_C
-        skinTab.getTabAt(5).setText("미스트");      // Frmt_Skin_M
-        skinTab.getTabAt(6).setText("팩");      // Frmt_Skin_P
+        skinTab.getTabAt(1).setText("립스틱");  // Frmt_Lip_Tick
+        skinTab.getTabAt(2).setText("립틴트");      // Frmt_Lip_Tin
+        skinTab.getTabAt(3).setText("립글로즈");      // Frmt_Lip_Rose
+        skinTab.getTabAt(4).setText("립케어/립밤");      // Frmt_Lip_Bam
 
 
         //--------------------------------------------------------------------------------

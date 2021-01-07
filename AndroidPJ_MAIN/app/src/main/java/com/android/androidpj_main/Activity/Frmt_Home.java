@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.androidpj_main.R;
-import com.android.androidpj_main.Skin.SkinMainActivity;
+import com.android.androidpj_main.Lip.LipMainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Frmt_Home extends Fragment {
@@ -61,7 +61,7 @@ public class Frmt_Home extends Fragment {
     View.OnClickListener gomainClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(getActivity(), SkinMainActivity.class);
+            Intent intent = new Intent(getActivity(), LipMainActivity.class);
             startActivity(intent);
         }
     };

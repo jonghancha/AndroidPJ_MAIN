@@ -27,7 +27,7 @@
         <activity android:name=".Activity.MyViewActivity"/>
         <activity android:name=".Activity.MyUpdateActivity"/>
         <activity android:name=".Activity.SearchActivity"/>
-        <activity android:name=".Skin.SkinMainActivity"/>
+        <activity android:name=".Lip.LipMainActivity"/>
         <activity android:name=".Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
