@@ -4,22 +4,42 @@ package com.android.androidpj_main.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.androidpj_main.R;
-import com.android.androidpj_main.Skin.SkinMainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Frmt_Home extends Fragment {
 
-    View v;
     final static String TAG = "Frmt_Home";
-    Button btn_skin;
+    View v;
+
+
+    // 21.01.07 지은 추가 ---------------
+
+    //boolean flag to know if main FAB is in open or closed state.
+    private boolean fabExpanded = false;
+    private FloatingActionButton fabMain;   // 메안 플로팅 버튼
+    private FloatingActionButton fabMake, fab_honey;
+
+    //Linear layout holding the Save submenu
+    private LinearLayout layoutFabSave;
+    //Linear layout holding the Edit submenu
+    private LinearLayout layoutFabEdit;
+    //------------------------
+
+    Button gotest;
+
+
 
 
     public Frmt_Home() {
@@ -31,14 +51,48 @@ public class Frmt_Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.frmt_home,container,false);
 
+        gotest = v.findViewById(R.id.btn_test);
+        fabMain = v.findViewById(R.id.fabMain);
+        fabMake = v.findViewById(R.id.fabMake);
+        fab_honey = v.findViewById(R.id.fab_honey);
+        layoutFabSave = v.findViewById(R.id.layoutFabSave);
+        layoutFabEdit = v.findViewById(R.id.layoutFabEdit);
 
-        FloatingActionButton floatingActionButton = v.findViewById(R.id.home_tip);
-        floatingActionButton.setOnClickListener(floatCliclListener);
+//        gotest.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), TestMainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
-        btn_skin = v.findViewById(R.id.btn_skin);
-        btn_skin.setOnClickListener(gomainClick);
+        fabMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (fabExpanded == true) {
+                    closeSubMenusFab();
+                } else {
+                    openSubMenusFab();
+                }
+            }
+        });
 
+        fab_honey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "꿀팁 차차", Toast.LENGTH_SHORT).show();
+            }
+        });
+        fabMake.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "메이크업 영상", Toast.LENGTH_SHORT).show();
 
+            }
+        });
+
+        //Only main FAB is visible in the beginning
+        closeSubMenusFab();
         return v;
     }
 
@@ -47,23 +101,25 @@ public class Frmt_Home extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    //closes FAB submenus
+    private void closeSubMenusFab() {
+        layoutFabSave.setVisibility(View.INVISIBLE);
+        layoutFabEdit.setVisibility(View.INVISIBLE);
+//        fabMain.setImageResource(R.drawable.ic_add_black_24dp);
+        fabExpanded = false;
+    }
 
-    // 플로팅 버튼( 새로운 연락처 추가하는 액티비티로 옮김 )
-    View.OnClickListener floatCliclListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(getActivity(),HoneyTipActivity.class);
-            startActivity(intent);
-        }
-    };
+    //Opens FAB submenus
+    private void openSubMenusFab() {
+        layoutFabSave.setVisibility(View.VISIBLE);
+        layoutFabEdit.setVisibility(View.VISIBLE);
+        //'X' 아이콘으로 변경
+//        fabMain.setImageResource(R.drawable.ic_close);
+        fabExpanded = true;
+    }
 
-    // SkinMainActivity.java로 이동
-    View.OnClickListener gomainClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(getActivity(), SkinMainActivity.class);
-            startActivity(intent);
-        }
-    };
+
+
+
 
 }//-----------
