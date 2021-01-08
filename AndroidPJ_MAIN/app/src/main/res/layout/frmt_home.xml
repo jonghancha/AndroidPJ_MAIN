@@ -5,6 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,8 +23,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_weight="3"
-            android:background="#FFBDBD"
-            android:layout_margin="20dp">
+            android:background="#FFBDBD">
 
             <TextView
                 android:layout_width="match_parent"
@@ -67,6 +74,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <include layout="@layout/layout_fab_submenu" />
+<!--    <include layout="@layout/layout_fab_submenu" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

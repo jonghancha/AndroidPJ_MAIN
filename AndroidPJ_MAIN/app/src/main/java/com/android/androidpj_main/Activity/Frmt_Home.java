@@ -4,6 +4,8 @@ package com.android.androidpj_main.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -61,33 +63,33 @@ public class Frmt_Home extends Fragment {
             }
         });
 
-        fabMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (fabExpanded == true) {
-                    closeSubMenusFab();
-                } else {
-                    openSubMenusFab();
-                }
-            }
-        });
-
-        fab_honey.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "꿀팁 차차", Toast.LENGTH_SHORT).show();
-            }
-        });
-        fabMake.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "메이크업 영상", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        //Only main FAB is visible in the beginning
-        closeSubMenusFab();
+//        fabMain.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (fabExpanded == true) {
+//                    closeSubMenusFab();
+//                } else {
+//                    openSubMenusFab();
+//                }
+//            }
+//        });
+//
+//        fab_honey.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getContext(), "꿀팁 차차", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        fabMake.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getContext(), "메이크업 영상", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//
+//        //Only main FAB is visible in the beginning
+//        closeSubMenusFab();
         return v;
     }
 
@@ -99,29 +101,31 @@ public class Frmt_Home extends Fragment {
     // 버튼선언 - xml 과의
     private void initUI() {
         gotest = v.findViewById(R.id.btn_test);
-        fabMain = v.findViewById(R.id.fabMain);
-        fabMake = v.findViewById(R.id.fabMake);
-        fab_honey = v.findViewById(R.id.fab_honey);
-        layoutFabSave = v.findViewById(R.id.layoutFabSave);
-        layoutFabEdit = v.findViewById(R.id.layoutFabEdit);
+//        fabMain = v.findViewById(R.id.fabMain);
+//        fabMake = v.findViewById(R.id.fabMake);
+//        fab_honey = v.findViewById(R.id.fab_honey);
+//        layoutFabSave = v.findViewById(R.id.layoutFabSave);
+//        layoutFabEdit = v.findViewById(R.id.layoutFabEdit);
     }
 
-    //closes FAB submenus
-    private void closeSubMenusFab() {
-        layoutFabSave.setVisibility(View.INVISIBLE);
-        layoutFabEdit.setVisibility(View.INVISIBLE);
-        fabMain.setImageResource(R.drawable.ic_add_black_24dp);
-        fabExpanded = false;
-    }
+//    //closes FAB submenus
+//    private void closeSubMenusFab() {
+//        layoutFabSave.setVisibility(View.INVISIBLE);
+//        layoutFabEdit.setVisibility(View.INVISIBLE);
+//        fabMain.setImageResource(R.drawable.ic_add_black_24dp);
+//        fabExpanded = false;
+//    }
+//
+//    //Opens FAB submenus
+//    private void openSubMenusFab() {
+//        layoutFabSave.setVisibility(View.VISIBLE);
+//        layoutFabEdit.setVisibility(View.VISIBLE);
+//        //'X' 아이콘으로 변경
+//        fabMain.setImageResource(R.drawable.ic_close);
+//        fabExpanded = true;
+//    }
 
-    //Opens FAB submenus
-    private void openSubMenusFab() {
-        layoutFabSave.setVisibility(View.VISIBLE);
-        layoutFabEdit.setVisibility(View.VISIBLE);
-        //'X' 아이콘으로 변경
-        fabMain.setImageResource(R.drawable.ic_close);
-        fabExpanded = true;
-    }
+
 
 
 
