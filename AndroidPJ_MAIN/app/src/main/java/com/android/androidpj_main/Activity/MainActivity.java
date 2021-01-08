@@ -41,14 +41,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("LIPHAE");
 
         // 지은 추가 = 검색창 눌렀을 때 탭레이아웃 올라오는거 막음
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
 
 
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout_id);
-        viewPager = (ViewPager) findViewById(R.id.pageViewId);
+        tabLayout = findViewById(R.id.tabLayout_id);
+        viewPager = findViewById(R.id.pageViewId);
 
         viewPageAdapter = new ViewPageAdapter(getSupportFragmentManager());
 
@@ -73,12 +74,36 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(2).setText("찜");
         tabLayout.getTabAt(3).setText("마이페이지");
 
-
-        //Remove ActionBar Shadow
-
+//
+//        //Remove ActionBar Shadow
+//
         ActionBar actionBar = getSupportActionBar();
         actionBar.setElevation(0);
         //--------------------------------------------------------------------------------
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_category) {
+            Toast.makeText(MainActivity.this, "장바구니 클릭", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
