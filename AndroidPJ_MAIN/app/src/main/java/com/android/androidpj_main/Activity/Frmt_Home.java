@@ -32,7 +32,7 @@ public class Frmt_Home extends Fragment {
     View v;
 
 
-    // 21.01.07 지은 추가 ---------------
+    // 21.01.07 지은 추가 ***************************
     //boolean 플래그는 main FAB가 열린 상태인지 닫힌 상태인지 알 수 있음.
     private boolean fabExpanded = false;
     Button gotest;
@@ -43,7 +43,10 @@ public class Frmt_Home extends Fragment {
     LinearLayout layoutFabMake;
     //Linear layout holding the Honey submenu
     LinearLayout layoutFabHoney;
-    //------------------------
+
+    // 21.01.09 지은 추가 ---------------
+    SliderView sliderView;
+    //****************************************
 
 
     public Frmt_Home() {
@@ -56,7 +59,7 @@ public class Frmt_Home extends Fragment {
         v = inflater.inflate(R.layout.frmt_home,container,false);
 
 
-        // 지은 21.01.08-------------------------------
+        // 지은 추가 21.01.08 ***************************
         gotest = v.findViewById(R.id.btn_test);
         fabMain = v.findViewById(R.id.fabMain);
         fabMake = v.findViewById(R.id.fabMake);
@@ -74,10 +77,23 @@ public class Frmt_Home extends Fragment {
         //------------------------------------------------
 
 
-        //
-        final SliderView sliderView = v.findViewById(R.id.imageSlider);
+        //지은 21.01.09------------------------------------
+        sliderView = v.findViewById(R.id.imageSlider);
 
+        MainBanner();
+       //**********************************************
 
+        return v;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    //지은 추가 21.01.09 *****************************************
+    // 배너에 이용되는 메소드 분리-------
+    public void MainBanner(){
         SliderAdapter adapter = new SliderAdapter(getContext());
         adapter.addItem(new SliderItem("Demo Image 1","https://hi.esmplus.com/b/2019/06/05/1559701410921nltlm7c.jpg"));
         adapter.addItem(new SliderItem("Demo Image 2","https://img1.daumcdn.net/thumb/R720x0/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fyookkystudio%2F25bbc5bf0ea74c98a9e0fa244e9dc7b1.JPG"));
@@ -99,17 +115,8 @@ public class Frmt_Home extends Fragment {
             public void onIndicatorClicked(int position) {
                 sliderView.setCurrentPagePosition(position);
             }
-        });
+        });    }
 
-        //
-
-        return v;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     // 지은 추가 21.01.09-------------------------------
     // 지은 home 쪽에서 쓰이는 버튼 기능 수정
@@ -144,11 +151,7 @@ public class Frmt_Home extends Fragment {
     };//------------------------------------------------
 
 
-
-
-
-
-    // 지은 21.01.08-------------------------------
+    // 지은 추가 21.01.08-------------------------------
     // 플로팅 서브메뉴 숨기기
     private void closeSubMenusFab() {
         layoutFabMake.setVisibility(View.INVISIBLE);
@@ -165,7 +168,7 @@ public class Frmt_Home extends Fragment {
         fabMain.setImageResource(R.drawable.ic_close);
         fabExpanded = true;
     }
-    //------------------------------------------------
+    //**********************************************
 
 
 
