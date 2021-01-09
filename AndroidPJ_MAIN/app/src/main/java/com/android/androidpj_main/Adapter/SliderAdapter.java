@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.androidpj_main.R;
-import com.android.androidpj_main.models.SliderItem;
+import com.android.androidpj_main.Model.SliderItem;
 import com.bumptech.glide.Glide;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 

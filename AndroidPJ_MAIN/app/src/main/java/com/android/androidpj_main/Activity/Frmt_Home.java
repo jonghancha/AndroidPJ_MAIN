@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,9 +15,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.androidpj_main.Adapter.SliderAdapter;
+import com.android.androidpj_main.Make_Youtube.YoutubeActivity;
 import com.android.androidpj_main.R;
 import com.android.androidpj_main.Test.TestMainActivity;
-import com.android.androidpj_main.models.SliderItem;
+import com.android.androidpj_main.Model.SliderItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.IndicatorView.draw.controller.DrawController;
@@ -144,6 +143,8 @@ public class Frmt_Home extends Fragment {
 
                 case R.id.fabMake:
                     Toast.makeText(getContext(), "메이크업 영상", Toast.LENGTH_SHORT).show();
+                    Intent Mintent = new Intent(getActivity(), YoutubeActivity.class);
+                    startActivity(Mintent);
                     break;
                 // 플로팅 버튼 관련 -------------------------
             }

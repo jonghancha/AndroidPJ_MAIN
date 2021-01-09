@@ -1,4 +1,4 @@
-package com.android.androidpj_main.models;
+package com.android.androidpj_main.Model;
 
 public class SliderItem {
     private String description;
