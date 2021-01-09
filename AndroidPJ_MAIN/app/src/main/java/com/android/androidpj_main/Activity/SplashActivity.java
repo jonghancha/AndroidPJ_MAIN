@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.android.androidpj_main.R;
+import com.android.androidpj_main.UserSign.LoginActivity;
 
 public class SplashActivity extends Activity {
 
