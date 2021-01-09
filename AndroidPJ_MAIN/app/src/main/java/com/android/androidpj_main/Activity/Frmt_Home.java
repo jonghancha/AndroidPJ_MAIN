@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.androidpj_main.R;
+import com.android.androidpj_main.Test.TestMainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Frmt_Home extends Fragment {
@@ -25,21 +26,17 @@ public class Frmt_Home extends Fragment {
 
 
     // 21.01.07 지은 추가 ---------------
-
-    //boolean flag to know if main FAB is in open or closed state.
+    //boolean 플래그는 main FAB가 열린 상태인지 닫힌 상태인지 알 수 있음.
     private boolean fabExpanded = false;
-    private FloatingActionButton fabMain;   // 메안 플로팅 버튼
-    private FloatingActionButton fabMake, fab_honey;
-
-    //Linear layout holding the Save submenu
-    private LinearLayout layoutFabSave;
-    //Linear layout holding the Edit submenu
-    private LinearLayout layoutFabEdit;
-    //------------------------
-
     Button gotest;
+    FloatingActionButton fabMain;   // 메안 플로팅 버튼
+    FloatingActionButton fabMake, fab_honey;
 
-
+    //Linear layout holding the Make submenu
+    LinearLayout layoutFabMake;
+    //Linear layout holding the Honey submenu
+    LinearLayout layoutFabHoney;
+    //------------------------
 
 
     public Frmt_Home() {
@@ -51,48 +48,25 @@ public class Frmt_Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.frmt_home,container,false);
 
+
+        // 지은 21.01.08-------------------------------
         gotest = v.findViewById(R.id.btn_test);
         fabMain = v.findViewById(R.id.fabMain);
         fabMake = v.findViewById(R.id.fabMake);
         fab_honey = v.findViewById(R.id.fab_honey);
-        layoutFabSave = v.findViewById(R.id.layoutFabSave);
-        layoutFabEdit = v.findViewById(R.id.layoutFabEdit);
+        layoutFabMake = v.findViewById(R.id.layoutFabMake);
+        layoutFabHoney = v.findViewById(R.id.layoutFabHoney);
 
-//        gotest.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), TestMainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        gotest.setOnClickListener(homeBtnClickListener);
+        fabMain.setOnClickListener(homeBtnClickListener);
+        fabMake.setOnClickListener(homeBtnClickListener);
+        fab_honey.setOnClickListener(homeBtnClickListener);
 
-        fabMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (fabExpanded == true) {
-                    closeSubMenusFab();
-                } else {
-                    openSubMenusFab();
-                }
-            }
-        });
-
-        fab_honey.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "꿀팁 차차", Toast.LENGTH_SHORT).show();
-            }
-        });
-        fabMake.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "메이크업 영상", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        //Only main FAB is visible in the beginning
+        //플로팅 버튼 시작할때 숨기기
         closeSubMenusFab();
+        //------------------------------------------------
+
+
         return v;
     }
 
@@ -101,25 +75,63 @@ public class Frmt_Home extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    //closes FAB submenus
+    // 지은 추가 21.01.09-------------------------------
+    // 지은 home 쪽에서 쓰이는 버튼 기능 수정
+    View.OnClickListener homeBtnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.btn_test:
+                    Intent intent = new Intent(getActivity(), TestMainActivity.class);
+                    startActivity(intent);
+                    break;
+
+                    // 플로팅 버튼 관련 -------------------------
+                case R.id.fabMain:
+                    if (fabExpanded == true) {
+                        closeSubMenusFab();
+                    } else {
+                        openSubMenusFab();
+                    }
+                    break;
+
+                case R.id.fab_honey:
+                    Toast.makeText(getContext(), "꿀팁 차차", Toast.LENGTH_SHORT).show();
+                    break;
+
+                case R.id.fabMake:
+                    Toast.makeText(getContext(), "메이크업 영상", Toast.LENGTH_SHORT).show();
+                    break;
+                // 플로팅 버튼 관련 -------------------------
+            }
+        }
+    };//------------------------------------------------
+
+
+
+
+
+
+    // 지은 21.01.08-------------------------------
+    // 플로팅 서브메뉴 숨기기
     private void closeSubMenusFab() {
-        layoutFabSave.setVisibility(View.INVISIBLE);
-        layoutFabEdit.setVisibility(View.INVISIBLE);
-//        fabMain.setImageResource(R.drawable.ic_add_black_24dp);
+        layoutFabMake.setVisibility(View.INVISIBLE);
+        layoutFabHoney.setVisibility(View.INVISIBLE);
+        fabMain.setImageResource(R.drawable.ic_add_black_24dp);
         fabExpanded = false;
     }
 
-    //Opens FAB submenus
+    // 플로팅 서브메뉴 나타내기
     private void openSubMenusFab() {
-        layoutFabSave.setVisibility(View.VISIBLE);
-        layoutFabEdit.setVisibility(View.VISIBLE);
+        layoutFabMake.setVisibility(View.VISIBLE);
+        layoutFabHoney.setVisibility(View.VISIBLE);
         //'X' 아이콘으로 변경
-//        fabMain.setImageResource(R.drawable.ic_close);
+        fabMain.setImageResource(R.drawable.ic_close);
         fabExpanded = true;
     }
+    //------------------------------------------------
 
 
 
 
-
-}//-----------
+}//--- 끝 --------
