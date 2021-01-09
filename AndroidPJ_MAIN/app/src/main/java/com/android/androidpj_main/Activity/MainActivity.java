@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,9 +25,11 @@ import com.android.androidpj_main.Adapter.ViewPageAdapter;
 import com.android.androidpj_main.R;
 import com.google.android.material.tabs.TabLayout;
 
+import static android.graphics.Color.*;
+
 public class MainActivity extends AppCompatActivity {
 
-
+    // 21.01.07 지은 추가 ***************************
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPageAdapter viewPageAdapter;
@@ -37,15 +41,18 @@ public class MainActivity extends AppCompatActivity {
     // 첫 번째 뒤로가기 버튼을 누를때 표시
     private Toast toast;
 
+
+    //****************************************
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("LIPHAE");
 
-        // 지은 추가 = 검색창 눌렀을 때 탭레이아웃 올라오는거 막음
+        //21.01.07 지은 추가 ******************************
+        //검색창 눌렀을 때 탭레이아웃 올라오는거 막음
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
-
 
 
         tabLayout = findViewById(R.id.tabLayout_id);
@@ -64,25 +71,19 @@ public class MainActivity extends AppCompatActivity {
 
         mContext = this;
 
-//        tabLayout.getTabAt(0).setIcon(R.drawable.ic_call_black_24dp).setText("홈");
-//        tabLayout.getTabAt(1).setIcon(R.drawable.ic_group_black_24dp).setText("카테고리");
-//        tabLayout.getTabAt(2).setIcon(R.drawable.ic_favorite_black_24dp).setText("찜");
-//        tabLayout.getTabAt(3).setIcon(R.drawable.ic_favorite_black_24dp).setText("마이페이지");
+        //21.01.10 지은 수정 ------------------------------------------
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_home).setText("홈");
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_cate).setText("카테고리");
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_like).setText("찜");
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_mypage).setText("마이페이지");
 
-        tabLayout.getTabAt(0).setText("홈");
-        tabLayout.getTabAt(1).setText("카테고리");
-        tabLayout.getTabAt(2).setText("찜");
-        tabLayout.getTabAt(3).setText("마이페이지");
-
-//
-//        //Remove ActionBar Shadow
-//
         ActionBar actionBar = getSupportActionBar();
         actionBar.setElevation(0);
-        //--------------------------------------------------------------------------------
+        //****************************************
     }
 
 
+    // 옵션 메뉴 선언
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -90,22 +91,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // 옵션 메뉴
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_category) {
-            Toast.makeText(MainActivity.this, "장바구니 클릭", Toast.LENGTH_SHORT).show();
-            return true;
+        switch (item.getItemId()){
+            case R.id.action_search:
+                Toast.makeText(MainActivity.this, "검색창 클릭", Toast.LENGTH_SHORT).show();
+                Intent intentS = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(intentS);
+                break;
+            case R.id.action_cart:
+                Toast.makeText(MainActivity.this, "장바구니 클릭", Toast.LENGTH_SHORT).show();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+
+    // 뒤로가기 두번 클릭시 어플 종료
     @Override
     public void onBackPressed() {
         // 기존 뒤로가기 버튼의 기능을 막기위해 주석처리 또는 삭제
