@@ -2,6 +2,7 @@ package com.android.androidpj_main.Activity;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,9 +16,15 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.androidpj_main.Adapter.SliderAdapter;
 import com.android.androidpj_main.R;
 import com.android.androidpj_main.Test.TestMainActivity;
+import com.android.androidpj_main.models.SliderItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.smarteist.autoimageslider.IndicatorAnimations;
+import com.smarteist.autoimageslider.IndicatorView.draw.controller.DrawController;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 public class Frmt_Home extends Fragment {
 
@@ -66,6 +73,35 @@ public class Frmt_Home extends Fragment {
         closeSubMenusFab();
         //------------------------------------------------
 
+
+        //
+        final SliderView sliderView = v.findViewById(R.id.imageSlider);
+
+
+        SliderAdapter adapter = new SliderAdapter(getContext());
+        adapter.addItem(new SliderItem("Demo Image 1","https://hi.esmplus.com/b/2019/06/05/1559701410921nltlm7c.jpg"));
+        adapter.addItem(new SliderItem("Demo Image 2","https://img1.daumcdn.net/thumb/R720x0/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fyookkystudio%2F25bbc5bf0ea74c98a9e0fa244e9dc7b1.JPG"));
+        adapter.addItem(new SliderItem("Demo Image 3","https://post-phinf.pstatic.net/MjAxNzA3MjhfMjY5/MDAxNTAxMjA1MzUyOTYz.wtBPmVQGbJp38EiyeZu5AzLnVb1jnqxIxLfV-hYO6gAg.TEQEeHgDem8EhaJczzIjP_B2QE7dv76aGC6p0DrYHAsg.JPEG/170728_%EB%A6%BD%EC%BB%AC%EB%9F%AC%EC%B0%BE%EA%B8%B0_%ED%94%84%EB%A1%9C%EB%AA%A8%EC%85%98_APP_02.jpg?type=w1200"));
+
+        sliderView.setSliderAdapter(adapter);
+
+        sliderView.setIndicatorAnimation(IndicatorAnimations.THIN_WORM); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
+        sliderView.setIndicatorSelectedColor(Color.WHITE);
+        sliderView.setIndicatorUnselectedColor(Color.GRAY);
+        sliderView.setScrollTimeInSec(1);
+        sliderView.setAutoCycle(true);
+        sliderView.startAutoCycle();
+
+        sliderView.setOnIndicatorClickListener(new DrawController.ClickListener() {
+            @Override
+            public void onIndicatorClicked(int position) {
+                sliderView.setCurrentPagePosition(position);
+            }
+        });
+
+        //
 
         return v;
     }
