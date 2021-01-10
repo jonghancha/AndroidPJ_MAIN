@@ -1,31 +1,22 @@
-package com.android.androidpj_main.Activity;
+package com.android.androidpj_main.Main;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import com.android.androidpj_main.Activity.SearchActivity;
 import com.android.androidpj_main.Adapter.ViewPageAdapter;
 import com.android.androidpj_main.R;
 import com.google.android.material.tabs.TabLayout;
-
-import static android.graphics.Color.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_cate).setText("카테고리");
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_like).setText("찜");
         tabLayout.getTabAt(3).setIcon(R.drawable.ic_mypage).setText("마이페이지");
+
+        // 21.01.10 지은 추가 선택되는 탭 상단 색 바꾸기 --- > 교체 예정
+        tabLayout.setSelectedTabIndicatorColor(Color.RED);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setElevation(0);

@@ -1,4 +1,4 @@
-package com.android.androidpj_main.Activity;
+package com.android.androidpj_main.Main;
 
 
 import android.content.Intent;

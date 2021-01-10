@@ -1,4 +1,4 @@
-package com.android.addressproject.Bean;
+package com.android.androidpj_main.Bean;
 
 public class User {
     //Field (필드) = Bean 에선 이렇게 한줄 씩 쓰는 것이 좋다.

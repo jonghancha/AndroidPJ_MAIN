@@ -57,10 +57,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
 
         // 상품 이미지(이미지로 수정해야함)
         holder.search_img.setImageResource(R.mipmap.ic_launcher);
+        // 상품 브랜드
+        holder.search_brand.setText("[ "+data.get(position).getPrdBrand()+ " ]");
         // 상품 이름
         holder.search_name.setText(data.get(position).getPrdName());
         // 상품 가격
-        //int prdPrice = data.get(position).getPrdPrice();
         Log.v(TAG, String.valueOf(data.get(position).getPrdPrice()));
         holder.search_price.setText(String.valueOf(data.get(position).getPrdPrice()));
 
@@ -96,12 +97,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
 
         // item_search.xml 선언
         protected ImageView search_img;
+        protected TextView search_brand;
         protected TextView search_name;
         protected TextView search_price;
 
         public ProductHolder(@NonNull View itemView) {
             super(itemView);
             search_img = itemView.findViewById(R.id.search_img);
+            search_brand = itemView.findViewById(R.id.search_brand);
             search_name = itemView.findViewById(R.id.search_name);
             search_price = itemView.findViewById(R.id.search_price);
         }

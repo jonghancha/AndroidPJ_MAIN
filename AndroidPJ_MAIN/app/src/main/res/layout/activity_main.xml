@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.MainActivity">
+    tools:context=".Main.MainActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,8 +20,9 @@
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFBF00"
+        android:background="?colorPrimary"
         android:layout_alignParentBottom="true"
+        app:tabIconTint="@color/black"
         app:tabTextColor="@color/black"
         app:tabSelectedTextColor="@color/white"
         app:tabGravity="fill"

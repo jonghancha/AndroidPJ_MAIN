@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.androidpj_main.Activity.MainActivity;
+import com.android.androidpj_main.Main.MainActivity;
 import com.android.androidpj_main.R;
 
 

@@ -3,13 +3,178 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".Activity.MyViewActivity">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="내정보"
-        />
+        android:layout_weight="2"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/MyName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="나의 이름"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"
+            />
+        <TextView
+            android:id="@+id/MyEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="나의 이메일"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:textColor="@color/black"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        >
+        <LinearLayout
+            android:id="@+id/MyUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:weightSum="5"
+            android:background="@color/white"
+            android:layout_marginTop="1dp"
+            android:paddingLeft="20dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="회원 정보 수정"
+                android:textSize="15dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center|bottom"
+                android:src="@drawable/ic_next"
+                android:padding="5dp"
+                android:layout_weight="4"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/MyPwUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:weightSum="5"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:paddingLeft="20dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="비밀번호 수정"
+                android:textSize="15dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center|bottom"
+                android:src="@drawable/ic_next"
+                android:padding="5dp"
+                android:layout_weight="4"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        >
+        <LinearLayout
+            android:id="@+id/MyLogout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:weightSum="5"
+            android:background="@color/white"
+            android:layout_marginTop="1dp"
+            android:paddingLeft="20dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="로그아웃"
+                android:textSize="15dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center|bottom"
+                android:src="@drawable/ic_next"
+                android:padding="5dp"
+                android:layout_weight="4"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/MyDelete"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:weightSum="5"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:paddingLeft="20dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="회원 탈퇴"
+                android:textSize="15dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center|bottom"
+                android:src="@drawable/ic_next"
+                android:padding="5dp"
+                android:layout_weight="4"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            />
+    </LinearLayout>
+
 
 </LinearLayout>
