@@ -62,13 +62,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2"
-            android:background="#FFC9C9">
+            android:background="#3F51B5">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#FF1212"
+
                 />
 
             <Button

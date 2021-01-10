@@ -1,4 +1,4 @@
-package com.android.androidpj_main.Activity;
+package com.android.androidpj_main.Main;
 
 
 import android.os.Bundle;
@@ -11,20 +11,20 @@ import androidx.fragment.app.Fragment;
 
 import com.android.androidpj_main.R;
 
-public class Frmt_Mypage extends Fragment {
+public class Frmt_Category extends Fragment {
 
     View v;
-    final static String TAG = "Frmt_Mypage";
+    final static String TAG = "Frmt_Category";
 
 
-    public Frmt_Mypage() {
+    public Frmt_Category() {
 
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.frmt_mypage,container,false);
+        v = inflater.inflate(R.layout.frmt_category,container,false);
 
         return v;
     }

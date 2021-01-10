@@ -38,7 +38,9 @@ dependencies {
     //
 
     // 유튜브 api
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
     //
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
