@@ -66,14 +66,10 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ProductHolder>
         // 상품 이름
         holder.tv_likename.setText(data.get(position).getPrdName());
         // 상품 가격
-        //int prdPrice = data.get(position).getPrdPrice();
-        Log.v(TAG, String.valueOf(data.get(position).getPrdPrice()));
-        Log.v(TAG, String.valueOf(holder.tv_likeprice));
-        Log.v(TAG, String.valueOf(holder.tv_likename));
         holder.tv_likeprice.setText(String.valueOf(data.get(position).getPrdPrice()));
 
         int prdNo = data.get(position).getPrdNo();
-        Toast.makeText(mContext, "prdNo : " + prdNo, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext, "prdNo : " + prdNo, Toast.LENGTH_SHORT).show();
 
 
         ///////////////////////////////////////////////////////////////////////////
@@ -88,6 +84,7 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ProductHolder>
             public void onClick(View v) {
 
                 Intent intent = new Intent(v.getContext(), ProductViewActivity.class);
+                intent.putExtra("prdNo", data.get(position).getPrdNo());
                 intent.putExtra("prdName", data.get(position).getPrdName());
 
                 v.getContext().startActivity(intent);
