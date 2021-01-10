@@ -22,6 +22,7 @@ import com.android.androidpj_main.Share.ShareVar;
 
 import java.util.ArrayList;
 
+// 21.01.10 지은 추가 ********************************
 public class MyViewActivity extends AppCompatActivity {
 
     // 21.01.10 지은 추가 ********************************
@@ -214,7 +215,42 @@ public class MyViewActivity extends AppCompatActivity {
                     break;
 
                 case R.id.MyDelete:
-                    Toast.makeText(MyViewActivity.this, "회원 탈퇴 클릭", Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MyViewActivity.this);
+
+                    // Set the message show for the Alert time
+                    builder.setMessage("탈퇴를 진행하시겠습니까?");
+
+                    // Set Alert Title
+                    builder.setTitle("경고");
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("네",new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog,int which)
+                        {
+                            // 저장한 키 값으로 저장된 아이디와 암호를 불러와 String 값에 저장
+                            // String checkEmail = PreferenceManager.getString(getActivity(),"email");
+
+                            //지은 실험
+                            String checkEmail = "qkrwldms011@naver.com";
+
+                            // 로그인 한 id에 대한 이름 과 연락처를 띄우는 jsp
+                            urlAddr_de = "http://" + ShareVar.macIP + ":8080/JSP/myDelete.jsp?userEmail=" + checkEmail;
+                            connectUpdateDelete();
+                            Toast.makeText(MyViewActivity.this, "회원 탈퇴가 완료 되었습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    builder.setNegativeButton("아니오",new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog,int which){
+                            dialog.cancel();
+                        }
+                    });
+
+                    AlertDialog alertDialog = builder.create();
+
+                    alertDialog.show();
+
+
                     break;
             }
 
@@ -250,6 +286,17 @@ public class MyViewActivity extends AppCompatActivity {
         try {
             CUDNetworkTask passnetworkTask = new CUDNetworkTask(MyViewActivity.this, urlAddr_pw);
             passnetworkTask.execute().get();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    // 회원탈퇴
+    private void connectUpdateDelete(){
+        try {
+            CUDNetworkTask deletenetworkTask = new CUDNetworkTask(MyViewActivity.this, urlAddr_de);
+            deletenetworkTask.execute().get();
 
         }catch (Exception e){
             e.printStackTrace();
