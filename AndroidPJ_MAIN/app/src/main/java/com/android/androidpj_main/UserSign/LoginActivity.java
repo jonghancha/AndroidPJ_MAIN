@@ -28,7 +28,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-   //     gomain = findViewById(R.id.btn_main);
+        gomain = findViewById(R.id.gomain);
 
         gomain.setOnClickListener(gogo);
 
