@@ -1,39 +1,34 @@
 package com.android.androidpj_main.Bean;
 
+import java.util.Date;
+
 public class User {
     //Field (필드) = Bean 에선 이렇게 한줄 씩 쓰는 것이 좋다.
-    String userId;
+    String userEmail;
     String userPw;
     String userName;
-    String userPhone;
-    String userEmail;
+    String userTel;
+    String userFilename;
+    String userGender;
+    String userColor;
 
     // Constructor (생성자)
-
-
-    public User(String userId, String userPw, String userName, String userPhone, String userEmail) {
-
-        this.userId = userId;
+    public User(String userEmail, String userPw, String userName, String userTel, String userFilename, String userGender, String userColor) {
+        this.userEmail = userEmail;
         this.userPw = userPw;
         this.userName = userName;
-        this.userPhone = userPhone;
+        this.userTel = userTel;
+        this.userFilename = userFilename;
+        this.userGender = userGender;
+        this.userColor = userColor;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getUserPw() {
@@ -44,20 +39,44 @@ public class User {
         this.userPw = userPw;
     }
 
-    public String getUserPhone() {
-        return userPhone;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getUserTel() {
+        return userTel;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setUserTel(String userTel) {
+        this.userTel = userTel;
+    }
+
+    public String getUserFilename() {
+        return userFilename;
+    }
+
+    public void setUserFilename(String userFilename) {
+        this.userFilename = userFilename;
+    }
+
+    public String getUserGender() {
+        return userGender;
+    }
+
+    public void setUserGender(String userGender) {
+        this.userGender = userGender;
+    }
+
+    public String getUserColor() {
+        return userColor;
+    }
+
+    public void setUserColor(String userColor) {
+        this.userColor = userColor;
     }
 }
 
