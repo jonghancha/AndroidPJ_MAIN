@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.androidpj_main.Activity.MyViewActivity;
 import com.android.androidpj_main.Bean.User;
+import com.android.androidpj_main.NetworkTask.UserNetworkTask;
 import com.android.androidpj_main.R;
 import com.android.androidpj_main.Share.ShareVar;
 
@@ -52,16 +53,19 @@ public class Frmt_Mypage extends Fragment {
 
         // 지은 21/01/10 정보 띄우기****************************
         // 저장한 키 값으로 저장된 아이디와 암호를 불러와 String 값에 저장
-//        String checkId = PreferenceManager.getString(getActivity(),"id");
+//        String checkEmail = PreferenceManager.getString(getActivity(),"email");
+
+        //지은 실험
+        String checkEmail = "qkrwldms011@naver.com";
 
         // 로그인 한 id에 대한 이름 과 연락처를 띄우는 jsp
-//        urlAddr_My = "http://" + ShareVar.macIP + ":8080/test/mySelect.jsp?user_userId=" + checkId;
-//        getUserDate();  // 띄우기 위한 메소드
+        urlAddr_My = "http://" + ShareVar.macIP + ":8080/JSP/mySelect.jsp?userEmail=" + checkEmail;
+        getUserDate();  // 띄우기 위한 메소드
         MyMainName = v.findViewById(R.id.MyMainName);
         MyColor = v.findViewById(R.id.MyColor);
 
-//        MyMainName.setText(users_mypage.get(0).getUserName());
-//        MyColor.setText(users_mypage.get(0).getUserColor);
+        MyMainName.setText(users_mypage.get(0).getUserName());
+        MyColor.setText(users_mypage.get(0).getUserColor());
         //*******************************************
 
 
@@ -101,15 +105,15 @@ public class Frmt_Mypage extends Fragment {
 
     // 21.01.10 지은 추가 ********************************
     // 내가 로그인한 id값에 대한 이름과 연락처를 불러옴
-//    private void getUserDate(){
-//        try {
-//            UserNetworkTask networkTask = new UserNetworkTask(MyViewActivity.this, urlAddr1);
-//            Object obj = networkTask.execute().get();
-//            users = (ArrayList<User>) obj;
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//    }
+    private void getUserDate(){
+        try {
+            UserNetworkTask networkTask = new UserNetworkTask(getActivity(), urlAddr_My);
+            Object obj = networkTask.execute().get();
+            users_mypage = (ArrayList<User>) obj;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 
     // 정보 & 조회 관련 버튼 클릭
