@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,11 +22,11 @@ import com.android.androidpj_main.Share.ShareVar;
 
 import java.util.ArrayList;
 
-public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductHolder> {
 
-    final static String TAG = "SearchAdapter";
+    final static String TAG = "ProductAdapter";
 
-    // 지은 추가 21.01.10 *************************************
+    // 지은 추가 21.01.11 *************************************
 
     Context mContext = null;
     int layout = 0;
@@ -36,7 +34,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
     LayoutInflater inflater = null;
     String urlAddr;
 
-    public SearchAdapter(Context mContext, int layout, ArrayList<Product> data){
+    public ProductAdapter(Context mContext, int layout, ArrayList<Product> data){
         this.mContext = mContext;
         this.layout = layout;
         this.data = data;
@@ -49,7 +47,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
     @Override
     public ProductHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
-        v = LayoutInflater.from(mContext).inflate(R.layout.item_search, parent, false);
+        v = LayoutInflater.from(mContext).inflate(R.layout.item_product, parent, false);
         ProductHolder productHolder = new ProductHolder(v);
         return productHolder;
     }
@@ -67,18 +65,18 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
                 "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
                 "</head>" +
                 "<body><center>" +
-                "<img src = \"" + urlAddr + "\"style=\"width: auto; height: 100%;\"" +
+                "<img src = \"" + urlAddr + "\"style=\"width: auto; height: 90%;\"" +
                 "</center></body>" +
                 "</html>";
-        holder.web_search.loadData(htmlData,"text/html", "UTF-8");
+        holder.web_product.loadData(htmlData,"text/html", "UTF-8");
 
         // 상품 브랜드
-        holder.search_brand.setText("[ "+data.get(position).getPrdBrand()+ " ]");
+        holder.product_brand.setText("[ "+data.get(position).getPrdBrand()+ " ]");
         // 상품 이름
-        holder.search_name.setText(data.get(position).getPrdName());
+        holder.product_name.setText(data.get(position).getPrdName());
         // 상품 가격
         Log.v(TAG, String.valueOf(data.get(position).getPrdPrice()));
-        holder.search_price.setText(String.valueOf(data.get(position).getPrdPrice()));
+        holder.product_price.setText(String.valueOf(data.get(position).getPrdPrice()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,26 +103,26 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
     // ProductHolder
     public class ProductHolder extends RecyclerView.ViewHolder {
 
-        // item_search.xml 선언
-        WebView web_search;
-        protected TextView search_brand;
-        protected TextView search_name;
-        protected TextView search_price;
+        // item_product.xml 선언
+        WebView web_product;
+        protected TextView product_brand;
+        protected TextView product_name;
+        protected TextView product_price;
 
         public ProductHolder(@NonNull View itemView) {
             super(itemView);
-            web_search = itemView.findViewById(R.id.web_search);
-            search_brand = itemView.findViewById(R.id.search_brand);
-            search_name = itemView.findViewById(R.id.search_name);
-            search_price = itemView.findViewById(R.id.search_price);
+            web_product = itemView.findViewById(R.id.web_product);
+            product_brand = itemView.findViewById(R.id.product_brand);
+            product_name = itemView.findViewById(R.id.product_name);
+            product_price = itemView.findViewById(R.id.product_price);
 
             // WebView 세팅
             // Web Setting
-            WebSettings webSettings = web_search.getSettings();
+            WebSettings webSettings = web_product.getSettings();
             webSettings.setJavaScriptEnabled(true); // 자바 스크립트는 쓰겠다.
             webSettings.setBuiltInZoomControls(true); // 확대 축소 기능
             webSettings.setDisplayZoomControls(false); // 돋보기 없애기
-            web_search.setBackgroundColor(Color.TRANSPARENT);  // webview의 배경 투명으로 전환
+            web_product.setBackgroundColor(Color.TRANSPARENT);  // webview의 배경 투명으로 전환
         }
     }
 }
