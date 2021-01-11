@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     //****************************************
 
-    // 종한 광고 추가
+    // 종한 광고 추가 ***************************
     // Debug tag, for logging
     static final String TAG = "Main";
 
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     // SharedPreferences 접근 이름, 저장 데이터 초기화
     private final String NameSPreferences = "Day";
     private String strSDFormatDay = "0";
+    //****************************************
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setElevation(0);
         //****************************************
 
+
+        // 종한 광고 추가 ***************************
         // '오늘 그만 보기' 기능을 위한 날짜 획득
         long CurrentTime = System.currentTimeMillis(); // 현재 시간을 msec 단위로 얻음
         Date TodayDate = new Date(CurrentTime); // 현재 시간 Date 변수에 저장
@@ -114,6 +117,8 @@ public class MainActivity extends AppCompatActivity {
         MyDialogFragment myDialogFragment = new MyDialogFragment();
         myDialogFragment.show(getSupportFragmentManager(), "MyFragment");
     }
+    // *****************************************************
+
 
 
     // 옵션 메뉴 선언
@@ -124,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // 21.01.07 지은 추가 ***************************
     // 옵션 메뉴
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -165,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
             toast.cancel();
         }
     }
+    //**********************************************
 
 
 

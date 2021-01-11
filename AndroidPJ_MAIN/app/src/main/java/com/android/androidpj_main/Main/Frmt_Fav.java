@@ -1,11 +1,14 @@
 package com.android.androidpj_main.Main;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -36,7 +39,8 @@ public class Frmt_Fav extends Fragment {
     private LinearLayoutManager linearLayoutManager;
     private RecyclerView.LayoutManager layoutManager;
     RecyclerView recyclerView;
-
+    Button ib_likebtn;
+    String prdNo;
 
     public Frmt_Fav() {
 
@@ -49,7 +53,7 @@ public class Frmt_Fav extends Fragment {
 
         recyclerView = v.findViewById(R.id.fav_recycleView);
 
-        String user_email = "qkrtpa12@naver.com";
+        String user_email = "qkrtpa12@naver.com";   // 로그인한 아이디값으로 변경해야함
         urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/favSelect.jsp?user_userEmail=" + user_email;
 
         return v;
@@ -59,7 +63,6 @@ public class Frmt_Fav extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
 
     public void connectGetData(){
 
@@ -88,6 +91,15 @@ public class Frmt_Fav extends Fragment {
         connectGetData();
         Log.v(TAG, "onResume()");
     }
+// 찜삭제
+//    View.OnClickListener likebtnClickListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            Toast.makeText(getContext(), "찜에서 하트버튼 클릭" + prdNo, Toast.LENGTH_SHORT).show();
+//        //urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/likeDelete.jsp?user_userEmail=";
+//
+//        }
+//    };
 
 
 }//----------
