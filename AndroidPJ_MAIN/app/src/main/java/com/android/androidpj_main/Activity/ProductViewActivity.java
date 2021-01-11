@@ -1,23 +1,17 @@
 package com.android.androidpj_main.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.android.androidpj_main.Adapter.ViewPageAdapter;
-import com.android.androidpj_main.Bean.Product;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.androidpj_main.NetworkTask.LikeCheckNetworkTask;
 import com.android.androidpj_main.R;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.tabs.TabLayout;
+import com.android.androidpj_main.Share.ShareVar;
 
 public class ProductViewActivity extends AppCompatActivity {
 
@@ -33,13 +27,14 @@ public class ProductViewActivity extends AppCompatActivity {
     String prdNo;
     Button btn_buy;
     BottomSheet bottomSheet;
-
+    String urlAddr = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_view);
-        //String id = PreferenceManager.getString(ProductViewActivity.this, "id");
+        String email = PreferenceManager.getString(ProductViewActivity.this, "email");
+
         // 연결하기
         prdName = findViewById(R.id.prdName);
         btn_buy = findViewById(R.id.btn_buy);
@@ -48,7 +43,17 @@ public class ProductViewActivity extends AppCompatActivity {
         Intent intent = getIntent();
         prdNo = Integer.toString(intent.getIntExtra("prdNo", 0));
         prdName.setText(intent.getStringExtra("prdName"));
-        Log.v(TAG, "prddname ::::: "+ intent.getStringExtra("prdName") + "  prdno ::::: " + prdNo);
+
+        // like 테이블에 있는지 체크
+        urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/likeCheck.jsp?user_userEmail=" + email + "&product_prdNo=" + prdNo;
+        String result = likeCheck();
+
+        if (result.equals("1")){
+            Toast.makeText(ProductViewActivity.this, "찜한상품", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(ProductViewActivity.this, "안찜한상품", Toast.LENGTH_SHORT).show();
+
+        }
 
         // 버튼 클릭시
         btn_buy.setOnClickListener(mClickListener);
@@ -75,5 +80,23 @@ public class ProductViewActivity extends AppCompatActivity {
 ;
         }
     };
+
+    // 찜목록 체크
+    public String likeCheck(){
+
+        String result = null;
+
+        try {
+
+        LikeCheckNetworkTask likeCheckNetworkTask = new LikeCheckNetworkTask(ProductViewActivity.this, urlAddr);
+
+        Object obj = likeCheckNetworkTask.execute().get();
+        result = (String) obj;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+            return result;
+    }
+
 
 }//----------------
