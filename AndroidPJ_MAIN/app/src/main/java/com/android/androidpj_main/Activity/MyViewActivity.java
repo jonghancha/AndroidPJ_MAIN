@@ -2,7 +2,6 @@ package com.android.androidpj_main.Activity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -57,7 +56,6 @@ public class MyViewActivity extends AppCompatActivity {
 
         MyName = findViewById(R.id.MyName);
         MyEmail = findViewById(R.id.MyEmail);
-
 //        MyName.setText(users.get(0).getUserName());
 //        MyEmail.setText(users.get(0).getUserEmail());
 

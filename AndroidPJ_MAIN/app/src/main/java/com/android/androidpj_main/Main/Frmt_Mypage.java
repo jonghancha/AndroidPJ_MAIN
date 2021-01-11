@@ -1,15 +1,12 @@
 package com.android.androidpj_main.Main;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,7 +18,6 @@ import androidx.fragment.app.Fragment;
 import com.android.androidpj_main.Activity.MyViewActivity;
 import com.android.androidpj_main.Bean.User;
 import com.android.androidpj_main.R;
-import com.android.androidpj_main.Share.ShareVar;
 
 import java.util.ArrayList;
 
@@ -52,7 +48,8 @@ public class Frmt_Mypage extends Fragment {
 
         // 지은 21/01/10 정보 띄우기****************************
         // 저장한 키 값으로 저장된 아이디와 암호를 불러와 String 값에 저장
-//        String checkId = PreferenceManager.getString(getActivity(),"id");
+        String id = PreferenceManager.getString(getContext(), "id"  );
+        Toast.makeText(getContext(), "id값:::::::;"+ id, Toast.LENGTH_SHORT).show();
 
         // 로그인 한 id에 대한 이름 과 연락처를 띄우는 jsp
 //        urlAddr_My = "http://" + ShareVar.macIP + ":8080/test/mySelect.jsp?user_userId=" + checkId;
