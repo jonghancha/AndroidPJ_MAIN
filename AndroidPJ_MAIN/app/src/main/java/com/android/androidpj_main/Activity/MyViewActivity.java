@@ -63,13 +63,14 @@ public class MyViewActivity extends AppCompatActivity {
 
         // 지은 21/01/10 정보 띄우기****************************
         // 저장한 키 값으로 저장된 아이디와 암호를 불러와 String 값에 저장
-//        String checkEmail = PreferenceManager.getString(getActivity(),"email");
+        String email = PreferenceManager.getString(MyViewActivity.this,"email");
+
 
         //지은 실험
-        String checkEmail = "qkrwldms011@naver.com";
+        //String checkEmail = "qkrwldms011@naver.com";
 
         // 로그인 한 id에 대한 이름 과 연락처를 띄우는 jsp
-        urlAddr_my = "http://" + ShareVar.macIP + ":8080/JSP/mySelect.jsp?userEmail=" + checkEmail;
+        urlAddr_my = "http://" + ShareVar.macIP + ":8080/JSP/mySelect.jsp?userEmail=" + email;
         getUserDate();  // 띄우기 위한 메소드
 
         MyName = findViewById(R.id.MyName);
