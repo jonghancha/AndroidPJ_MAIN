@@ -2,6 +2,7 @@ package com.android.androidpj_main.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,14 +62,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
         urlAddr = "http://" + ShareVar.macIP + ":8080/Images/";  // Images 파일
         urlAddr = urlAddr + data.get(position).getPrdFilename(); // 경로에 이미지 이름 추가
 
-        // html 세팅
-        String html = "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
-                "\n<html><body><img src=\"" + urlAddr + "\"/></body></html>";
-
-        // html로 웹뷰 띄우기
-        holder.web_search.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null ); // RecyclerView 라 holder있는거
-
-
+        String htmlData = "<html>" +
+                "<head>" +
+                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
+                "</head>" +
+                "<body><center>" +
+                "<img src = \"" + urlAddr + "\"style=\"width: auto; height: 90%;\"" +
+                "</center></body>" +
+                "</html>";
+        holder.web_search.loadData(htmlData,"text/html", "UTF-8");
 
         // 상품 브랜드
         holder.search_brand.setText("[ "+data.get(position).getPrdBrand()+ " ]");
@@ -104,7 +106,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
     public class ProductHolder extends RecyclerView.ViewHolder {
 
         // item_search.xml 선언
-        protected WebView web_search;
+        WebView web_search;
         protected TextView search_brand;
         protected TextView search_name;
         protected TextView search_price;
@@ -117,11 +119,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
             search_price = itemView.findViewById(R.id.search_price);
 
             // WebView 세팅
+            // Web Setting
             WebSettings webSettings = web_search.getSettings();
-            webSettings.setUseWideViewPort(true);       // wide viewport를 사용하도록 설정
-            webSettings.setLoadWithOverviewMode(true);  // 컨텐츠가 웹뷰보다 클 경우 스크린 크기에 맞게 조정
-
-            web_search.setInitialScale(1);
+            webSettings.setJavaScriptEnabled(true); // 자바 스크립트는 쓰겠다.
+            webSettings.setBuiltInZoomControls(true); // 확대 축소 기능
+            webSettings.setDisplayZoomControls(false); // 돋보기 없애기
+            web_search.setBackgroundColor(Color.TRANSPARENT);  // webview의 배경 투명으로 전환
         }
     }
 }
