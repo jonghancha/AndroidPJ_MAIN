@@ -41,9 +41,11 @@ public class BottomSheet extends BottomSheetDialogFragment {
     Spinner spinner = null;
     ArrayList<String> spinnerList;
     String urlAddr = null;
-    String urlAddr2 = null;
-    String urlAddr3 = null; // cart Qty 체크
-    String urlAddr4 = null;
+    String urlAddrCheck = null; // cart 에 이미 있는지 체크
+    String urlAddrCount = null; // cart Qty 체크
+    String urlAddrInsert = null; // 입력
+    String urlAddrUpdate = null; // 수정
+
     String macIP,prdNo;
     Button btn_plus, btn_minus;
     EditText et_quantity;
@@ -52,6 +54,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
     Button bottomCart, bottomBuy;
     String cartCheck, cartCount;
     String cartInsertQty;
+    String cartUpdateQty;
     int cartQty;
 
     // 로그인한 id 받아오기
@@ -100,11 +103,13 @@ public class BottomSheet extends BottomSheetDialogFragment {
         bottomBuy = getView().findViewById(R.id.btn_bottombuy);
 
         // 장바구니 체크
-        urlAddr2 = "http://" + macIP + ":8080/JSP/cart_check.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo;
+        urlAddrCheck = "http://" + macIP + ":8080/JSP/cart_check.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo;
         // 장바구니 수량 체크
-        urlAddr3 = "http://" + macIP + ":8080/JSP/cart_count.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo;
+        urlAddrCount = "http://" + macIP + ":8080/JSP/cart_count.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo;
         // 장바구니 입력
-        urlAddr4 = "http://" + macIP + ":8080/JSP/cart_insert.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo + "&cartQty=";
+        urlAddrInsert = "http://" + macIP + ":8080/JSP/cart_insert.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo + "&cartQty=";
+        // 장바구니 수정
+        urlAddrUpdate = "http://" + macIP + ":8080/JSP/cart_update.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo + "&cartQty=";
 
         btn_plus.setOnClickListener(btnClickListener);
         btn_minus.setOnClickListener(btnClickListener);
@@ -148,26 +153,21 @@ public class BottomSheet extends BottomSheetDialogFragment {
                     if (cartCheck().equals("0")){ // 장바구니에 처음으로 추가
                         Log.v(TAG, "in cartCheck() == 0");
                         // 수량만큼 장바구니에 insert
-                        if (cartInsertData().equals("1")) {
+                        if (cartInsertData().equals("1")) { // Insert 성공.
                             Log.v(TAG, "in cartInsertData() == 1)");
 
                             new AlertDialog.Builder(getContext())
-//                                .setTitle("장바구니 담기")
                                     .setMessage("상품이 장바구니에 담겼습니다.\n지금 확인하시겠습니까?")
-//                                .setIcon(R.drawable.ic_shopping_cart)
                                     .setPositiveButton("예", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             Intent intent = new Intent(getActivity(), CartActivity.class);
                                             startActivity(intent);
-//                                        getActivity().finish(); // finish 해야하는지 ..?
-
                                         }
                                     })
                                     .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-
                                         }
                                     })
                                     .show();
@@ -176,11 +176,49 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
                     }else {
                         Toast.makeText(getActivity(), "장바구니에 이미 있음", Toast.LENGTH_SHORT).show();
-                        // 장바구니 수량 업데이트
-                        //cartQty = Integer.parseInt(cartCount());
+                        // 기존 장바구니 수량 가져오기
+                        cartQty = Integer.parseInt(cartCount());
+                        // 수량만큼 장바구니에 업데이트
+                       // cartUpdateData().equals("1")
+                            Log.v(TAG, "in cartUpdateData() == 1)");
+
+                            // 수량을 추가하겠냐고 묻는 다이얼로그
+                            new AlertDialog.Builder(getContext())
+                                    .setMessage("이미 장바구니에 담긴 상품입니다.\n수량을 추가하시겠습니까?")
+                                    .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+
+                                            if (cartUpdateData().equals("1")){
+                                                new AlertDialog.Builder(getContext())
+                                                        .setMessage("장바구니에 상품 수량이 추가되었습니다.지금 확인하시겠습니까?")
+                                                        .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                Intent intent = new Intent(getActivity(), CartActivity.class);
+                                                                startActivity(intent);
+                                                            }
+                                                        })
+                                                        .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                            }
+                                                        })
+                                                        .show();
+                                            }
+                                        }
+                                    })
+                                    .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    })
+                                    .show();
+
+                        break;
 
                     }
-                    break;
 
                 case R.id.btn_bottombuy: // 구매하기 버튼
                     break;
@@ -206,11 +244,47 @@ public class BottomSheet extends BottomSheetDialogFragment {
         }
     }
 
-    // 장바구니에 상품 추가
+
+
+    // 해당 상품이 장바구니에 존재하는지 확인
+    private String cartCheck() {
+        cartCheck = "0";
+
+        try {
+            CartNetworkTask cartNetworkTask = new CartNetworkTask(getContext(), urlAddrCheck, "select");
+            Object obj = cartNetworkTask.execute().get();
+            cartCheck = String.valueOf(obj);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        Log.v(TAG, cartCheck);
+        return cartCheck;
+    }
+
+    // 장바구니에 있는 상품 Qty 체크
+    private String cartCount() {
+        cartCount = "0";
+
+        try {
+            CartNetworkTask cartNetworkTask = new CartNetworkTask(getContext(), urlAddrCount, "count");
+            Object obj = cartNetworkTask.execute().get();
+            cartCount = String.valueOf(obj);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        Log.v(TAG, cartCount);
+        return cartCount;
+    }
+
+    // 장바구니에 상품 Insert
     private String cartInsertData(){
         String result = null;
         cartInsertQty = String.valueOf(et_quantity.getText());
-        urlAddr4 = urlAddr4 + cartInsertQty;
+        urlAddrInsert = urlAddrInsert + cartInsertQty;
         Log.v(TAG, "cartInsertQty =" + cartInsertQty);
         try {
             ///////////////////////////////////////////////////////////////////////////////////////
@@ -220,7 +294,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
             //  - 입력하고 리턴값을 받음
             //
             ///////////////////////////////////////////////////////////////////////////////////////
-            CartNetworkTask networkTask = new CartNetworkTask(getActivity(), urlAddr4, "insert");
+            CartNetworkTask networkTask = new CartNetworkTask(getActivity(), urlAddrInsert, "insert");
             ///////////////////////////////////////////////////////////////////////////////////////
 
             ///////////////////////////////////////////////////////////////////////////////////////
@@ -241,38 +315,39 @@ public class BottomSheet extends BottomSheetDialogFragment {
         return result;
     }
 
-    // 해당 상품이 장바구니에 존재하는지 확인
-    private String cartCheck() {
-        cartCheck = "0";
-
+    // 장바구니에 상품 Update
+    private String cartUpdateData(){
+        String result = null;
+        cartUpdateQty = String.valueOf(et_quantity.getText());
+        urlAddrUpdate = urlAddrUpdate + cartUpdateQty;
+        Log.v(TAG, "cartUpdateQty =" + cartUpdateQty);
         try {
-            CartNetworkTask cartNetworkTask = new CartNetworkTask(getContext(), urlAddr2, "select");
-            Object obj = cartNetworkTask.execute().get();
-            cartCheck = String.valueOf(obj);
+            ///////////////////////////////////////////////////////////////////////////////////////
+            // Date : 2020.01.11
+            //
+            // Description:
+            //  - 수정하고 리턴값을 받음
+            //
+            ///////////////////////////////////////////////////////////////////////////////////////
+            CartNetworkTask networkTask = new CartNetworkTask(getActivity(), urlAddrUpdate, "update");
+            ///////////////////////////////////////////////////////////////////////////////////////
 
+            ///////////////////////////////////////////////////////////////////////////////////////
+            // Date : 2020.12.24
+            //
+            // Description:
+            //  - 수정 결과 값을 받기 위해 Object로 return후에 String으로 변환 하여 사용
+            //
+            ///////////////////////////////////////////////////////////////////////////////////////
+            Object obj = networkTask.execute().get();
+            result = (String) obj;
+            ///////////////////////////////////////////////////////////////////////////////////////
 
         }catch (Exception e){
             e.printStackTrace();
         }
-        Log.v(TAG, cartCheck);
-        return cartCheck;
-    }
 
-    // 장바구니에 있는 상품 Qty 체크
-    private String cartCount() {
-        cartCount = "0";
-
-        try {
-            CartNetworkTask cartNetworkTask = new CartNetworkTask(getContext(), urlAddr3, "count");
-            Object obj = cartNetworkTask.execute().get();
-            cartCount = String.valueOf(obj);
-
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        Log.v(TAG, cartCount);
-        return cartCount;
+        return result;
     }
 
 
