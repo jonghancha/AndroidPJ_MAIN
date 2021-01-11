@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="30dp"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="이름"
+        />
+    <EditText
+        android:id="@+id/myDname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="나의 이름"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="연락처"
+        />
+    <EditText
+        android:id="@+id/myDtel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="나의 연락처"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="퍼스널 컬러"
+        />
+    <TextView
+        android:id="@+id/myDcolor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="나의 퍼스널 컬러 띄움"
+        />
+
+    <RadioGroup
+        android:id="@+id/rgColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/myMwarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:text="웜톤"
+            android:checked="true"
+            />
+        <RadioButton
+            android:id="@+id/myMcool"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="쿨톤"
+            />
+
+    </RadioGroup>
+
+
+</LinearLayout>

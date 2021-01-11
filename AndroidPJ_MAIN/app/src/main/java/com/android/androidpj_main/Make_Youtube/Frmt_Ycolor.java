@@ -19,11 +19,11 @@ import com.android.androidpj_main.Share.ShareVar;
 
 import java.util.ArrayList;
 
-
+// 21.01.08 지은 추가 ****************************************************
 public class Frmt_Ycolor extends Fragment {
 
     View v;
-    final static String TAG = "Frmt_color";
+    final static String TAG = "Frmt_Ycolor";
     String urlAddr = null;
     ArrayList<Youtube> members;
     YoutubeAdapter adapter;

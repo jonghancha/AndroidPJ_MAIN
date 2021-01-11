@@ -19,7 +19,7 @@ import com.android.androidpj_main.Share.ShareVar;
 
 import java.util.ArrayList;
 
-
+// 21.01.08 지은 추가 ****************************************************
 public class Frmt_Yseason extends Fragment {
 
     View v;

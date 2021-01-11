@@ -10,6 +10,7 @@ import com.android.androidpj_main.Adapter.YouPageAdapter;
 import com.android.androidpj_main.R;
 import com.google.android.material.tabs.TabLayout;
 
+// 21.01.08 지은 추가 ****************************************************
 public class YoutubeActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;

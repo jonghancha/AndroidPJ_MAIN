@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.android.androidpj_main.Bean.Youtube;
+import com.android.androidpj_main.Bean.User;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,22 +16,22 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 
+// 21.01.10 지은 추가  ***************************************
+public class UserNetworkTask extends AsyncTask<Integer, String, Object> {
 
-// 21.01.09 지은 추가  ***************************************
-public class YoutubeNetworkTask extends AsyncTask<Integer, String, Object> {
-
-    final static String TAG = "YoutubeNetworkTask";
+    final static String TAG = "UserNetworkTask";
     Context context = null;
     String mAddr = null;
     ProgressDialog progressDialog = null;
-    ArrayList<Youtube> youtubes; // 불러와야 해서
+    ArrayList<User> users; // 불러와야 해서
 
     //Constructor
-    public YoutubeNetworkTask(Context context, String mAddr) {
+    public UserNetworkTask(Context context, String mAddr) {
         this.context = context;
         this.mAddr = mAddr;
-        this.youtubes = new ArrayList<Youtube>();    //직접 침 : 이유는 꼭 쓸 필요성은 없지만 arraylist를 사용하기 위해 생성해줌
+        this.users = new ArrayList<User>();    //직접 침 : 이유는 꼭 쓸 필요성은 없지만 arraylist를 사용하기 위해 생성해줌
         Log.v(TAG, "Start : "+ mAddr);
     }
 
@@ -89,7 +89,7 @@ public class YoutubeNetworkTask extends AsyncTask<Integer, String, Object> {
                 e.printStackTrace();
             }
         }
-        return youtubes;
+        return users;
     }
 
     @Override
@@ -116,25 +116,29 @@ public class YoutubeNetworkTask extends AsyncTask<Integer, String, Object> {
         try {
             // 배열이기 때문에 [] 이렇게 시작
             JSONObject jsonObject = new JSONObject(s);
-            JSONArray jsonArray = new JSONArray(jsonObject.getString("youtube_info"));
+            JSONArray jsonArray = new JSONArray(jsonObject.getString("user_info"));
             // object 가 읽어줌
             //students_info는 테이블 명이라고 생각할 것
 
-            youtubes.clear();    // 하는 이유는
+            users.clear();
 
             // object 별로 불러오는 것 {이 안의 묶음}
             for (int i=0; i<jsonArray.length(); i++){
                 JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
-                String ytNo = jsonObject1.getString("ytNo");
-                String ytCtg = jsonObject1.getString("ytCtg");
-                String ytName = jsonObject1.getString("ytName");
-                String ytContent = jsonObject1.getString("ytContent");
-                String ytUrl = jsonObject1.getString("ytUrl");
-                String ytImg = jsonObject1.getString("ytImg");
 
-                // 빈에 넣는 과정 (Youtube.java) 와 비교 해볼것
-                Youtube youtube = new Youtube(ytNo, ytCtg, ytName, ytContent, ytUrl, ytImg);
-                youtubes.add(youtube);
+                String userEmail = jsonObject1.getString("userEmail");
+                String userPw = jsonObject1.getString("userPw");
+                String userName = jsonObject1.getString("userName");
+                String userTel = jsonObject1.getString("userTel");
+                String userFilename = jsonObject1.getString("userFilename");
+                String userGender = jsonObject1.getString("userGender");
+                String userColor = jsonObject1.getString("userColor");
+
+
+                User user = new User(userEmail, userPw, userName,
+                        userTel, userFilename, userGender, userColor);
+
+                users.add(user);
             }
 
 
