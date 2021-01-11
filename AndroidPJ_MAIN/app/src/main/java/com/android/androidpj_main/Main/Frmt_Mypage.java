@@ -50,13 +50,8 @@ public class Frmt_Mypage extends Fragment {
 
         // 지은 21/01/10 정보 띄우기****************************
         // 저장한 키 값으로 저장된 아이디와 암호를 불러와 String 값에 저장
-        String id = PreferenceManager.getString(getContext(), "id"  );
-        Toast.makeText(getContext(), "id값:::::::;"+ id, Toast.LENGTH_SHORT).show();
+        String checkEmail = PreferenceManager.getString(getActivity(),"email");
 
-//        String checkEmail = PreferenceManager.getString(getActivity(),"email");
-
-        //지은 실험
-        String checkEmail = "qkrwldms011@naver.com";
 
 
         // 로그인 한 id에 대한 이름 과 연락처를 띄우는 jsp
