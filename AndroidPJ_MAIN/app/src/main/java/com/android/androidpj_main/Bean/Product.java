@@ -33,6 +33,10 @@ public class Product {
 
     }
 
+    public Product(int prdNo) {
+        this.prdNo = prdNo;
+    }
+
     // getter setter
     public int getPrdNo() {
         return prdNo;

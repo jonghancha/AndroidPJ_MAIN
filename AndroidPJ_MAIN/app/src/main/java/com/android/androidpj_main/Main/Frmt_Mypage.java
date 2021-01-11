@@ -50,12 +50,13 @@ public class Frmt_Mypage extends Fragment {
 
         // 지은 21/01/10 정보 띄우기****************************
         // 저장한 키 값으로 저장된 아이디와 암호를 불러와 String 값에 저장
-        String checkEmail = PreferenceManager.getString(getActivity(),"email");
+        String email = PreferenceManager.getString(getActivity(), "email");
+        Toast.makeText(getContext(), "email값:::::::;"+ email, Toast.LENGTH_SHORT).show();
 
 
 
         // 로그인 한 id에 대한 이름 과 연락처를 띄우는 jsp
-        urlAddr_My = "http://" + ShareVar.macIP + ":8080/JSP/mySelect.jsp?userEmail=" + checkEmail;
+        urlAddr_My = "http://" + ShareVar.macIP + ":8080/JSP/mySelect.jsp?userEmail=" + email;
         getUserDate();  // 띄우기 위한 메소드
         MyMainName = v.findViewById(R.id.MyMainName);
         MyColor = v.findViewById(R.id.MyColor);

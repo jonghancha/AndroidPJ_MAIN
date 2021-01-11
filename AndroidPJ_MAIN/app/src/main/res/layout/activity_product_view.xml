@@ -37,12 +37,27 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/btn_buy"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="구매하기"
-        android:textSize="20dp"/>
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_hate"
+            android:layout_weight="1"
+            />
+         <Button
+            android:id="@+id/btn_buy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="구매하기"
+            android:layout_weight="4"
+            android:textSize="20dp"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

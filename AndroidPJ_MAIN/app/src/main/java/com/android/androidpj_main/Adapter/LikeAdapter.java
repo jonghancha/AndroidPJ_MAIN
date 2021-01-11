@@ -2,8 +2,6 @@ package com.android.androidpj_main.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.androidpj_main.Activity.PreferenceManager;
@@ -89,12 +86,14 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ProductHolder>
                 Intent intent = new Intent(v.getContext(), ProductViewActivity.class);
                 intent.putExtra("prdNo", data.get(position).getPrdNo());
                 intent.putExtra("prdName", data.get(position).getPrdName());
+                intent.putExtra("ctgType", data.get(position).getCtgType());
+                intent.putExtra("prdBrand", data.get(position).getPrdBrand());
+                intent.putExtra("prdPrice", data.get(position).getPrdPrice());
+                intent.putExtra("prdFilename", data.get(position).getPrdFilename());
+                intent.putExtra("prdDFilename", data.get(position).getPrdDFilename());
+                intent.putExtra("prdNFilename", data.get(position).getPrdNFilename());
 
                 v.getContext().startActivity(intent);
-
-//                Bundle bundle = new Bundle();// 무언가를 담을 준비를 할 수 있는 보따리 or 꾸러미
-//                bundle.putString("fromFrag1", "홍드로이드 프래그먼트 1");
-                //FragmentTransaction transaction = v.getC
 
                 Toast.makeText(v.getContext(), "상세보기 페이지 이동", Toast.LENGTH_SHORT).show();
             }
@@ -132,26 +131,37 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ProductHolder>
                     //networktask 사용해서 like 지우기
                    int prdNo = data.get(getAdapterPosition()).getPrdNo();
                    // 로그인한 아이디 받아와서 아이디 넘겨주기. 그 아이디에 있는 것을 삭제해야하기 때문.
-                   urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/likeDel.jsp?prdNo="+prdNo;
+                    String email = PreferenceManager.getString(v.getContext(), "email");
+                   urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/likeDel.jsp?prdNo="+prdNo+"&useremail="+email;
                     connectDeleteData();
-                   Toast.makeText(v.getContext(),"삭제되었습니다." + prdNo, Toast.LENGTH_SHORT).show();
+
+                    data.remove(getAdapterPosition());
+                    notifyItemRemoved(getAdapterPosition());
+                    //notifyItemChanged(getAdapterPosition());
+
+                   Toast.makeText(v.getContext(),"삭제되었습니다." + prdNo + "email:::: " + email, Toast.LENGTH_SHORT).show();
                 }
             });
         }
     }
 
-    public void connectDeleteData(){
-        try{
+    // 찜 삭제
+    public void connectDeleteData() {
+        try {
             CUDNetworkTask deletenetworkTask = new CUDNetworkTask(mContext, urlAddr);
             deletenetworkTask.execute().get();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-     }
+    }
 
-
-
-
-
+//    public void remove(int position){
+//        try{
+//            data.remove(position);
+//            notifyItemRemoved(position);    // 새로고침
+//        }catch (IndexOutOfBoundsException ex){
+//            ex.printStackTrace();
+//        }
+//    }
 
 }//-----------
