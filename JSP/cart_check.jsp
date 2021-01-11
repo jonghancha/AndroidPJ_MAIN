@@ -32,7 +32,7 @@
             }
 %>            
 			{
-			"count" : "<%=rs.getString(1) %>"
+			"check" : "<%=rs.getString(1) %>"
 			}
 
 <%		

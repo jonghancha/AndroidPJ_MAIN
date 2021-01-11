@@ -92,6 +92,8 @@ public class CartNetworkTask extends AsyncTask<Integer, String, Object> {
                 ///////////////////////////////////////////////////////////////////////////////////////
                 if(where.equals("select")){
                     result = parserSelect(stringBuffer.toString());
+                }else if (where.equals("count")){
+                    result = parserCount(stringBuffer.toString());
                 }else{
                     result = parserAction(stringBuffer.toString());
                 }
@@ -114,6 +116,8 @@ public class CartNetworkTask extends AsyncTask<Integer, String, Object> {
         return result;
     }
 
+
+
     ///////////////////////////////////////////////////////////////////////////////////////
     // Date : 2020.01.11
     //
@@ -122,9 +126,9 @@ public class CartNetworkTask extends AsyncTask<Integer, String, Object> {
     //
     ///////////////////////////////////////////////////////////////////////////////////////
     private String parserSelect(String s){
-        Log.v(TAG,"Parser()");
+        Log.v(TAG,"parserSelect()");
         Log.v(TAG, s);
-        String count = null;
+        String check = null;
         try {
             JSONObject jsonObject = new JSONObject(s);
             JSONArray jsonArray = new JSONArray(jsonObject.getString("cart_info"));
@@ -132,10 +136,10 @@ public class CartNetworkTask extends AsyncTask<Integer, String, Object> {
 
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
-                count = jsonObject1.getString("count");
+                check = jsonObject1.getString("check");
 
 
-                Log.v(TAG, "count : " + count);
+                Log.v(TAG, "check : " + check);
 
 
 
@@ -145,9 +149,38 @@ public class CartNetworkTask extends AsyncTask<Integer, String, Object> {
             e.printStackTrace();
         }
 
-        return count;
+        return check;
     }
     ///////////////////////////////////////////////////////////////////////////////////////
+
+    private String parserCount(String s) {
+
+            Log.v(TAG,"parserCount()");
+            Log.v(TAG, s);
+            String count = null;
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                JSONArray jsonArray = new JSONArray(jsonObject.getString("cart_info"));
+
+
+                for(int i = 0; i < jsonArray.length(); i++){
+                    JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
+                    count = jsonObject1.getString("count");
+
+
+                    Log.v(TAG, "count : " + count);
+
+
+
+                    Log.v(TAG, "----------------------------------");
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            return count;
+        }
+
 
     ///////////////////////////////////////////////////////////////////////////////////////
     // Date : 2020.01.11
@@ -157,7 +190,7 @@ public class CartNetworkTask extends AsyncTask<Integer, String, Object> {
     //
     ///////////////////////////////////////////////////////////////////////////////////////
     private String parserAction(String s){
-        Log.v(TAG,"Parser()");
+        Log.v(TAG,"parserAction()");
         String returnValue = null;
 
         try {
