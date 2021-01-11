@@ -29,18 +29,16 @@ CREATE TABLE `cartdetail` (
   `cartinfo_cartNo` int NOT NULL,
   `user_userEmail` varchar(45) NOT NULL,
   `goods_prdNo` int NOT NULL,
-  `prdoption_prdOptionNo` int NOT NULL,
+  `cartOption` text,
   `cartQty` int DEFAULT NULL,
   PRIMARY KEY (`DcartNo`),
   KEY `goods_prdNo` (`goods_prdNo`),
   KEY `fk_orderdetail_copy1_cartinfo1_idx` (`cartinfo_cartNo`),
   KEY `fk_cartdetail_user1_idx` (`user_userEmail`),
-  KEY `fk_cartdetail_prdoption1_idx` (`prdoption_prdOptionNo`),
-  CONSTRAINT `fk_cartdetail_prdoption1` FOREIGN KEY (`prdoption_prdOptionNo`) REFERENCES `prdoption` (`prdOptionNo`),
   CONSTRAINT `fk_cartdetail_user1` FOREIGN KEY (`user_userEmail`) REFERENCES `user` (`userEmail`),
   CONSTRAINT `fk_orderdetail_copy1_cartinfo1` FOREIGN KEY (`cartinfo_cartNo`) REFERENCES `cartinfo` (`cartNo`),
   CONSTRAINT `orderdetail_ibfk_20` FOREIGN KEY (`goods_prdNo`) REFERENCES `product` (`prdNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=203 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=213 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,6 +47,7 @@ CREATE TABLE `cartdetail` (
 
 LOCK TABLES `cartdetail` WRITE;
 /*!40000 ALTER TABLE `cartdetail` DISABLE KEYS */;
+INSERT INTO `cartdetail` VALUES (205,63,'qkrtpa12@naver.com',52,'red',3),(212,63,'qkrtpa12@naver.com',52,'yellow',1);
 /*!40000 ALTER TABLE `cartdetail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +66,7 @@ CREATE TABLE `cartinfo` (
   PRIMARY KEY (`cartNo`,`user_userEmail`),
   KEY `fk_cartinfo_user1_idx` (`user_userEmail`),
   CONSTRAINT `fk_cartinfo_user1` FOREIGN KEY (`user_userEmail`) REFERENCES `user` (`userEmail`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,6 +75,7 @@ CREATE TABLE `cartinfo` (
 
 LOCK TABLES `cartinfo` WRITE;
 /*!40000 ALTER TABLE `cartinfo` DISABLE KEYS */;
+INSERT INTO `cartinfo` VALUES (63,'qkrtpa12@naver.com',NULL,NULL);
 /*!40000 ALTER TABLE `cartinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,7 +123,7 @@ CREATE TABLE `like` (
   KEY `fk_like_product1_idx` (`product_prdNo`),
   CONSTRAINT `fk_like_product1` FOREIGN KEY (`product_prdNo`) REFERENCES `product` (`prdNo`),
   CONSTRAINT `fk_like_user1` FOREIGN KEY (`user_userEmail`) REFERENCES `user` (`userEmail`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,6 +132,7 @@ CREATE TABLE `like` (
 
 LOCK TABLES `like` WRITE;
 /*!40000 ALTER TABLE `like` DISABLE KEYS */;
+INSERT INTO `like` VALUES (6,'qkrtpa12@naver.com',52);
 /*!40000 ALTER TABLE `like` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,7 +197,7 @@ CREATE TABLE `orderdetail` (
   `user_userEmail` varchar(45) NOT NULL,
   `orderinfo_ordNo` int NOT NULL,
   `goods_prdNo` int NOT NULL,
-  `prdoption_prdOptionNo` int NOT NULL,
+  `ordOption` text,
   `ordQty` int DEFAULT NULL,
   `ordRefund` datetime DEFAULT NULL,
   `ordReview` text,
@@ -205,8 +206,6 @@ CREATE TABLE `orderdetail` (
   KEY `fk_orderdetail_orderinfo1_idx` (`orderinfo_ordNo`),
   KEY `goods_prdNo` (`goods_prdNo`),
   KEY `fk_orderdetail_user1_idx` (`user_userEmail`),
-  KEY `fk_orderdetail_prdoption1_idx` (`prdoption_prdOptionNo`),
-  CONSTRAINT `fk_orderdetail_prdoption1` FOREIGN KEY (`prdoption_prdOptionNo`) REFERENCES `prdoption` (`prdOptionNo`),
   CONSTRAINT `fk_orderdetail_user1` FOREIGN KEY (`user_userEmail`) REFERENCES `user` (`userEmail`),
   CONSTRAINT `orderdetail_ibfk_1` FOREIGN KEY (`orderinfo_ordNo`) REFERENCES `orderinfo` (`ordNo`),
   CONSTRAINT `orderdetail_ibfk_2` FOREIGN KEY (`goods_prdNo`) REFERENCES `product` (`prdNo`)
@@ -300,7 +299,7 @@ CREATE TABLE `prdoption` (
   UNIQUE KEY `optionNo_UNIQUE` (`prdOptionNo`),
   KEY `fk_option_product1_idx` (`product_prdNo`),
   CONSTRAINT `fk_option_product1` FOREIGN KEY (`product_prdNo`) REFERENCES `product` (`prdNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -309,6 +308,7 @@ CREATE TABLE `prdoption` (
 
 LOCK TABLES `prdoption` WRITE;
 /*!40000 ALTER TABLE `prdoption` DISABLE KEYS */;
+INSERT INTO `prdoption` VALUES (27,52,'red'),(28,52,'yellow');
 /*!40000 ALTER TABLE `prdoption` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -330,7 +330,7 @@ CREATE TABLE `product` (
   `prdNFilename` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`prdNo`),
   UNIQUE KEY `prdNo_UNIQUE` (`prdNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -339,6 +339,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
+INSERT INTO `product` VALUES (52,'123','23','123',123,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -369,6 +370,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES ('qkrtpa12@naver.com','123','123','123',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -381,4 +383,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-11 23:13:42
+-- Dump completed on 2021-01-12  2:51:51

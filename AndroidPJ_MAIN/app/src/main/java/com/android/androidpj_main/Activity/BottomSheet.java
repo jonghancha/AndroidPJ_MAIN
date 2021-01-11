@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,7 +57,9 @@ public class BottomSheet extends BottomSheetDialogFragment {
     String cartCheck, cartCount;
     String cartInsertQty;
     String cartUpdateQty;
+    // 장바구니에 존재하는 수량
     int cartQty;
+    String selectedOption;
 
     // 로그인한 id 받아오기
     String userEmail;
@@ -97,6 +100,9 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
         connectGetData();
 
+        // 옵션
+        selectedOption = String.valueOf(spinner.getSelectedItem());
+        Log.v(TAG, selectedOption);
         // 수량
         btn_plus = getView().findViewById(R.id.btn_plus);
         btn_minus = getView().findViewById(R.id.btn_minus);
@@ -110,9 +116,9 @@ public class BottomSheet extends BottomSheetDialogFragment {
         bottomBuy = getView().findViewById(R.id.btn_bottombuy);
 
         // 장바구니 체크
-        urlAddrCheck = "http://" + macIP + ":8080/JSP/cart_check.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo;
+        urlAddrCheck = "http://" + macIP + ":8080/JSP/cart_check.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo + "&option=";
         // 장바구니 수량 체크
-        urlAddrCount = "http://" + macIP + ":8080/JSP/cart_count.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo;
+        urlAddrCount = "http://" + macIP + ":8080/JSP/cart_count.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo + "&option=";
         // 장바구니 입력
         urlAddrInsert = "http://" + macIP + ":8080/JSP/cart_insert.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo + "&cartQty=";
         // 장바구니 수정
@@ -133,6 +139,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
 
 
+
     //--------------------------
 
     // 수량 +, - 버튼
@@ -144,6 +151,9 @@ public class BottomSheet extends BottomSheetDialogFragment {
             int et_quan = Integer.parseInt(et_quantity.getText().toString());
             // 총 상품 금액
             int total = Integer.parseInt(tv_total_price.getText().toString());
+            // 옵션
+            selectedOption = String.valueOf(spinner.getSelectedItem());
+            Log.v(TAG, selectedOption);
             switch (v.getId()){
                 case R.id.btn_plus: // 플러스 버튼
                     et_quan = et_quan + 1;
@@ -187,6 +197,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
                                         }
                                     })
                                     .show();
+
                         }
                         break;
 
@@ -194,6 +205,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
                         Toast.makeText(getActivity(), "장바구니에 이미 있음", Toast.LENGTH_SHORT).show();
                         // 기존 장바구니 수량 가져오기
                         cartQty = Integer.parseInt(cartCount());
+                        cartUpdateQty = String.valueOf((cartQty + et_quan));
                         // 수량만큼 장바구니에 업데이트
                        // cartUpdateData().equals("1")
                             Log.v(TAG, "in cartUpdateData() == 1)");
@@ -206,7 +218,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
                                         public void onClick(DialogInterface dialog, int which) {
 
 
-                                            if (cartUpdateData().equals("1")){
+                                            if (cartUpdateData().equals("1")){ // Update 성공.
                                                 new AlertDialog.Builder(getContext())
                                                         .setMessage("장바구니에 상품 수량이 추가되었습니다.지금 확인하시겠습니까?")
                                                         .setPositiveButton("예", new DialogInterface.OnClickListener() {
@@ -222,6 +234,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
                                                             }
                                                         })
                                                         .show();
+
                                             }
                                         }
                                     })
@@ -265,7 +278,8 @@ public class BottomSheet extends BottomSheetDialogFragment {
     // 해당 상품이 장바구니에 존재하는지 확인
     private String cartCheck() {
         cartCheck = "0";
-
+        urlAddrCheck = "http://" + macIP + ":8080/JSP/cart_check.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo + "&option=";
+        urlAddrCheck = urlAddrCheck + spinner.getSelectedItem();
         try {
             CartNetworkTask cartNetworkTask = new CartNetworkTask(getContext(), urlAddrCheck, "select");
             Object obj = cartNetworkTask.execute().get();
@@ -282,7 +296,8 @@ public class BottomSheet extends BottomSheetDialogFragment {
     // 장바구니에 있는 상품 Qty 체크
     private String cartCount() {
         cartCount = "0";
-
+        urlAddrCount = "http://" + macIP + ":8080/JSP/cart_count.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo + "&option=";
+        urlAddrCount = urlAddrCount + spinner.getSelectedItem();
         try {
             CartNetworkTask cartNetworkTask = new CartNetworkTask(getContext(), urlAddrCount, "count");
             Object obj = cartNetworkTask.execute().get();
@@ -299,8 +314,9 @@ public class BottomSheet extends BottomSheetDialogFragment {
     // 장바구니에 상품 Insert
     private String cartInsertData(){
         String result = null;
+        urlAddrInsert = "http://" + macIP + ":8080/JSP/cart_insert.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo + "&cartQty=";
         cartInsertQty = String.valueOf(et_quantity.getText());
-        urlAddrInsert = urlAddrInsert + cartInsertQty;
+        urlAddrInsert = urlAddrInsert + cartInsertQty + "&option=" + spinner.getSelectedItem();
         Log.v(TAG, "cartInsertQty =" + cartInsertQty);
         try {
             ///////////////////////////////////////////////////////////////////////////////////////
@@ -334,8 +350,8 @@ public class BottomSheet extends BottomSheetDialogFragment {
     // 장바구니에 상품 Update
     private String cartUpdateData(){
         String result = null;
-        cartUpdateQty = String.valueOf(et_quantity.getText());
-        urlAddrUpdate = urlAddrUpdate + cartUpdateQty;
+        urlAddrUpdate = "http://" + macIP + ":8080/JSP/cart_update.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo + "&cartQty=";
+        urlAddrUpdate = urlAddrUpdate + cartUpdateQty + "&option=" + spinner.getSelectedItem();
         Log.v(TAG, "cartUpdateQty =" + cartUpdateQty);
         try {
             ///////////////////////////////////////////////////////////////////////////////////////

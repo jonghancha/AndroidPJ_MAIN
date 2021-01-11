@@ -21,17 +21,15 @@
 	    Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 		Statement stmt_mysql = conn_mysql.createStatement();
 	
-	    String A = "insert into cartdetail (cartinfo_cartNo, user_userEmail, cartQty, goods_prdNo, cartOption) values (";
-	    String B = "(select cartNo from cartinfo where user_userEmail = ?)";
-		String C = ", ?, ?, ?, ?)";
-	
-	    ps = conn_mysql.prepareStatement(A+B+C);
-	    ps.setString(1, user_userEmail);
-	    ps.setString(2, user_userEmail);
-	    ps.setString(3, cartQty);
-		ps.setString(4, goods_prdNo);
-		ps.setString(5, cartOption);
+	    String A = "update cartdetail set cartQty = ?";
+	    String B = " where user_userEmail = '" + user_userEmail + "' and goods_prdNo = '" + goods_prdNo + "'and cartOption = '" + cartOption + "';";
 		
+	
+	    ps = conn_mysql.prepareStatement(A+B);
+	    
+	    ps.setString(1, cartQty);
+		
+
 		result = ps.executeUpdate();
 %>
 		{
