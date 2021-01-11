@@ -1,15 +1,12 @@
 package com.android.androidpj_main.Main;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,10 +50,14 @@ public class Frmt_Mypage extends Fragment {
 
         // 지은 21/01/10 정보 띄우기****************************
         // 저장한 키 값으로 저장된 아이디와 암호를 불러와 String 값에 저장
+        String id = PreferenceManager.getString(getContext(), "id"  );
+        Toast.makeText(getContext(), "id값:::::::;"+ id, Toast.LENGTH_SHORT).show();
+
 //        String checkEmail = PreferenceManager.getString(getActivity(),"email");
 
         //지은 실험
         String checkEmail = "qkrwldms011@naver.com";
+
 
         // 로그인 한 id에 대한 이름 과 연락처를 띄우는 jsp
         urlAddr_My = "http://" + ShareVar.macIP + ":8080/JSP/mySelect.jsp?userEmail=" + checkEmail;

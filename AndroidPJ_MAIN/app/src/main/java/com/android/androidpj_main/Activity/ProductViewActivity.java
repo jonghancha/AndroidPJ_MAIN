@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.androidpj_main.Adapter.ViewPageAdapter;
+import com.android.androidpj_main.Bean.Product;
 import com.android.androidpj_main.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -38,7 +39,7 @@ public class ProductViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_view);
-
+        //String id = PreferenceManager.getString(ProductViewActivity.this, "id");
         // 연결하기
         prdName = findViewById(R.id.prdName);
         btn_buy = findViewById(R.id.btn_buy);
@@ -53,6 +54,8 @@ public class ProductViewActivity extends AppCompatActivity {
         btn_buy.setOnClickListener(mClickListener);
 
     }
+
+    // 구매하기 버튼 클릭시
     View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

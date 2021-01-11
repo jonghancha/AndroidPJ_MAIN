@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.androidpj_main.Activity.PreferenceManager;
 import com.android.androidpj_main.Main.MainActivity;
 import com.android.androidpj_main.R;
 
@@ -44,6 +45,9 @@ public class LoginActivity extends Activity {
         public void onClick(View v) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
+
+            // PreferenceManager 이메일 보내주기
+            PreferenceManager.setString(LoginActivity.this, "id", "qkrtpa12@naver.com");
             finish();
         }
     };

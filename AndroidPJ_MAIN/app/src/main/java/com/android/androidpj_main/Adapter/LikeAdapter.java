@@ -16,9 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.androidpj_main.Activity.PreferenceManager;
 import com.android.androidpj_main.Activity.ProductViewActivity;
 import com.android.androidpj_main.Bean.Product;
+import com.android.androidpj_main.NetworkTask.CUDNetworkTask;
 import com.android.androidpj_main.R;
+import com.android.androidpj_main.Share.ShareVar;
 
 import java.util.ArrayList;
 
@@ -121,6 +124,34 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ProductHolder>
             tv_likename = itemView.findViewById(R.id.tv_likename);
             tv_likeprice = itemView.findViewById(R.id.tv_likeprice);
             ib_likebtn = itemView.findViewById(R.id.ib_likebtn);
+
+            ib_likebtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    //networktask 사용해서 like 지우기
+                   int prdNo = data.get(getAdapterPosition()).getPrdNo();
+                   // 로그인한 아이디 받아와서 아이디 넘겨주기. 그 아이디에 있는 것을 삭제해야하기 때문.
+                   urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/likeDel.jsp?prdNo="+prdNo;
+                    connectDeleteData();
+                   Toast.makeText(v.getContext(),"삭제되었습니다." + prdNo, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
-}
+
+    public void connectDeleteData(){
+        try{
+            CUDNetworkTask deletenetworkTask = new CUDNetworkTask(mContext, urlAddr);
+            deletenetworkTask.execute().get();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+     }
+
+
+
+
+
+
+}//-----------
