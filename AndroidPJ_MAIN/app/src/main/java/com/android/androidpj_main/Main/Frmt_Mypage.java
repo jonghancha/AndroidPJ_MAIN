@@ -53,8 +53,6 @@ public class Frmt_Mypage extends Fragment {
         String email = PreferenceManager.getString(getActivity(), "email"  );
         Toast.makeText(getContext(), "email값:::::::;"+ email, Toast.LENGTH_SHORT).show();
 
-        //지은 실험
-       // String checkEmail = "qkrwldms011@naver.com";
 
 
         // 로그인 한 id에 대한 이름 과 연락처를 띄우는 jsp

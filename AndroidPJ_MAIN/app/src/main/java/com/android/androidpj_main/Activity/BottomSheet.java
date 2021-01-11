@@ -2,10 +2,13 @@ package com.android.androidpj_main.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.androidpj_main.NetworkTask.CartNetworkTask;
 import com.android.androidpj_main.NetworkTask.SpinnerNetworkTask;
 import com.android.androidpj_main.R;
 import com.android.androidpj_main.Share.ShareVar;
@@ -37,9 +41,18 @@ public class BottomSheet extends BottomSheetDialogFragment {
     Spinner spinner = null;
     ArrayList<String> spinnerList;
     String urlAddr = null;
+    String urlAddr2 = null;
     String macIP,prdNo;
     Button btn_plus, btn_minus;
     EditText et_quantity;
+
+    // 장바구니, 구매하기 버튼
+    Button bottomCart, bottomBuy;
+    String cartCount;
+
+    // 로그인한 id 받아오기
+//    String userEmail = PreferenceManager.getString(getActivity(),"id");
+    String userEmail = "qkrtpa12@naver.com"; // 임시 아이디.
 
 
     @Nullable
@@ -70,13 +83,22 @@ public class BottomSheet extends BottomSheetDialogFragment {
         spinner = getView().findViewById(R.id.sp_bottom);
 
         connectGetData();
+
         // 수량
         btn_plus = getView().findViewById(R.id.btn_plus);
         btn_minus = getView().findViewById(R.id.btn_minus);
         et_quantity = getView().findViewById(R.id.et_quantity);
 
+        // 장바구니, 구매
+        bottomCart = getView().findViewById(R.id.btn_bottomcart);
+        bottomBuy = getView().findViewById(R.id.btn_bottombuy);
+
+        urlAddr2 = "http://" + macIP + ":8080/JSP/cart_check_count.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo;
+
         btn_plus.setOnClickListener(btnClickListener);
         btn_minus.setOnClickListener(btnClickListener);
+        bottomCart.setOnClickListener(btnClickListener);
+        bottomBuy.setOnClickListener(btnClickListener);
 
 //        getView().findViewById(R.id.button_bottom_sheet).setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -85,6 +107,8 @@ public class BottomSheet extends BottomSheetDialogFragment {
 //            }
 //        });
     }
+
+
 
     //--------------------------
 
@@ -109,6 +133,40 @@ public class BottomSheet extends BottomSheetDialogFragment {
                     Log.v(TAG, "감소값::::" + et_quan);
                    break;
 
+                case R.id.btn_bottomcart: // 장바구니 버튼
+                    if (cartCount() == "0"){
+                        // 장바구니에 처음으로 추가
+                        new AlertDialog.Builder(getContext())
+//                                .setTitle("장바구니 담기")
+                                .setMessage("상품이 장바구니에 담겼습니다.\n지금 확인하시겠습니까?")
+//                                .setIcon(R.drawable.ic_shopping_cart)
+                                .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(getActivity(), CartActivity.class);
+                                        startActivity(intent);
+//                                        getActivity().finish(); // finish 해야하는지 ..?
+
+                                    }
+                                })
+                                .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .show();
+                        break;
+
+                    }else {
+                        // 장바구니 수량 업데이트
+
+                    }
+                    break;
+
+                case R.id.btn_bottombuy: // 구매하기 버튼
+                    break;
+
             }
         }
     };
@@ -129,5 +187,25 @@ public class BottomSheet extends BottomSheetDialogFragment {
             e.printStackTrace();
         }
     }
+
+    // 
+
+    // 해당 상품이 장바구니에 존재하는지 확인
+    private String cartCount() {
+        cartCount = "0";
+
+        try {
+            CartNetworkTask cartNetworkTask = new CartNetworkTask(getContext(), urlAddr2, "select");
+            Object obj = cartNetworkTask.execute().get();
+            cartCount = String.valueOf(obj);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        Log.v(TAG, cartCount);
+        return cartCount;
+    }
+
 
 }//--------
