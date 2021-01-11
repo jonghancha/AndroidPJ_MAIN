@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.androidpj_main.Activity.ProductViewActivity;
 import com.android.androidpj_main.Bean.Product;
 import com.android.androidpj_main.R;
+import com.android.androidpj_main.Share.ShareVar;
 
 import java.util.ArrayList;
 
@@ -55,8 +58,18 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
     @Override
     public void onBindViewHolder(@NonNull ProductHolder holder, int position) {
 
-        // 상품 이미지(이미지로 수정해야함)
-        holder.search_img.setImageResource(R.mipmap.ic_launcher);
+        urlAddr = "http://" + ShareVar.macIP + ":8080/IMG/";  // IMG
+        urlAddr = urlAddr + data.get(position).getPrdFilename(); // 경로에 이미지 이름 추가
+
+        // html 세팅
+        String html = "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                "\n<html><body><img src=\"" + urlAddr + "\"/></body></html>";
+
+        // html로 웹뷰 띄우기
+        holder.web_search.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null ); // RecyclerView 라 holder있는거
+
+
+
         // 상품 브랜드
         holder.search_brand.setText("[ "+data.get(position).getPrdBrand()+ " ]");
         // 상품 이름
@@ -64,11 +77,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
         // 상품 가격
         Log.v(TAG, String.valueOf(data.get(position).getPrdPrice()));
         holder.search_price.setText(String.valueOf(data.get(position).getPrdPrice()));
-
-        int prdNo = data.get(position).getPrdNo();
-        Toast.makeText(mContext, "prdNo : " + prdNo, Toast.LENGTH_SHORT).show();
-
-
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,17 +104,24 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
     public class ProductHolder extends RecyclerView.ViewHolder {
 
         // item_search.xml 선언
-        protected ImageView search_img;
+        protected WebView web_search;
         protected TextView search_brand;
         protected TextView search_name;
         protected TextView search_price;
 
         public ProductHolder(@NonNull View itemView) {
             super(itemView);
-            search_img = itemView.findViewById(R.id.search_img);
+            web_search = itemView.findViewById(R.id.web_search);
             search_brand = itemView.findViewById(R.id.search_brand);
             search_name = itemView.findViewById(R.id.search_name);
             search_price = itemView.findViewById(R.id.search_price);
+
+            // WebView 세팅
+            WebSettings webSettings = web_search.getSettings();
+            webSettings.setUseWideViewPort(true);       // wide viewport를 사용하도록 설정
+            webSettings.setLoadWithOverviewMode(true);  // 컨텐츠가 웹뷰보다 클 경우 스크린 크기에 맞게 조정
+
+            web_search.setInitialScale(1);
         }
     }
 }
