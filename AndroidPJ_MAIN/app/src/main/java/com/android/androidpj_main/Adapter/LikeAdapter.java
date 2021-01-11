@@ -131,7 +131,7 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ProductHolder>
 
                     data.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
-                    notifyItemChanged(getAdapterPosition());
+                    //notifyItemChanged(getAdapterPosition());
 
                    Toast.makeText(v.getContext(),"삭제되었습니다." + prdNo + "email:::: " + email, Toast.LENGTH_SHORT).show();
                 }
@@ -156,10 +156,5 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ProductHolder>
 //            ex.printStackTrace();
 //        }
 //    }
-
-
-
-
-
 
 }//-----------
