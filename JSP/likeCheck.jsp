@@ -9,9 +9,10 @@
 	String url_mysql = "jdbc:mysql://localhost/one?serverTimezone=Asia/Seoul&characterEncoding=utf8&useSSL=false";
  	String id_mysql = "root";
  	String pw_mysql = "qwer1234";
-    String WhereDefault = "select product_prdNo from like";
-    String Condition = " where user_userEmail = " + useremail + "and product_prdNo = " + prdNo;
+    String WhereDefault = "select count(product_prdNo) from one.like";
+    String Condition = " where user_userEmail = '" + useremail + "' and product_prdNo = " + prdNo;
     int count = 0;
+    int result = 0;
     
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -33,7 +34,7 @@
             }
 %>            
 			{
-			"product_prdNo" : "<%=rs.getString(1) %>"    
+			"result" : "<%=rs.getInt(1) %>"    
 			}
 
 <%		

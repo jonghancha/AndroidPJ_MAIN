@@ -30,6 +30,7 @@ public class LikeCheckNetworkTask extends AsyncTask<Integer, String, Object> {
     String mAddr = null;
     ProgressDialog progressDialog = null;
     ArrayList<Product> products; // 불러와야 해서
+    int result = 0;
 
     //Constructor
     public LikeCheckNetworkTask(Context context, String mAddr) {
@@ -78,7 +79,7 @@ public class LikeCheckNetworkTask extends AsyncTask<Integer, String, Object> {
                     if (strline ==  null)break;
                     stringBuffer.append(strline + "\n");
                 }
-                parser(stringBuffer.toString());
+                result = parser(stringBuffer.toString());
             }
 
         }catch (Exception e){
@@ -93,7 +94,7 @@ public class LikeCheckNetworkTask extends AsyncTask<Integer, String, Object> {
                 e.printStackTrace();
             }
         }
-        return products;
+        return result;
     }
 
     @Override
@@ -115,16 +116,16 @@ public class LikeCheckNetworkTask extends AsyncTask<Integer, String, Object> {
         super.onCancelled();
     }
 
-    private String parser(String s){
+    private int parser(String s){
         Log.v(TAG, "likeCheckParser()");
-        String returnValue = null;
+        int returnValue = 0;
         try {
             JSONObject jsonObject = new JSONObject(s);
             JSONArray jsonArray = new JSONArray(jsonObject.getString("like_select"));
 
             for (int i=0; i<jsonArray.length(); i++){
                 JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
-                returnValue = jsonObject.getString("result");
+                returnValue = jsonObject1.getInt("result");
 
                 Log.v(TAG, "likereturnValue : " + returnValue);
                 //products.add(product);
@@ -135,8 +136,5 @@ public class LikeCheckNetworkTask extends AsyncTask<Integer, String, Object> {
         }
         return  returnValue;
     }
-
-
-
 
 }//-- Buffer 에 만들고 ArrayList 를 만듦

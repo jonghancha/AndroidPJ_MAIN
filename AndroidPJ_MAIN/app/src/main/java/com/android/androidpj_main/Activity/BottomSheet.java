@@ -1,10 +1,5 @@
 package com.android.androidpj_main.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,9 +11,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.androidpj_main.Main.MainActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.androidpj_main.NetworkTask.CartNetworkTask;
 import com.android.androidpj_main.NetworkTask.SpinnerNetworkTask;
 import com.android.androidpj_main.R;
@@ -47,8 +46,10 @@ public class BottomSheet extends BottomSheetDialogFragment {
     String urlAddrUpdate = null; // 수정
 
     String macIP,prdNo;
+    int prdPrice;
     Button btn_plus, btn_minus;
     EditText et_quantity;
+    TextView tv_total_price;
 
     // 장바구니, 구매하기 버튼
     Button bottomCart, bottomBuy;
@@ -85,11 +86,14 @@ public class BottomSheet extends BottomSheetDialogFragment {
         // Intent로 값 받아오기
         Intent intent = getActivity().getIntent();
         prdNo = String.valueOf(intent.getIntExtra("prdNo", 0));
-        Log.v(TAG, "prdNOBOTTOm:::::" + prdNo);
+        prdPrice = intent.getIntExtra("prdPrice", 0);
+        Log.v(TAG, "prdNOBOTTOm:::::" + prdNo + " price :::: " + prdPrice);
+
 
         macIP = ShareVar.macIP;
         urlAddr = "http://" + macIP + ":8080/JSP/spinner_option_list.jsp?prdNo=" + prdNo;
         spinner = getView().findViewById(R.id.sp_bottom);
+        tv_total_price = getView().findViewById(R.id.tv_total_price);
 
         connectGetData();
 
@@ -97,6 +101,9 @@ public class BottomSheet extends BottomSheetDialogFragment {
         btn_plus = getView().findViewById(R.id.btn_plus);
         btn_minus = getView().findViewById(R.id.btn_minus);
         et_quantity = getView().findViewById(R.id.et_quantity);
+
+        // 총 금액
+        tv_total_price.setText(String.valueOf(prdPrice));
 
         // 장바구니, 구매
         bottomCart = getView().findViewById(R.id.btn_bottomcart);
@@ -128,15 +135,22 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
     //--------------------------
 
+    // 수량 +, - 버튼
     View.OnClickListener btnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
+            // 수량
             int et_quan = Integer.parseInt(et_quantity.getText().toString());
+            // 총 상품 금액
+            int total = Integer.parseInt(tv_total_price.getText().toString());
             switch (v.getId()){
                 case R.id.btn_plus: // 플러스 버튼
                     et_quan = et_quan + 1;
                    et_quantity.setText(String.valueOf(et_quan));
-                   Log.v(TAG, "증가값::::" + et_quan);
+                   total = et_quan * prdPrice;
+                   tv_total_price.setText(String.valueOf(total));
+                   Log.v(TAG, "증가값::::" + et_quan + "Total값:::: " + total);
                    break;
 
                 case  R.id.btn_minus:  // 마이너스 버튼
@@ -146,6 +160,8 @@ public class BottomSheet extends BottomSheetDialogFragment {
                     et_quan = et_quan - 1;
                     }
                     et_quantity.setText(String.valueOf(et_quan));
+                    total = et_quan * prdPrice;
+                    tv_total_price.setText(String.valueOf(total));
                     Log.v(TAG, "감소값::::" + et_quan);
                    break;
 

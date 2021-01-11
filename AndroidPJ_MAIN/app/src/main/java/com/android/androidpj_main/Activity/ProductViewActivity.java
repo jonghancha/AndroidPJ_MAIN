@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,9 +26,11 @@ public class ProductViewActivity extends AppCompatActivity {
     final static String TAG = "ProductView";
     TextView prdName;
     String prdNo;
+    int prdPrice;
     Button btn_buy;
     BottomSheet bottomSheet;
     String urlAddr = null;
+    ImageButton ib_like;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,21 +41,24 @@ public class ProductViewActivity extends AppCompatActivity {
         // 연결하기
         prdName = findViewById(R.id.prdName);
         btn_buy = findViewById(R.id.btn_buy);
+        ib_like = findViewById(R.id.btn_like);
 
         // intent 가져오기
         Intent intent = getIntent();
         prdNo = Integer.toString(intent.getIntExtra("prdNo", 0));
         prdName.setText(intent.getStringExtra("prdName"));
+        prdPrice = intent.getIntExtra("prdPrice", 0);
 
         // like 테이블에 있는지 체크
         urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/likeCheck.jsp?user_userEmail=" + email + "&product_prdNo=" + prdNo;
-        String result = likeCheck();
+        int result = likeCheck();
 
-        if (result.equals("1")){
+        if (result == 1){
             Toast.makeText(ProductViewActivity.this, "찜한상품", Toast.LENGTH_SHORT).show();
+            ib_like.setImageResource(R.drawable.ic_like);
         }else {
             Toast.makeText(ProductViewActivity.this, "안찜한상품", Toast.LENGTH_SHORT).show();
-
+            ib_like.setImageResource(R.drawable.ic_hate);
         }
 
         // 버튼 클릭시
@@ -74,7 +80,7 @@ public class ProductViewActivity extends AppCompatActivity {
 
             Intent intent = new Intent(ProductViewActivity.this, BottomSheet.class);
             intent.putExtra("prdNo", prdNo);
-
+            intent.putExtra("prdPrice",prdPrice);
             bottomSheet = new BottomSheet();
             bottomSheet.show(getSupportFragmentManager(),bottomSheet.getTag());
 ;
@@ -82,16 +88,16 @@ public class ProductViewActivity extends AppCompatActivity {
     };
 
     // 찜목록 체크
-    public String likeCheck(){
+    public int likeCheck(){
 
-        String result = null;
+        int result = 0;
 
         try {
 
         LikeCheckNetworkTask likeCheckNetworkTask = new LikeCheckNetworkTask(ProductViewActivity.this, urlAddr);
 
         Object obj = likeCheckNetworkTask.execute().get();
-        result = (String) obj;
+        result = (int) obj;
         } catch (Exception e){
             e.printStackTrace();
         }
