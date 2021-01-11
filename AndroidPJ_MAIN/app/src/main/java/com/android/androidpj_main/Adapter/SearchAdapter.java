@@ -58,7 +58,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
     @Override
     public void onBindViewHolder(@NonNull ProductHolder holder, int position) {
 
-        urlAddr = "http://" + ShareVar.macIP + ":8080/IMG/";  // IMG
+        urlAddr = "http://" + ShareVar.macIP + ":8080/Images/";  // Images 파일
         urlAddr = urlAddr + data.get(position).getPrdFilename(); // 경로에 이미지 이름 추가
 
         // html 세팅
