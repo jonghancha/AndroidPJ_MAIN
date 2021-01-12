@@ -1,6 +1,6 @@
 # 1조 안드로이드 프로젝트 메인 저장소
 
-
+<img src= "https://github.com/jonghancha/AndroidPJ_Documents/blob/main/PartImage/part.png">
 ## 01/12 중간 점검 내용
  
 ### 남은 부분
