@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.androidpj_main.Activity.ProductList;
+import com.android.androidpj_main.Activity.ProductSubList;
 import com.android.androidpj_main.R;
 
 public class Frmt_Category extends Fragment {
@@ -103,18 +104,33 @@ public class Frmt_Category extends Fragment {
             switch (v.getId()) {
                 case R.id.lipStick:
                     lip = cate_text_stick.getText().toString();
+                    Intent intent_stick = new Intent(getActivity(), ProductSubList.class);
+                    intent_stick.putExtra("lip", lip);
+                    startActivity(intent_stick);
                     Toast.makeText(getActivity(), lip + "을 선택하였습니다.", Toast.LENGTH_SHORT).show();
                     break;
+
                 case R.id.lipTint:
                     lip = cate_text_tint.getText().toString();
+                    Intent intent_tint = new Intent(getActivity(), ProductSubList.class);
+                    intent_tint.putExtra("lip", lip);
+                    startActivity(intent_tint);
                     Toast.makeText(getActivity(), lip + "을 선택하였습니다.", Toast.LENGTH_SHORT).show();
                     break;
+
                 case R.id.lipRose:
                     lip = cate_text_rose.getText().toString();
+                    Intent intent_rose = new Intent(getActivity(), ProductSubList.class);
+                    intent_rose.putExtra("lip", lip);
+                    startActivity(intent_rose);
                     Toast.makeText(getActivity(), lip + "을 선택하였습니다.", Toast.LENGTH_SHORT).show();
                     break;
+
                 case R.id.lipBam:
                     lip = cate_text_bam.getText().toString();
+                    Intent intent_bam = new Intent(getActivity(), ProductSubList.class);
+                    intent_bam.putExtra("lip", lip);
+                    startActivity(intent_bam);
                     Toast.makeText(getActivity(), lip + "을 선택하였습니다.", Toast.LENGTH_SHORT).show();
                     break;
             }
