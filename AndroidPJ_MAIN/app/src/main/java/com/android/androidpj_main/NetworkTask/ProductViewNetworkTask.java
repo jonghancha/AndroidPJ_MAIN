@@ -132,6 +132,7 @@ public class ProductViewNetworkTask extends AsyncTask<Integer, String, Object> {
                 JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
 
                 int prdNo = jsonObject1.getInt("prdNo");
+                String prdColor = jsonObject1.getString("prdColor");
                 String prdName = jsonObject1.getString("prdName");
                 String ctgType = jsonObject1.getString("ctgType");
                 String prdBrand = jsonObject1.getString("prdBrand");
@@ -141,7 +142,7 @@ public class ProductViewNetworkTask extends AsyncTask<Integer, String, Object> {
                 String prdNFilname = jsonObject1.getString("prdNFilename");
 
 
-                Product product = new Product(prdNo, prdName, ctgType,
+                Product product = new Product(prdNo, prdColor, prdName, ctgType,
                         prdBrand, prdPrice, prdFilename, prdDFilename, prdNFilname);
 
                 products.add(product);
