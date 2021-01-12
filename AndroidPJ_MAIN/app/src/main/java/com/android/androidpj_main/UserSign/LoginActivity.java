@@ -1,5 +1,6 @@
 package com.android.androidpj_main.UserSign;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -79,7 +80,7 @@ import com.kakao.util.exception.KakaoException;
 //--------------------------------------------
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Activity {
 
                                 //로그인 - 이강후.
 
