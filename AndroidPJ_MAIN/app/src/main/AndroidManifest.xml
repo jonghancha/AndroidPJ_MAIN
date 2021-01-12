@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".UserSign.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,6 +16,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
+
+
+
+        <activity android:name=".Activity.ProductList"></activity>
         <activity android:name=".Activity.EmptyCartActivity"></activity>
         <activity android:name=".Activity.CartActivity" />
         <activity android:name=".Activity.ProductViewActivity" />
@@ -25,11 +35,12 @@
         <activity android:name=".Make_Youtube.YoutubeActivity" />
         <activity android:name=".Make_Youtube.YoutubeViewActivity" />
         <activity android:name=".Lip.LipMainActivity" />
+        <activity android:name=".UserSign.FindPwActivity"/>
         <activity android:name=".Activity.SearchActivity" />
         <activity android:name=".UserSign.LoginActivity" />
         <activity android:name=".Activity.HoneyTipActivity" />
         <activity android:name=".Activity.MyViewActivity" />
-        <activity android:name=".Activity.MyUpdateActivity" />
+        <activity android:name=".Activity.ProductSubList"/>
         <activity
             android:name=".Main.MainActivity"
             android:windowSoftInputMode="adjustNothing" />

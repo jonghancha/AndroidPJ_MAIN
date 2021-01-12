@@ -107,6 +107,7 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ProductHolder>
 //                intent.putExtra("prdFilename", data.get(position).getPrdFilename());
 //                intent.putExtra("prdDFilename", data.get(position).getPrdDFilename());
 //                intent.putExtra("prdNFilename", data.get(position).getPrdNFilename());
+                intent.putExtra("prdName", data.get(position).getPrdName());
 
                 v.getContext().startActivity(intent);
 

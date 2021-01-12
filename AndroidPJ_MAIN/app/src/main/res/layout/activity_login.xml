@@ -27,33 +27,50 @@
             android:layout_height="250dp"
             />
             <EditText
+                android:id="@+id/et_id"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:background="@drawable/et_black"
+                android:gravity="center"
                 android:hint="아이디(e-mail)"
                 android:textColorHint="@color/black"
-                android:gravity="center"
+                android:singleLine="true"
+                android:lines="1"
                 />
 
             <TextView
-                android:layout_width="300dp"
-                android:layout_height="20dp"
-                android:text="fdsfdfd"
-                android:textSize="13dp"
-                android:textColor="#E53935"
-                />
+                    android:id="@+id/tv_errorId"
+                    android:layout_width="300dp"
+                    android:layout_height="20dp"
+                    android:text="fdsfdfd"
+                    android:textSize="13dp"
+                    android:textColor="#E53935"
+                    />
 
-
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:endIconTint="#D50000"
+            android:gravity="center_horizontal"
+            app:endIconMode="password_toggle"
+            app:hintEnabled="false"
+            >
             <EditText
+                android:id="@+id/et_pw"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:background="@drawable/et_black"
                 android:hint="비밀번호"
                 android:textColorHint="@color/black"
                 android:gravity="center"
+                android:singleLine="true"
+                android:lines="1"
+                android:inputType="textPassword"
                 />
+        </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:id="@+id/tv_errorPw"
                 android:layout_width="300dp"
                 android:layout_height="20dp"
                 android:text="fdsfdfd"
@@ -70,6 +87,7 @@
         >
 
         <TextView
+            android:id="@+id/tv_findPw"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="비밀번호 찾기"
@@ -79,7 +97,7 @@
             />
 
         <CheckBox
-            android:id="@+id/cb_atlogin"
+            android:id="@+id/cb_autoLogin"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:textStyle="bold"
@@ -87,6 +105,7 @@
             android:text="자동 로그인"
             android:layout_marginLeft="100dp"
             android:layout_gravity="right"
+            android:checked="false"
             />
 
     </LinearLayout>
@@ -99,7 +118,7 @@
         >
 
         <Button
-            android:id="@+id/btn_id"
+            android:id="@+id/btn_Login"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="로그인"
@@ -110,7 +129,7 @@
             />
 
         <Button
-            android:id="@+id/btn_pw"
+            android:id="@+id/btn_Signup"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="회원 가입"
@@ -131,12 +150,14 @@
         >
 
         <TextView
+            android:id="@+id/tv_google"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/google"
             />
 
         <TextView
+            android:id="@+id/tv_kakao"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/kakao"

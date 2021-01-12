@@ -12,6 +12,7 @@ public class Product {
     //Field (필드) = Bean 에선 이렇게 한줄 씩 쓰는 것이 좋다.
     int prdNo;
     String prdName;
+    String prdColor;
     String ctgType;
     String prdBrand;
     int prdPrice;
@@ -21,23 +22,19 @@ public class Product {
 
 
     // Constructor (생성자)
-    public Product(int prdNo, String prdName, String ctgType, String prdBrand, int prdPrice, String prdFilename, String prdDFilename, String prdNFilename) {
+
+    public Product(int prdNo, String prdName, String prdColor, String ctgType, String prdBrand, int prdPrice, String prdFilename, String prdDFilename, String prdNFilename) {
         this.prdNo = prdNo;
         this.prdName = prdName;
+        this.prdColor = prdColor;
         this.ctgType = ctgType;
         this.prdBrand = prdBrand;
         this.prdPrice = prdPrice;
         this.prdFilename = prdFilename;
         this.prdDFilename = prdDFilename;
         this.prdNFilename = prdNFilename;
-
     }
 
-    public Product(int prdNo) {
-        this.prdNo = prdNo;
-    }
-
-    // getter setter
     public int getPrdNo() {
         return prdNo;
     }
@@ -52,6 +49,14 @@ public class Product {
 
     public void setPrdName(String prdName) {
         this.prdName = prdName;
+    }
+
+    public String getPrdColor() {
+        return prdColor;
+    }
+
+    public void setPrdColor(String prdColor) {
+        this.prdColor = prdColor;
     }
 
     public String getCtgType() {

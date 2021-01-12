@@ -17,7 +17,7 @@ import com.android.androidpj_main.R;
 
 import java.util.ArrayList;
 
-
+// 지은 추가 21.01.07 ***************************
 public class YoutubeAdapter extends RecyclerView.Adapter<YoutubeAdapter.MyViewHolder> {
 
     Context mContext = null;

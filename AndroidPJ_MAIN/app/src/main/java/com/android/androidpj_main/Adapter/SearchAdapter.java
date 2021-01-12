@@ -67,7 +67,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
                 "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
                 "</head>" +
                 "<body><center>" +
-                "<img src = \"" + urlAddr + "\"style=\"width: auto; height: 90%;\"" +
+                "<img src = \"" + urlAddr + "\"style=\"width: auto; height: 100%;\"" +
                 "</center></body>" +
                 "</html>";
         holder.web_search.loadData(htmlData,"text/html", "UTF-8");
@@ -78,7 +78,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
         holder.search_name.setText(data.get(position).getPrdName());
         // 상품 가격
         Log.v(TAG, String.valueOf(data.get(position).getPrdPrice()));
-        holder.search_price.setText(String.valueOf(data.get(position).getPrdPrice()));
+        holder.search_price.setText(String.valueOf(data.get(position).getPrdPrice())+" 원");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
