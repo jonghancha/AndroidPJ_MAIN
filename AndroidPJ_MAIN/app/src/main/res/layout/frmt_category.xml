@@ -4,23 +4,253 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:weightSum="2"
+        android:gravity="center"
+        android:orientation="horizontal">
+    <ImageButton
+        android:id="@+id/cate_tot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="전체"
+        android:src="@drawable/splash"
+        android:adjustViewBounds="true"
         android:textSize="50dp"
-        android:background="#FFAA00"
         android:layout_margin="20dp"
         android:layout_weight="1"/>
-    <TextView
+
+    <ImageButton
+        android:id="@+id/cate_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="톤"
+        android:text="전체"
+        android:src="@drawable/splash"
+        android:adjustViewBounds="true"
         android:textSize="50dp"
         android:layout_margin="20dp"
-        android:background="#673AB7"
         android:layout_weight="1"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="10"
+        android:layout_margin="20dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/view_tot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:background="#FFAA00"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@color/black"
+                >
+                <LinearLayout
+                    android:id="@+id/lipStick"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginRight="1dp"
+                    android:padding="10dp"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:maxHeight="30dp"
+                        android:maxWidth="24dp"
+                        android:scaleType="fitCenter"
+                        android:background="@color/white"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/lipstick"/>
+                    <TextView
+                        android:id="@+id/cate_text_stick"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="립스틱"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/lipTint"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    android:padding="10dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:maxHeight="30dp"
+                        android:maxWidth="24dp"
+                        android:scaleType="fitCenter"
+                        android:background="@color/white"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/liptin"/>
+                    <TextView
+                        android:id="@+id/cate_text_tint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="립틴트"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@color/black"
+                >
+                <LinearLayout
+                    android:id="@+id/lipRose"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginRight="1dp"
+                    android:padding="10dp"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:maxHeight="30dp"
+                        android:maxWidth="24dp"
+                        android:scaleType="fitCenter"
+                        android:background="@color/white"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/liprose"/>
+                    <TextView
+                        android:id="@+id/cate_text_rose"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="립글로즈"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/lipBam"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    android:padding="10dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:maxHeight="30dp"
+                        android:maxWidth="24dp"
+                        android:scaleType="fitCenter"
+                        android:background="@color/white"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/lipbam"/>
+                    <TextView
+                        android:id="@+id/cate_text_bam"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="립밤"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/view_color"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="invisible"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:weightSum="2"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:id="@+id/cate_text_warm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="웜톤"
+                        />
+                <ImageView
+                    android:id="@+id/cate_warm"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:src="@drawable/warm_color"
+                    android:adjustViewBounds="true"
+                    android:layout_margin="20dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:id="@+id/cate_text_cool"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="쿨톤"
+                        />
+                    <ImageView
+                        android:id="@+id/cate_cool"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:src="@drawable/cool_color"
+                        android:adjustViewBounds="true"
+                        android:layout_margin="20dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </FrameLayout>
+
 
 </LinearLayout>

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +20,7 @@ import com.android.androidpj_main.Share.ShareVar;
 
 import java.util.ArrayList;
 
+// 제품 검색 (한줄-가로)
 public class SearchActivity extends AppCompatActivity {
 
     // 지은 추가 21.01.10 ***************************
@@ -29,8 +31,11 @@ public class SearchActivity extends AppCompatActivity {
     SearchAdapter searchAdapter;
     private RecyclerView.LayoutManager layoutManager;
     RecyclerView search_recyclerView;
+//    GridLayoutManager gridLayoutManager;
     // 검색창
     EditText search_EdT;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,10 @@ public class SearchActivity extends AppCompatActivity {
         search_recyclerView = findViewById(R.id.search_recycleView);
         search_EdT = findViewById(R.id.search_ET);
         search_EdT.addTextChangedListener(textChangedListener);
+
+
+
+        connectGetData();
     }
 
 
@@ -51,9 +60,9 @@ public class SearchActivity extends AppCompatActivity {
 
             // object 에서 선언은 되었지만 실질적으로 리턴한것은 arraylist
             Object object = networkTask.execute().get();
+//            gridLayoutManager = new GridLayoutManager(this, 2);
             products = (ArrayList<Product>) object;
-            Log.v(TAG, "addresses size = " + String.valueOf(products.size()));
-            //StudentAdapter.java 의 생성자를 받아온다.
+
             searchAdapter = new SearchAdapter(SearchActivity.this, R.layout.item_search, products);
             search_recyclerView.setAdapter(searchAdapter);
             search_recyclerView.setHasFixedSize(true); // 리사이클러뷰 기존성능 강화

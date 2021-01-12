@@ -95,7 +95,7 @@
             <Button
                 android:layout_width="85dp"
                 android:layout_height="45dp"
-                android:background="@drawable/btn_round"
+                android:background="@drawable/button_round"
                 android:text="인증 확인"
                 android:textStyle="bold"
                 android:textSize="15dp"

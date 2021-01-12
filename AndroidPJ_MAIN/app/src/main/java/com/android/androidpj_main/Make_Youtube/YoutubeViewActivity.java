@@ -12,9 +12,11 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
-
+// 21.01.08 지은 추가 ****************************************************
 public class YoutubeViewActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
-    public static final String API_KEY = "AIzaSyCZV9d_FQ4hL5Cdt2SnZcdizR6FhKhIJOk";//사용자가 얻은 API Key을 입력하면 된다.(개발자 콘솔에 얻은 것.)
+
+    //사용자가 얻은 API Key을 입력하면 된다.(개발자 콘솔에 얻은 것.)
+    public static final String API_KEY = "AIzaSyCZV9d_FQ4hL5Cdt2SnZcdizR6FhKhIJOk";
 
     //http://youtu.be/<VIDEO_ID>
 

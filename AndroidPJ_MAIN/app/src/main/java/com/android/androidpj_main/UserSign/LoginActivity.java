@@ -28,8 +28,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.androidpj_main.Activity.MainActivity;
+
+
 import com.android.androidpj_main.NetworkTask.NetworkTask_LogIn;
+
+import com.android.androidpj_main.Activity.PreferenceManager;
+import com.android.androidpj_main.Main.MainActivity;
+
 import com.android.androidpj_main.R;
 import com.android.androidpj_main.Share.ShareVar;
 
@@ -117,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         //[자동로그인] 설정값 불러오기  ---------------------------------------------------------------------
         appData = getSharedPreferences("appData",MODE_PRIVATE);
@@ -484,7 +490,9 @@ public class LoginActivity extends AppCompatActivity {
     View.OnClickListener kakaoClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
             Session.getCurrentSession().open(AuthType.KAKAO_LOGIN_ALL, LoginActivity.this);
+
         }
     };
 

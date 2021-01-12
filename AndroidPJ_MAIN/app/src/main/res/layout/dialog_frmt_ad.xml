@@ -1,0 +1,68 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@android:color/transparent"
+    android:layout_height="match_parent">
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="300dp"
+            android:layout_height="500dp"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center"
+            >
+
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="9"
+                android:src="@drawable/ad_2"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#4D55F4F4"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="9dp"
+                >
+
+                <CheckBox
+                    android:id="@+id/cb_ad_stop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="다시 보지 않기"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/iv_ad_close"
+        android:layout_width="47dp"
+        android:layout_height="48dp"
+        android:src="@drawable/close_button_foreground"
+        android:layout_gravity="right|top"/>
+    </FrameLayout>
+
+
+
+</FrameLayout>

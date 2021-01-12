@@ -25,8 +25,8 @@ public class LipMainActivity extends AppCompatActivity {
 
 
 
-        skinTab = (TabLayout) findViewById(R.id.skinTab);
-        skinViewPager = (ViewPager) findViewById(R.id.skinView);
+        skinTab = findViewById(R.id.skinTab);
+        skinViewPager = findViewById(R.id.skinView);
 
         VPSkinAdapter = new ViewPageAdapter(getSupportFragmentManager());
 

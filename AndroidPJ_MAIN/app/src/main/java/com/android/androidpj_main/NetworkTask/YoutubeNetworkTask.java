@@ -17,7 +17,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-//
+
+// 21.01.09 지은 추가  ***************************************
 public class YoutubeNetworkTask extends AsyncTask<Integer, String, Object> {
 
     final static String TAG = "YoutubeNetworkTask";

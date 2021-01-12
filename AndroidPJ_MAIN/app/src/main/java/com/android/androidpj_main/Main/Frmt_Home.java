@@ -1,4 +1,4 @@
-package com.android.androidpj_main.Activity;
+package com.android.androidpj_main.Main;
 
 
 import android.content.Intent;
@@ -80,7 +80,7 @@ public class Frmt_Home extends Fragment {
         sliderView = v.findViewById(R.id.imageSlider);
 
         MainBanner();
-       //**********************************************
+        //**********************************************
 
         return v;
     }
@@ -128,7 +128,7 @@ public class Frmt_Home extends Fragment {
                     startActivity(intent);
                     break;
 
-                    // 플로팅 버튼 관련 -------------------------
+                // 플로팅 버튼 관련 -------------------------
                 case R.id.fabMain:
                     if (fabExpanded == true) {
                         closeSubMenusFab();
@@ -174,4 +174,4 @@ public class Frmt_Home extends Fragment {
 
 
 
-}//--- 끝 --------
+}//— 끝 ————
