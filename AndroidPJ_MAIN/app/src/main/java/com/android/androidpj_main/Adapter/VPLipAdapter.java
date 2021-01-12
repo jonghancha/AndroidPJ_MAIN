@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-// 피부타입에서 쓰이는 ViewPageAdapter
+// 지은 추가 21.01.07 ***************************
 public class VPLipAdapter extends FragmentPagerAdapter {
 
 

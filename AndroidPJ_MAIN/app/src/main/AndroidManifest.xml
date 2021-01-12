@@ -40,7 +40,6 @@
         <activity android:name=".UserSign.LoginActivity" />
         <activity android:name=".Activity.HoneyTipActivity" />
         <activity android:name=".Activity.MyViewActivity" />
-        <activity android:name=".Activity.MyUpdateActivity" />
         <activity android:name=".Activity.ProductSubList"/>
         <activity
             android:name=".Main.MainActivity"

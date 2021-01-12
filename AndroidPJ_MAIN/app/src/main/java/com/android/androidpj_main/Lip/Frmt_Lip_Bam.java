@@ -20,6 +20,7 @@ import com.android.androidpj_main.Share.ShareVar;
 
 import java.util.ArrayList;
 
+// 지은 추가 21.01.13 ***************************
 public class Frmt_Lip_Bam extends Fragment {
 
     View v;

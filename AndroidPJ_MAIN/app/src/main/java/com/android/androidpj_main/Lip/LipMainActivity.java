@@ -12,6 +12,8 @@ import com.android.androidpj_main.Adapter.ViewPageAdapter;
 import com.android.androidpj_main.R;
 import com.google.android.material.tabs.TabLayout;
 
+
+// 지은 추가 21.01.13 ***************************
 public class LipMainActivity extends AppCompatActivity {
 
 

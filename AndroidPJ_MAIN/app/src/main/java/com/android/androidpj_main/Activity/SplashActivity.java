@@ -8,6 +8,7 @@ import android.os.Handler;
 import com.android.androidpj_main.R;
 import com.android.androidpj_main.UserSign.LoginActivity;
 
+// 지은 완료 21.01.06 ***************************
 public class SplashActivity extends Activity {
 
     @Override

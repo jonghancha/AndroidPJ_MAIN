@@ -18,6 +18,8 @@ import com.android.androidpj_main.Activity.ProductSubList;
 import com.android.androidpj_main.Lip.LipMainActivity;
 import com.android.androidpj_main.R;
 
+
+// 지은 최종 수정 완료 21.01.13 ***************************
 public class Frmt_Category extends Fragment {
 
     View v;
