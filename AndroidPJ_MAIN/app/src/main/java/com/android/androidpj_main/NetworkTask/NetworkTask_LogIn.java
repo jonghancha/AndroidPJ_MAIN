@@ -5,7 +5,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.android.addressproject.Bean.User;
+
+import com.android.androidpj_main.Bean.User;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

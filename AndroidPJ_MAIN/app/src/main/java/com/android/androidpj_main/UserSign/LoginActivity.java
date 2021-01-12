@@ -123,6 +123,28 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        ///////////////////////////////////////////////////////////////////////////
+        //
+        // 21.01.11 지은
+        // 건들지 말아주세요. 지은, 종한, 세미 사용해야 합니다.
+        // 로그인 만드실때 이부분 무시하고 만들어주세요.
+        // 로그인 다 만들어지면 저희가 지울겁니다.
+        //
+        ///////////////////////////////////////////////////////////////////////////
+        Button gomain = findViewById(R.id.gomain);
+        gomain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+
+                // PreferenceManager 이메일 보내주기
+                PreferenceManager.setString(LoginActivity.this, "email", "qkrtpa12@naver.com");
+                finish();
+            }
+        });
+        ///----------------------------------------------------------------------------------------------------
+
 
         //[자동로그인] 설정값 불러오기  ---------------------------------------------------------------------
         appData = getSharedPreferences("appData",MODE_PRIVATE);
@@ -226,6 +248,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+
     //[카카오로그인]-----------------------------------------------------------------------------------
 
     //onCreate 시 SessionCallback을 초기화하고, 현재 세션에 콜백을 붙임.
@@ -270,6 +293,7 @@ public class LoginActivity extends AppCompatActivity {
         tvGoogle.setOnClickListener(googleClickListener);
 
     }//@@@@@@@@@@@@@@@@@@@@@ OnCreate 끝. 여기부터 메서드. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 
 
     //[자동로그인]관련 메서드 2개 -------------------------------------------------------------------------
