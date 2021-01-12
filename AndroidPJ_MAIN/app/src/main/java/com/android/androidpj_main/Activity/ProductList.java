@@ -39,12 +39,13 @@ public class ProductList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_product_list);
+        setTitle("LIPHAE 상품 전체보기");
 
         product_recyclerView = findViewById(R.id.product_recycleView);
 
 
-//        urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/addressSelectWithCondition.jsp?user_userId=" + checkId;
+        urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/TProductList.jsp?";
         connectGetProduct();
     }
 

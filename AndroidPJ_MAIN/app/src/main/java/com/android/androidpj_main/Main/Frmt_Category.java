@@ -1,6 +1,7 @@
 package com.android.androidpj_main.Main;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.androidpj_main.Activity.ProductList;
 import com.android.androidpj_main.R;
 
 public class Frmt_Category extends Fragment {
@@ -23,9 +25,9 @@ public class Frmt_Category extends Fragment {
 
     LinearLayout view_tot, view_color;
     LinearLayout lipStick, lipTint, lipRose, lipBam;
-    ImageButton cate_tot, cate_color;
+    LinearLayout cate_tot, cate_color, cate_sub;
 
-    ImageView cate_warm, cate_cool;
+    LinearLayout cate_warm, cate_cool;
     TextView cate_text_warm, cate_text_cool;
     TextView cate_text_stick, cate_text_tint, cate_text_rose, cate_text_bam;
 
@@ -44,9 +46,11 @@ public class Frmt_Category extends Fragment {
 
         //
         cate_tot = v.findViewById(R.id.cate_tot);
+        cate_sub = v.findViewById(R.id.cate_sub);
         cate_color = v.findViewById(R.id.cate_color);
 
         cate_tot.setOnClickListener(cateClickListener);
+        cate_sub.setOnClickListener(cateClickListener);
         cate_color.setOnClickListener(cateClickListener);
         //
 
@@ -142,6 +146,13 @@ public class Frmt_Category extends Fragment {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.cate_tot:
+                    view_tot.setVisibility(v.INVISIBLE);
+                    view_color.setVisibility(v.INVISIBLE);
+                    Toast.makeText(getActivity(), "전체보기를 선택하였습니다.", Toast.LENGTH_SHORT).show();
+                    Intent Tintent = new Intent(getActivity(), ProductList.class);
+                    startActivity(Tintent);
+                    break;
+                case R.id.cate_sub:
                     view_tot.setVisibility(v.VISIBLE);
                     view_color.setVisibility(v.INVISIBLE);
                     break;
