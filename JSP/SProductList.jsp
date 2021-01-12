@@ -34,15 +34,17 @@
 <%
             }
 %>            
+			
 			{
 			"prdNo" : "<%=rs.getString(1) %>", 
-			"prdName" : "<%=rs.getString(2) %>",   
-			"ctgType" : "<%=rs.getString(3) %>",
-			"prdBrand" : "<%=rs.getString(4) %>",  
-            		"prdPrice" : "<%=rs.getString(5) %>",
-            		"prdFilename" : "<%=rs.getString(6) %>",
-            		"prdDFilename" : "<%=rs.getString(7) %>",
-            		"prdNFilename" : "<%=rs.getString(8) %>"
+			"prdName" : "<%=rs.getString(2) %>",  
+			"prdColor" : "<%=rs.getString(3) %>", 
+			"ctgType" : "<%=rs.getString(4) %>",
+			"prdBrand" : "<%=rs.getString(5) %>",  
+            		"prdPrice" : "<%=rs.getString(6) %>",
+            		"prdFilename" : "<%=rs.getString(7) %>",
+            		"prdDFilename" : "<%=rs.getString(8) %>",
+            		"prdNFilename" : "<%=rs.getString(9) %>"
 			}
 
 <%		

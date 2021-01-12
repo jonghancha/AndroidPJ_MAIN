@@ -15,8 +15,10 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.androidpj_main.Activity.ProductColorList;
 import com.android.androidpj_main.Activity.ProductList;
 import com.android.androidpj_main.Activity.ProductSubList;
+import com.android.androidpj_main.Lip.LipMainActivity;
 import com.android.androidpj_main.R;
 
 public class Frmt_Category extends Fragment {
@@ -29,7 +31,6 @@ public class Frmt_Category extends Fragment {
     LinearLayout cate_tot, cate_color, cate_sub;
 
     LinearLayout cate_warm, cate_cool;
-    TextView cate_text_warm, cate_text_cool;
     TextView cate_text_stick, cate_text_tint, cate_text_rose, cate_text_bam;
 
     String color;
@@ -80,8 +81,6 @@ public class Frmt_Category extends Fragment {
         //
         cate_warm = v.findViewById(R.id.cate_warm);
         cate_cool = v.findViewById(R.id.cate_cool);
-        cate_text_warm = v.findViewById(R.id.cate_text_warm);
-        cate_text_cool = v.findViewById(R.id.cate_text_cool);
 
         cate_warm.setOnClickListener(colorCilckListener);
         cate_cool.setOnClickListener(colorCilckListener);
@@ -144,11 +143,17 @@ public class Frmt_Category extends Fragment {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.cate_warm:
-                    color = cate_text_warm.getText().toString();
+                    color = "웜톤";
+                    Intent intent_warm = new Intent(getActivity(), LipMainActivity.class);
+                    intent_warm.putExtra("color", color);
+                    startActivity(intent_warm);
                     Toast.makeText(getActivity(), color + "을 선택하였습니다.",Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.cate_cool:
-                    color = cate_text_cool.getText().toString();
+                    color = "쿨톤";
+                    Intent intent_cool = new Intent(getActivity(), ProductColorList.class);
+                    intent_cool.putExtra("color", color);
+                    startActivity(intent_cool);
                     Toast.makeText(getActivity(), color + "을 선택하였습니다.", Toast.LENGTH_SHORT).show();
                     break;
             }

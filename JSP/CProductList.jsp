@@ -5,14 +5,14 @@
 <%-- test 폴더에 넣어주세요  --%>
 <%
     request.setCharacterEncoding("utf-8");
-    String user_email = request.getParameter("user_userEmail");
+	String prdColor = request.getParameter("prdColor");
 
 	String url_mysql = "jdbc:mysql://localhost/one?serverTimezone=Asia/Seoul&characterEncoding=utf8&useSSL=false";
  	String id_mysql = "root";
-     String pw_mysql = "qwer1234";
-     
-    String WhereDefault = "select p.prdNo, p.prdName, p.ctgType, p.prdBrand, p.prdPrice, p.prdFilename, p.prdDFilename, p.prdNFilename from product p, one.like l";
-    String Condition = " where user_userEmail = '" + user_email + "' and p.prdNo = l.product_prdNo";
+ 	String pw_mysql = "qwer1234";
+    String WhereDefault = "select * from product where prdColor = ";
+
+    String Condition = "'" + prdColor  +"'";
     int count = 0;
     
     try {
@@ -34,7 +34,6 @@
 <%
             }
 %>            
-			
 			{
 			"prdNo" : "<%=rs.getString(1) %>", 
 			"prdName" : "<%=rs.getString(2) %>",  

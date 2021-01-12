@@ -84,14 +84,7 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ProductHolder>
             public void onClick(View v) {
 
                 Intent intent = new Intent(v.getContext(), ProductViewActivity.class);
-                intent.putExtra("prdNo", data.get(position).getPrdNo());
                 intent.putExtra("prdName", data.get(position).getPrdName());
-                intent.putExtra("ctgType", data.get(position).getCtgType());
-                intent.putExtra("prdBrand", data.get(position).getPrdBrand());
-                intent.putExtra("prdPrice", data.get(position).getPrdPrice());
-                intent.putExtra("prdFilename", data.get(position).getPrdFilename());
-                intent.putExtra("prdDFilename", data.get(position).getPrdDFilename());
-                intent.putExtra("prdNFilename", data.get(position).getPrdNFilename());
 
                 v.getContext().startActivity(intent);
 

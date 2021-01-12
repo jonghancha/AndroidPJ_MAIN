@@ -112,7 +112,6 @@
             android:layout_gravity="center"
             android:visibility="invisible"
             android:gravity="center"
-            android:background="#FFAA00"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -284,12 +283,6 @@
                         android:background="@color/white"
                         android:adjustViewBounds="true"
                         android:src="@drawable/warm_color"/>
-                    <TextView
-                        android:id="@+id/cate_text_warm"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="웜톤"/>
                 </LinearLayout>
 
 
@@ -313,12 +306,6 @@
                         android:background="@color/white"
                         android:adjustViewBounds="true"
                         android:src="@drawable/cool_color"/>
-                    <TextView
-                        android:id="@+id/cate_text_cool"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="쿨톤"/>
                 </LinearLayout>
 
             </LinearLayout>

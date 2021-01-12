@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 // 피부타입에서 쓰이는 ViewPageAdapter
-public class VPSkinAdapter extends FragmentPagerAdapter {
+public class VPLipAdapter extends FragmentPagerAdapter {
 
 
     private final List<Fragment> SlstFrmt = new ArrayList<>();
     private final List<String> SlstTitles = new ArrayList<>();
 
-    public VPSkinAdapter(FragmentManager fm) {
+    public VPLipAdapter(FragmentManager fm) {
         super(fm);
     }
 
