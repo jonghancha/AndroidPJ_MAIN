@@ -75,8 +75,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
         // 상품 이름
         holder.product_name.setText(data.get(position).getPrdName());
         // 상품 가격
-        Log.v(TAG, String.valueOf(data.get(position).getPrdPrice()));
-        holder.product_price.setText(String.valueOf(data.get(position).getPrdPrice()));
+        Log.v(TAG, String.valueOf(data.get(position).getPrdPrice()) );
+        holder.product_price.setText(String.valueOf(data.get(position).getPrdPrice())+" 원");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,7 +12,7 @@
  	String pw_mysql = "qwer1234";
     String WhereDefault = "select * from product where prdColor = ";
 
-    String Condition = "'" + prdColor  +"'";
+    String Condition = "'" + prdColor  +"'" + "AND ctgType = " + "'립글로스'";
     int count = 0;
     
     try {

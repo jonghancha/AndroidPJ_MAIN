@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,7 +13,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.android.androidpj_main.Activity.ProductColorList;
 import com.android.androidpj_main.Activity.ProductList;
 import com.android.androidpj_main.Activity.ProductSubList;
 import com.android.androidpj_main.Lip.LipMainActivity;
@@ -151,7 +148,7 @@ public class Frmt_Category extends Fragment {
                     break;
                 case R.id.cate_cool:
                     color = "쿨톤";
-                    Intent intent_cool = new Intent(getActivity(), ProductColorList.class);
+                    Intent intent_cool = new Intent(getActivity(), LipMainActivity.class);
                     intent_cool.putExtra("color", color);
                     startActivity(intent_cool);
                     Toast.makeText(getActivity(), color + "을 선택하였습니다.", Toast.LENGTH_SHORT).show();

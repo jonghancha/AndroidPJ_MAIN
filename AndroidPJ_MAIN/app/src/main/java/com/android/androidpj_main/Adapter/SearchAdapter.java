@@ -78,7 +78,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
         holder.search_name.setText(data.get(position).getPrdName());
         // 상품 가격
         Log.v(TAG, String.valueOf(data.get(position).getPrdPrice()));
-        holder.search_price.setText(String.valueOf(data.get(position).getPrdPrice()));
+        holder.search_price.setText(String.valueOf(data.get(position).getPrdPrice())+" 원");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

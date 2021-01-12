@@ -30,8 +30,6 @@ public class LipMainActivity extends AppCompatActivity {
 
 
 
-        TextView lipM_name = findViewById(R.id.lipM_name);
-        lipM_name.setText(color);
 
         lipTab = findViewById(R.id.lipTab);
         lipViewPager = findViewById(R.id.lipView);
@@ -39,11 +37,11 @@ public class LipMainActivity extends AppCompatActivity {
         VPLipAdapter = new ViewPageAdapter(getSupportFragmentManager());
 
         //     Add Fragment
-        VPLipAdapter.AddFrmt(new Frmt_Lip_Tot(),"");   // 립전체
-        VPLipAdapter.AddFrmt(new Frmt_Lip_Tick(),""); // 립스틱
-        VPLipAdapter.AddFrmt(new Frmt_Lip_Tin(),""); // 립틴트
-        VPLipAdapter.AddFrmt(new Frmt_Lip_Rose(),""); // 립글로즈
-        VPLipAdapter.AddFrmt(new Frmt_Lip_Bam(),""); // 립케어/립밤
+        VPLipAdapter.AddFrmt(new Frmt_Lip_Tot(color),"");   // 립전체
+        VPLipAdapter.AddFrmt(new Frmt_Lip_Tick(color),""); // 립스틱
+        VPLipAdapter.AddFrmt(new Frmt_Lip_Tin(color),""); // 립틴트
+        VPLipAdapter.AddFrmt(new Frmt_Lip_Rose(color),""); // 립글로즈
+        VPLipAdapter.AddFrmt(new Frmt_Lip_Bam(color),""); // 립케어/립밤
 
         lipViewPager.setAdapter(VPLipAdapter);
         lipTab.setupWithViewPager(lipViewPager);

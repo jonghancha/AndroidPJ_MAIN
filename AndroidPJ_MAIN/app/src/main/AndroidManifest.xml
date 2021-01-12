@@ -42,7 +42,6 @@
         <activity android:name=".Activity.MyViewActivity" />
         <activity android:name=".Activity.MyUpdateActivity" />
         <activity android:name=".Activity.ProductSubList"/>
-        <activity android:name=".Activity.ProductColorList"/>
         <activity
             android:name=".Main.MainActivity"
             android:windowSoftInputMode="adjustNothing" />
