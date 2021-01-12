@@ -5,7 +5,7 @@
 	request.setCharacterEncoding("utf-8");
 	String user_userEmail = request.getParameter("userEmail");
 	String cartQty = request.getParameter("cartQty");
-	String goods_prdNo = request.getParameter("prdNo");	
+	String prdName = request.getParameter("prdName");	
 	
 		
 //------
@@ -21,17 +21,15 @@
 	    Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 		Statement stmt_mysql = conn_mysql.createStatement();
 	
-	    String A = "insert into cartdetail (cartinfo_cartNo, user_userEmail, cartQty, goods_prdNo) values (";
-	    String B = "(select cartNo from cartinfo where user_userEmail = ?)";
-		String C = ", ?, ?, ?)";
+	    String A = "update cartdetail set cartQty = ?";
+	    String B = " where user_userEmail = '" + user_userEmail + "' and goods_prdNo = (select prdNo from product where prdName = '" + prdName + "')";
+		
 	
-	    ps = conn_mysql.prepareStatement(A+B+C);
-	    ps.setString(1, user_userEmail);
-	    ps.setString(2, user_userEmail);
-	    ps.setString(3, cartQty);
-		ps.setString(4, goods_prdNo);
+	    ps = conn_mysql.prepareStatement(A+B);
+	    
+	    ps.setString(1, cartQty);
 		
-		
+
 		result = ps.executeUpdate();
 %>
 		{
