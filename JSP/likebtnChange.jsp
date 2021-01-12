@@ -22,13 +22,12 @@
 	    Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 	    Statement stmt_mysql = conn_mysql.createStatement();
 	
-	    String A = "delete from one.like";
-        String B = " where product_prdNo = ? and user_userEmail = ?";
+	    String A = "insert into one.like (user_userEmail, product_prdNo) values (?,?)";
 	
-	    ps = conn_mysql.prepareStatement(A+B);
+	    ps = conn_mysql.prepareStatement(A);
 	   
-		ps.setString(1, prdNo);
-		ps.setString(2, useremail);
+		ps.setString(1, useremail);
+		ps.setString(2, prdNo);
 	    
 	    ps.executeUpdate();
 	
