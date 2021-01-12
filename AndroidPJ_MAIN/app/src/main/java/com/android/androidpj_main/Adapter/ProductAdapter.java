@@ -65,7 +65,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
                 "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
                 "</head>" +
                 "<body><center>" +
-                "<img src = \"" + urlAddr + "\"style=\"width: auto; height: 90%;\"" +
+                "<img src = \"" + urlAddr + "\"style=\"width: auto; height: 100%;\"" +
                 "</center></body>" +
                 "</html>";
         holder.web_product.loadData(htmlData,"text/html", "UTF-8");
@@ -75,8 +75,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
         // 상품 이름
         holder.product_name.setText(data.get(position).getPrdName());
         // 상품 가격
-        Log.v(TAG, String.valueOf(data.get(position).getPrdPrice()));
-        holder.product_price.setText(String.valueOf(data.get(position).getPrdPrice()));
+        Log.v(TAG, String.valueOf(data.get(position).getPrdPrice()) );
+        holder.product_price.setText(String.valueOf(data.get(position).getPrdPrice())+" 원");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,6 +1,11 @@
 package com.android.androidpj_main.Make_Youtube;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +22,9 @@ public class YoutubeActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private YouPageAdapter viewPageAdapter;
 
+    // 21.01.13 지은 추가 ****************************************************
+    LinearLayout goyou, goinsta;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +33,14 @@ public class YoutubeActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.you_tablayout);
         viewPager = findViewById(R.id.you_viewpager);
+
+        // 21.01.13 지은 추가 ****************************************************
+        goyou = findViewById(R.id.goyou);
+        goinsta = findViewById(R.id.goinsta);
+
+        goyou.setOnClickListener(goUrlClickListener);
+        goinsta.setOnClickListener(goUrlClickListener);
+        //****************************************************
 
         viewPageAdapter = new YouPageAdapter(getSupportFragmentManager());
 
@@ -48,4 +64,26 @@ public class YoutubeActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setElevation(0);
     }
-}
+
+
+    // 21.01.13 지은 추가 ****************************************************
+    // 이사배 유튜브 채널 + 인스타 계정으로 이동
+    View.OnClickListener goUrlClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.goyou:
+                    Toast.makeText(YoutubeActivity.this, "이사배 유튜브 채널로 이동", Toast.LENGTH_SHORT).show();
+                    Intent intent_you = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/channel/UC9kmlDcqksaOnCkC_qzGacA"));
+                    startActivity(intent_you);
+                    break;
+
+                case R.id.goinsta:
+                    Toast.makeText(YoutubeActivity.this, "이사배 인스타 계정으로 이동", Toast.LENGTH_SHORT).show();
+                    Intent intent_insta = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/risabae_art/?hl=ko"));
+                    startActivity(intent_insta);
+                    break;
+            }
+        }
+    };
+}//---- 끝 ----
