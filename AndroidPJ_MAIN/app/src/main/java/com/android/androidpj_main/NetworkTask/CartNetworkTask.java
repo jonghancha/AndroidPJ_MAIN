@@ -175,6 +175,8 @@ public class CartNetworkTask extends AsyncTask<Integer, String, Object> {
             carts.clear();
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
+
+                int prdNo = jsonObject1.getInt("prdNo");
                 String prdBrand = jsonObject1.getString("prdBrand");
                 String prdName = jsonObject1.getString("prdName");
                 int prdPrice = Integer.parseInt(jsonObject1.getString("prdPrice"));
@@ -184,7 +186,7 @@ public class CartNetworkTask extends AsyncTask<Integer, String, Object> {
 
                 Log.v(TAG, "prdBrand : " + prdBrand);
 
-                Cart cart = new Cart(prdBrand, prdName, prdPrice, cartQty, prdFilename);
+                Cart cart = new Cart(prdNo, prdBrand, prdName, prdPrice, cartQty, prdFilename);
 
                 carts.add(cart);
                 Log.v(TAG, "----------------------------------");

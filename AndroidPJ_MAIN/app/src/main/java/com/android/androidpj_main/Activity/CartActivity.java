@@ -66,8 +66,19 @@ public class CartActivity extends AppCompatActivity implements OnChangeCheckedPr
         btnCartDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cartAdapter.connectDeleteData();
-                connectGetCart();
+
+                if(cart.size() != 0) {
+                    cartAdapter.connectDeleteData();
+                    connectGetCart();
+                    btnCartToOrder.setText("총 0원 주문하기");
+
+
+
+                } else {
+                    btnCartToOrder.setClickable(false);
+                }
+
+
             }
         });
 

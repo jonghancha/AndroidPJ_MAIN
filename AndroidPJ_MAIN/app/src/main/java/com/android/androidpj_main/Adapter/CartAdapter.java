@@ -117,8 +117,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             String urlAddrDelete;
 
             for (int i = 0; i < sendCartData.size(); i++) {
-                urlAddrDelete = "http://" + macIP + ":8080/JSP/cart_delete_inCart.jsp?userEmail=" + userEmail + "&prdName=";
-                urlAddrDelete = urlAddrDelete + sendCartData.get(i).getPrdName();
+                urlAddrDelete = "http://" + macIP + ":8080/JSP/cart_delete_inCart.jsp?userEmail=" + userEmail + "&goods_prdNo=";
+                urlAddrDelete = urlAddrDelete + sendCartData.get(i).getPrdNo();
                 try {
                     CartNetworkTask networkTask = new CartNetworkTask(mContext, urlAddrDelete, "delete");
                     networkTask.execute().get();
@@ -152,7 +152,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
                 "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
                 "</head>" +
                 "<body><center>" +
-                "<img src = \"" + urlAddr + "\"style=\"width: auto; height: 90%;\"" +
+                "<img src = \"" + urlAddr + "\"style=\"width: auto; height: 90%;\">" +
                 "</center></body>" +
                 "</html>";
         holder.web_cart.loadData(htmlData,"text/html", "UTF-8");
@@ -375,7 +375,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
         private String cartUpdateData() {
             String result = null;
 
-            String urlAddrUpdate = "http://" + macIP + ":8080/JSP/cart_update_inCart.jsp?userEmail=" + userEmail + "&prdName=" + data.get(getAdapterPosition()).getPrdName() + "&cartQty=";
+            String urlAddrUpdate = "http://" + macIP + ":8080/JSP/cart_update_inCart.jsp?userEmail=" + userEmail + "&prdNo=" + data.get(getAdapterPosition()).getPrdNo() + "&cartQty=";
             urlAddrUpdate = urlAddrUpdate + cart_qty.getText().toString();
             Log.v(TAG, "cartUpdateQty =" + cart_qty.getText().toString());
             try {

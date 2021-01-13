@@ -12,6 +12,7 @@ public class Cart implements Serializable {
 
 
     //Field (필드) = Bean 에선 이렇게 한줄 씩 쓰는 것이 좋다.
+    int prdNo;
     String prdBrand;
     String prdName;
     int prdPrice;
@@ -22,12 +23,21 @@ public class Cart implements Serializable {
     // Constructor (생성자)
 
 
-    public Cart(String prdBrand, String prdName, int prdPrice, int cartQty, String prdFilename) {
+    public Cart(int prdNo, String prdBrand, String prdName, int prdPrice, int cartQty, String prdFilename) {
+        this.prdNo = prdNo;
         this.prdBrand = prdBrand;
         this.prdName = prdName;
         this.prdPrice = prdPrice;
         this.cartQty = cartQty;
         this.prdFilename = prdFilename;
+    }
+
+    public int getPrdNo() {
+        return prdNo;
+    }
+
+    public void setPrdNo(int prdNo) {
+        this.prdNo = prdNo;
     }
 
     public String getPrdBrand() {
