@@ -42,7 +42,7 @@
                     android:id="@+id/tv_errorId"
                     android:layout_width="300dp"
                     android:layout_height="20dp"
-                    android:text="fdsfdfd"
+                    android:text=""
                     android:textSize="13dp"
                     android:textColor="#E53935"
                     />
@@ -73,7 +73,7 @@
                 android:id="@+id/tv_errorPw"
                 android:layout_width="300dp"
                 android:layout_height="20dp"
-                android:text="fdsfdfd"
+                android:text=""
                 android:textSize="13dp"
                 android:textColor="#E53935"
                 />

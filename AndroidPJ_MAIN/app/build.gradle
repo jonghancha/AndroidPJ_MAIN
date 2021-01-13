@@ -35,6 +35,9 @@ dependencies {
 
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation files('libs/activation.jar')
+    implementation files('libs/mail.jar')
+    implementation files('libs/additionnal.jar')
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     implementation platform('com.google.firebase:firebase-bom:26.2.0')

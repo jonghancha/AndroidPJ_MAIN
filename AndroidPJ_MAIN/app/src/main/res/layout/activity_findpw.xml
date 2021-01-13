@@ -41,20 +41,41 @@
             android:textColor="@color/black"
             android:textSize="12dp"
             android:textStyle="bold" />
-
-        <EditText
+        <LinearLayout
             android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:background="@drawable/et_black"
-            android:gravity="center"
-            android:hint="e-mail"
-            android:textSize="25dp" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+                <EditText
+                    android:id="@+id/et_id"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/et_black"
+                    android:gravity="center"
+                    android:hint="example@example.com"
+                    android:textSize="13dp" />
+
+                <Button
+                    android:id="@+id/btn_SendEmail"
+                    android:layout_width="85dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_round"
+                    android:text="인증 메일"
+                    android:textSize="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_gravity="center"
+                    />
+
+        </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_errorId"
             android:layout_width="300dp"
-            android:layout_height="20dp"
-            android:text="fdsfdfd"
+            android:layout_height="25dp"
+            android:text=""
             android:textColor="#E53935"
+            android:layout_marginBottom="20dp"
             android:textSize="13dp" />
 
 
@@ -64,6 +85,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="25dp"
 
         >
 
@@ -83,16 +105,18 @@
             >
 
             <EditText
+                android:id="@+id/et_Auth"
                 android:layout_width="200dp"
                 android:layout_height="45dp"
                 android:background="@drawable/et_black"
                 android:hint="e-mail 인증번호"
                 android:textStyle="bold"
-                android:textSize="18dp"
+                android:textSize="15dp"
                 android:gravity="center"
                 />
 
             <Button
+                android:id="@+id/btn_ChkAuth"
                 android:layout_width="85dp"
                 android:layout_height="45dp"
                 android:background="@drawable/button_round"
@@ -106,9 +130,10 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_errorAuth"
             android:layout_width="300dp"
             android:layout_height="20dp"
-            android:text="fdsfdfd"
+            android:text=""
             android:textSize="13dp"
             android:textColor="#E53935"
             />
@@ -121,20 +146,40 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:orientation="vertical"
-        android:gravity="bottom"
+
         android:layout_weight="1"
+        android:gravity="center_vertical"
         >
+        <TextView
+            android:id="@+id/time_counter_pre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            />
+        <TextView
+            android:id="@+id/time_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:textColor="#DD2C00"
+            android:layout_gravity="center_horizontal"
+            />
+
+
+    </LinearLayout>
 
         <Button
+            android:id="@+id/btn_FindPw"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:text="비밀번호 찾기"
             android:textStyle="bold"
             android:textSize="30dp"
             android:background="@drawable/btn_border_black"
+            android:layout_gravity="bottom"
             />
-
-
-    </LinearLayout>
 
 </LinearLayout>
