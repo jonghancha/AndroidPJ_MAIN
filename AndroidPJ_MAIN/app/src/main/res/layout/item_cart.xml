@@ -135,6 +135,13 @@
                     android:layout_marginLeft="160dp"
                     />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="원"
+                    android:textStyle="bold"
+                    />
+
             </LinearLayout>
 
         </LinearLayout>

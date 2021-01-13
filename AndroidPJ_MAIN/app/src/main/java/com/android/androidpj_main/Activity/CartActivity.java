@@ -6,13 +6,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import com.android.androidpj_main.Adapter.CartAdapter;
 
@@ -40,6 +43,12 @@ public class CartActivity extends AppCompatActivity {
     String userEmail;
 
     CheckBox cart_cb_all;
+    Button btnCartDelete;
+    Button btnCartToOrder;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +59,40 @@ public class CartActivity extends AppCompatActivity {
 
         userEmail = PreferenceManager.getString(CartActivity.this,"email");
         cartRecyclerView = findViewById(R.id.cart_recycleView);
+
+        btnCartToOrder = findViewById(R.id.btn_cart_order);
+
+        btnCartDelete = findViewById(R.id.btn_cart_delete);
+
+        btnCartDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cartAdapter.connectDeleteData();
+                connectGetCart();
+            }
+        });
+
+
+
+        // 결제창으로 넘어가기
+        btnCartToOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < cartAdapter.sendToOrder().size(); i++) {
+                    Log.v(TAG, "보낼 값 ;;;; " + i + " 번 째" + cartAdapter.sendToOrder().get(i).getPrdName());
+                    Log.v(TAG, "보낼 값 ;;;; " + i + " 번 째" + cartAdapter.sendToOrder().get(i).getPrdPrice());
+                    Log.v(TAG, "보낼 값 ;;;; " + i + " 번 째" + cartAdapter.sendToOrder().get(i).getCartQty());
+
+                }
+
+
+                Intent intent = new Intent(CartActivity.this, PurchaseActivity.class);
+                intent.putExtra("cartData", cartAdapter.sendToOrder());
+                startActivity(intent);
+            }
+        });
+
+
 
         cart_cb_all = findViewById(R.id.cart_cb_all);
 
@@ -63,7 +106,6 @@ public class CartActivity extends AppCompatActivity {
                 }
             }
         });
-
         connectGetCart();
     }
 
@@ -87,7 +129,6 @@ public class CartActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
     }
 
     //입력 되어도 리스트에 실시간으로 추가 되게 만들어줌(유지)
@@ -96,5 +137,8 @@ public class CartActivity extends AppCompatActivity {
         super.onResume();
         connectGetCart();
         Log.v(TAG, "onResume()");
+        btnCartToOrder =findViewById(R.id.btn_cart_order);
     }
+
+
 }

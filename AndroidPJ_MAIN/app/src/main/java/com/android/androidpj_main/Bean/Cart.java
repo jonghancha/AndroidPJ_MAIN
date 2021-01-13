@@ -1,6 +1,8 @@
 package com.android.androidpj_main.Bean;
 
-public class Cart {
+import java.io.Serializable;
+
+public class Cart implements Serializable {
 
 ///////////////////////////////////////////////////////////////////////////
 //
