@@ -84,6 +84,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
 
                 Intent intent = new Intent(v.getContext(), ProductViewActivity.class);
                 intent.putExtra("prdName", data.get(position).getPrdName());
+                intent.putExtra("prdNo", data.get(position).getPrdNo());
+                intent.putExtra("prdPrice", data.get(position).getPrdPrice());
 
                 v.getContext().startActivity(intent);
 

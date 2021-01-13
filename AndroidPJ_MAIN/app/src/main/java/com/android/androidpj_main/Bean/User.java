@@ -21,6 +21,10 @@ public class User {
         this.userColor = userColor;
     }
 
+    public User(String userColor) {
+        this.userColor = userColor;
+    }
+
     public String getUserEmail() {
         return userEmail;
     }

@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,12 +19,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.androidpj_main.NetworkTask.CartNetworkTask;
-import com.android.androidpj_main.NetworkTask.SpinnerNetworkTask;
 import com.android.androidpj_main.R;
 import com.android.androidpj_main.Share.ShareVar;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-
-import java.util.ArrayList;
 
 public class BottomSheet extends BottomSheetDialogFragment {
 
@@ -39,7 +35,6 @@ public class BottomSheet extends BottomSheetDialogFragment {
     final static String TAG = "BottomSheet";
     ArrayAdapter adapter = null;
     Spinner spinner = null;
-    ArrayList<String> spinnerList;
     String urlAddr = null;
     String urlAddrCheck = null; // cart 에 이미 있는지 체크
     String urlAddrCount = null; // cart Qty 체크
@@ -47,7 +42,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
     String urlAddrUpdate = null; // 수정
 
     String macIP,prdNo;
-    int prdPrice;
+    int prdPrice=0;
     Button btn_plus, btn_minus;
     EditText et_quantity;
     TextView tv_total_price;
@@ -90,21 +85,21 @@ public class BottomSheet extends BottomSheetDialogFragment {
         Intent intent = getActivity().getIntent();
         prdNo = String.valueOf(intent.getIntExtra("prdNo", 0));
         prdPrice = intent.getIntExtra("prdPrice", 0);
+        //String prdPricestr = String.valueOf(intent.getIntExtra("prdPrice", 0));
         Log.v(TAG, "prdNOBOTTOm:::::" + prdNo + " price :::: " + prdPrice);
-
 
         macIP = ShareVar.macIP;
         urlAddr = "http://" + macIP + ":8080/JSP/spinner_option_list.jsp?prdNo=" + prdNo;
-        spinner = getView().findViewById(R.id.sp_bottom);
         tv_total_price = getView().findViewById(R.id.tv_total_price);
 
-        connectGetData();
+       // connectGetData();
 
 
         // 수량
         btn_plus = getView().findViewById(R.id.btn_plus);
         btn_minus = getView().findViewById(R.id.btn_minus);
         et_quantity = getView().findViewById(R.id.et_quantity);
+        tv_total_price = getView().findViewById(R.id.tv_total_price);
 
         // 총 금액
         tv_total_price.setText(String.valueOf(prdPrice));
@@ -149,7 +144,6 @@ public class BottomSheet extends BottomSheetDialogFragment {
             int et_quan = Integer.parseInt(et_quantity.getText().toString());
             // 총 상품 금액
             int total = Integer.parseInt(tv_total_price.getText().toString());
-
 
             switch (v.getId()){
                 case R.id.btn_plus: // 플러스 버튼
@@ -253,24 +247,6 @@ public class BottomSheet extends BottomSheetDialogFragment {
             }
         }
     };
-
-
-
-    private void  connectGetData(){
-        try {
-            SpinnerNetworkTask networkTask = new SpinnerNetworkTask(getContext(), urlAddr,"select");
-            Object obj = networkTask.execute().get();
-            spinnerList = (ArrayList<String>) obj;
-            Log.v(TAG, "spinnerList.size() : " + spinnerList.size());
-
-            adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item,spinnerList);
-            spinner.setAdapter(adapter);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
 
 
     // 해당 상품이 장바구니에 존재하는지 확인

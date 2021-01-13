@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.android.androidpj_main.Bean.Product;
+import com.android.androidpj_main.Bean.Tip;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,25 +17,20 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-///////////////////////////////////////////////////////////////////////////
-//
-// 21.01.13 세미 생성
-//
-///////////////////////////////////////////////////////////////////////////
+// 21.01.13 지은 추가  ***************************************
+public class TipNetworkTask extends AsyncTask<Integer, String, Object> {
 
-public class ProductViewNetworkTask extends AsyncTask<Integer, String, Object> {
-
-    final static String TAG = "ProductViewNetworkTask";
+    final static String TAG = "TipNetworkTask";
     Context context = null;
     String mAddr = null;
     ProgressDialog progressDialog = null;
-    ArrayList<Product> products; // 불러와야 해서
+    ArrayList<Tip> tips; // 불러와야 해서
 
     //Constructor
-    public ProductViewNetworkTask(Context context, String mAddr) {
+    public TipNetworkTask(Context context, String mAddr) {
         this.context = context;
         this.mAddr = mAddr;
-        this.products = new ArrayList<Product>();    //직접 침 : 이유는 꼭 쓸 필요성은 없지만 arraylist를 사용하기 위해 생성해줌
+        this.tips = new ArrayList<Tip>();    //직접 침 : 이유는 꼭 쓸 필요성은 없지만 arraylist를 사용하기 위해 생성해줌
         Log.v(TAG, "Start : "+ mAddr);
     }
 
@@ -93,7 +88,7 @@ public class ProductViewNetworkTask extends AsyncTask<Integer, String, Object> {
                 e.printStackTrace();
             }
         }
-        return products;
+        return tips;
     }
 
     @Override
@@ -118,34 +113,27 @@ public class ProductViewNetworkTask extends AsyncTask<Integer, String, Object> {
     private void parser(String s){
         Log.v(TAG, "Parser()");
         try {
-            Log.v(TAG, "s값 ::::::" +  s);
             // 배열이기 때문에 [] 이렇게 시작
             JSONObject jsonObject = new JSONObject(s);
-            JSONArray jsonArray = new JSONArray(jsonObject.getString("product_select"));
+            JSONArray jsonArray = new JSONArray(jsonObject.getString("tip_select"));
             // object 가 읽어줌
             //students_info는 테이블 명이라고 생각할 것
 
-            products.clear();
+            tips.clear();
 
             // object 별로 불러오는 것 {이 안의 묶음}
             for (int i=0; i<jsonArray.length(); i++){
                 JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
 
-                int prdNo = jsonObject1.getInt("prdNo");
-                String prdName = jsonObject1.getString("prdName");
-                String prdColor = jsonObject1.getString("prdColor");
-                String ctgType = jsonObject1.getString("ctgType");
-                String prdBrand = jsonObject1.getString("prdBrand");
-                int prdPrice = jsonObject1.getInt("prdPrice");
-                String prdFilename = jsonObject1.getString("prdFilename");
-                String prdDFilename = jsonObject1.getString("prdDFilename");
-                String prdNFilname = jsonObject1.getString("prdNFilename");
+                int tipNo = jsonObject1.getInt("tipNo");
+                String tipTitle = jsonObject1.getString("tipTitle");
+                String tipContent = jsonObject1.getString("tipContent");
+                String tipImg = jsonObject1.getString("tipImg");
 
 
-                Product product = new Product(prdNo, prdName, prdColor, ctgType,
-                        prdBrand, prdPrice, prdFilename, prdDFilename, prdNFilname);
+                Tip tip = new Tip(tipNo, tipTitle, tipContent, tipImg);
 
-                products.add(product);
+                tips.add(tip);
             }
 
 

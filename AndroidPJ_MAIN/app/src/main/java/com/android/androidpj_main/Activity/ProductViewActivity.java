@@ -18,6 +18,7 @@ import com.android.androidpj_main.Bean.Product;
 import com.android.androidpj_main.NetworkTask.CUDNetworkTask;
 import com.android.androidpj_main.NetworkTask.LikeCheckNetworkTask;
 import com.android.androidpj_main.NetworkTask.ProductViewNetworkTask;
+import com.android.androidpj_main.PrdDialogFragment;
 import com.android.androidpj_main.R;
 import com.android.androidpj_main.Share.ShareVar;
 
@@ -34,17 +35,17 @@ public class ProductViewActivity extends AppCompatActivity {
 
     final static String TAG = "ProductView";
     TextView tv_prdName, tv_prdBrand, tv_prdPrice;
+    WebView wv_prdimg, wv_prdDFile, wv_prdNFile;
     String prdNo, prdName, prdName2;
     int prdPrice = 0;
     int result = 0;
-    Button btn_buy;
+    Button btn_buy, btn_prdview;
     BottomSheet bottomSheet;
     String urlAddr = null;
     String urlAddr1 = null;
     String email = null;
-    String prdFileName, prdDFileName;
+    String prdFileName, prdDFileName, prdNFileName;
     ImageButton ib_like;
-    WebView wv_prdimg, wv_prdDFile;
     ArrayList<Product> data = null;
 
     @Override
@@ -61,6 +62,8 @@ public class ProductViewActivity extends AppCompatActivity {
         tv_prdBrand = findViewById(R.id.prdBrand);
         tv_prdPrice = findViewById(R.id.prdPrice);
         wv_prdDFile = findViewById(R.id.wv_prdDFile);
+        wv_prdNFile = findViewById(R.id.wv_prdNFile);
+        btn_prdview = findViewById(R.id.btn_prdview);
 
         // intent 가져오기
         Intent intent = getIntent();
@@ -76,14 +79,12 @@ public class ProductViewActivity extends AppCompatActivity {
         prdPrice = data.get(0).getPrdPrice();
         prdFileName = data.get(0).getPrdFilename();
         prdDFileName = data.get(0).getPrdDFilename();
+        prdNFileName = data.get(0).getPrdNFilename();
 
         // 정보 띄워주기
         tv_prdName.setText(prdName2);
         tv_prdBrand.setText(data.get(0).getPrdBrand());
         tv_prdPrice.setText(String.valueOf(prdPrice));
-
-        Log.v(TAG, "여기까지 왔니>>>>>>> " + prdName2 + prdPrice + prdFileName);
-
 
         // like 테이블에 있는지 체크
         urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/likeCheck.jsp?user_userEmail=" + email + "&product_prdNo=" + prdNo;
@@ -139,7 +140,26 @@ public class ProductViewActivity extends AppCompatActivity {
                 "</html>";
         wv_prdDFile.loadData(htmlData2,"text/html", "UTF-8");
 
+    // 상품정보
+    urlAddr = "http://" + ShareVar.macIP + ":8080/Images/";  // Images 파일
+    urlAddr = urlAddr + prdNFileName; // 경로에 이미지 이름 추가
+        Log.v(TAG, "이미지 ::::::" + urlAddr);
+    String htmlData3 = "<html>" +
+            "<head>" +
+            "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
+            "</head>" +
+            "<body><center>" +
+            "<img src = \"" + urlAddr + "\"style=\"width: auto; height: 100%;\">" +
+            "</center></body>" +
+            "</html>";
+        wv_prdNFile.loadData(htmlData3,"text/html", "UTF-8");
+
+
+        btn_prdview.setOnClickListener(mClickListener);
     }
+
+
+
 
     // 구매하기 버튼 클릭시
     View.OnClickListener mClickListener = new View.OnClickListener() {
@@ -156,8 +176,9 @@ public class ProductViewActivity extends AppCompatActivity {
 
                 case R.id.btn_buy:
                         Intent intent = new Intent(ProductViewActivity.this, BottomSheet.class);
-                        intent.putExtra("prdNo", prdNo);
-                        intent.putExtra("prdPrice",prdPrice);
+//                        intent.putExtra("prdNo", prdNo);
+//                        intent.putExtra("prdPrice",prdPrice);
+//                        Log.v(TAG, "product price ::::::" + prdPrice);
                         bottomSheet = new BottomSheet();
                         bottomSheet.show(getSupportFragmentManager(),bottomSheet.getTag());
                         break;
@@ -167,6 +188,7 @@ public class ProductViewActivity extends AppCompatActivity {
                     if(result == 1){    // 이미 찜 상태 - like테이블에서 삭제, 버튼 변경
                         Log.v(TAG, "상세페이지 찜 삭제" + result);
                         urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/likeDel.jsp?prdNo=" + prdNo + "&email=" + email;
+
                         connectDeleteData();
                         Toast.makeText(ProductViewActivity.this, "하트 해제", Toast.LENGTH_SHORT).show();
                         ib_like.setImageResource(R.drawable.ic_hate);
@@ -182,8 +204,16 @@ public class ProductViewActivity extends AppCompatActivity {
                         result = likeCheck();
 
                     }
-;
+
+                    break;
+
+                case R.id.btn_prdview:
+                        Toast.makeText(ProductViewActivity.this, "웹뷰클릭", Toast.LENGTH_SHORT).show();
+                    PrdDialogFragment dialogFragment = new PrdDialogFragment();
+                    dialogFragment.show(getSupportFragmentManager(), "MyFragment");
+
             }
+
         }
     };
 

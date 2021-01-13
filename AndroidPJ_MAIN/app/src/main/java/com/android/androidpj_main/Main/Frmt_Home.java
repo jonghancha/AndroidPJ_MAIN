@@ -4,6 +4,7 @@ package com.android.androidpj_main.Main;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +14,16 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.androidpj_main.Activity.HoneyTipActivity;
 import com.android.androidpj_main.Adapter.SliderAdapter;
 import com.android.androidpj_main.Make_Youtube.YoutubeActivity;
-import com.android.androidpj_main.R;
-import com.android.androidpj_main.Test.TestMainActivity;
 import com.android.androidpj_main.Model.SliderItem;
+import com.android.androidpj_main.NetworkTask.UserColorNetworkTask;
+import com.android.androidpj_main.R;
+import com.android.androidpj_main.Share.ShareVar;
+import com.android.androidpj_main.Test.TestMainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.IndicatorView.draw.controller.DrawController;
@@ -47,6 +52,12 @@ public class Frmt_Home extends Fragment {
     SliderView sliderView;
     //****************************************
 
+    // 21.01.13 세미 추가 ***************************
+    RecyclerView recyclerView;
+    String urlAddr = null;
+    String result;
+    //*********************************************
+
 
     public Frmt_Home() {
 
@@ -57,6 +68,7 @@ public class Frmt_Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.frmt_home,container,false);
 
+        String email = PreferenceManager.getString(getActivity(), "email"  );
 
         // 지은 추가 21.01.08 ***************************
         gotest = v.findViewById(R.id.btn_test);
@@ -71,15 +83,32 @@ public class Frmt_Home extends Fragment {
         fabMake.setOnClickListener(homeBtnClickListener);
         fab_honey.setOnClickListener(homeBtnClickListener);
 
+
         //플로팅 버튼 시작할때 숨기기
         closeSubMenusFab();
         //------------------------------------------------
-
 
         //지은 21.01.09------------------------------------
         sliderView = v.findViewById(R.id.imageSlider);
 
         MainBanner();
+        //**********************************************
+
+        // 세미 추가 21.01.13 ***************************
+
+        // 로그인한 아이디 userColor 판단.
+        urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/homeSelect.jsp?user_userEmail=" + email;
+
+        // 판단한 결과로 추천상품 띄워주기
+         result = userColorCheck();
+        Log.v(TAG,"result톤톤톤오톤톤" + result);
+         //result.equals("웜톤")
+
+        // recyclerView 연결
+        recyclerView = v.findViewById(R.id.home_recycleView);
+
+
+
         //**********************************************
 
         return v;
@@ -139,6 +168,8 @@ public class Frmt_Home extends Fragment {
 
                 case R.id.fab_honey:
                     Toast.makeText(getContext(), "꿀팁 차차", Toast.LENGTH_SHORT).show();
+                    Intent Tintent = new Intent(getActivity(), HoneyTipActivity.class);
+                    startActivity(Tintent);
                     break;
 
                 case R.id.fabMake:
@@ -170,6 +201,26 @@ public class Frmt_Home extends Fragment {
         fabExpanded = true;
     }
     //**********************************************
+
+
+    // 21.01.13 세미 **********************************
+    // 리사이클러뷰 userColor select
+    // 찜목록 체크
+    public String userColorCheck(){
+
+        String result = null;
+
+        try {
+
+            UserColorNetworkTask userColorNetworkTask = new UserColorNetworkTask(getActivity(), urlAddr);
+
+            Object obj = userColorNetworkTask.execute().get();
+            result = (String) obj;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
 
 
 
