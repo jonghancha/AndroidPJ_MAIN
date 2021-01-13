@@ -5,7 +5,7 @@
 	request.setCharacterEncoding("utf-8");
 	String user_userEmail = request.getParameter("userEmail");
 	String cartQty = request.getParameter("cartQty");
-	String prdName = request.getParameter("prdName");	
+	String prdNo = request.getParameter("prdNo");	
 	
 		
 //------
@@ -22,7 +22,7 @@
 		Statement stmt_mysql = conn_mysql.createStatement();
 	
 	    String A = "update cartdetail set cartQty = ?";
-	    String B = " where user_userEmail = '" + user_userEmail + "' and goods_prdNo = (select prdNo from product where prdName = '" + prdName + "')";
+	    String B = " where user_userEmail = '" + user_userEmail + "' and goods_prdNo =" +prdNo;
 		
 	
 	    ps = conn_mysql.prepareStatement(A+B);

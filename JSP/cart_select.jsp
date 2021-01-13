@@ -8,7 +8,7 @@
 	String url_mysql = "jdbc:mysql://localhost/one?serverTimezone=Asia/Seoul&characterEncoding=utf8&useSSL=false";
  	String id_mysql = "root";
  	String pw_mysql = "qwer1234";
-    String A = "select prdBrand, prdName, prdPrice, cartQty, prdFilename ";
+    String A = "select prdNo, prdBrand, prdName, prdPrice, cartQty, prdFilename ";
     String B = "from product p, cartdetail c ";
     String C = "where c.goods_prdNo = p.prdNo and c.user_userEmail = '" + user_userEmail + "'";
 
@@ -35,11 +35,12 @@
             }
 %>            
 			{
-			"prdBrand" : "<%=rs.getString(1) %>", 
-			"prdName" : "<%=rs.getString(2) %>", 
-			"prdPrice" : "<%=rs.getString(3) %>", 
-			"cartQty" : "<%=rs.getString(4) %>",
-			"prdFilename" : "<%=rs.getString(5) %>"
+            "prdNo" : "<%=rs.getString(1) %>", 
+			"prdBrand" : "<%=rs.getString(2) %>", 
+			"prdName" : "<%=rs.getString(3) %>", 
+			"prdPrice" : "<%=rs.getString(4) %>", 
+			"cartQty" : "<%=rs.getString(5) %>",
+			"prdFilename" : "<%=rs.getString(6) %>"
 			}
 
 <%		

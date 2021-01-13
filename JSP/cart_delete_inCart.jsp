@@ -3,7 +3,7 @@
 <%@page import="java.sql.*"%>        
 <%
 	request.setCharacterEncoding("utf-8");
-	String prdName = request.getParameter("prdName");
+	String goods_prdNo = request.getParameter("goods_prdNo");
 	String user_userEmail = request.getParameter("userEmail");
 	
 		
@@ -23,11 +23,11 @@
 	    Statement stmt_mysql = conn_mysql.createStatement();
 	
 	    String A = "delete from cartdetail";
-        String B = " where goods_prdNo = (select prdNo from product where prdName = ?) and user_userEmail = ?";
+        String B = " where goods_prdNo = ? and user_userEmail = ?";
 	
 	    ps = conn_mysql.prepareStatement(A+B);
 	   
-		ps.setString(1, prdName);
+		ps.setString(1, goods_prdNo);
 		ps.setString(2, user_userEmail);
 	    
 	    result = ps.executeUpdate();
