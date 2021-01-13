@@ -49,6 +49,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     Context mContext = null;
     int layout = 0;
     ArrayList<Cart> data = null;
+
     LayoutInflater inflater = null;
     String urlAddr;
 
@@ -291,8 +292,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
                                 cart_price.setText(formattedStringPrice);
                             }
                             Log.v(TAG, "증가값::::" + et_quan + "Total값:::: " + total);
-                            cartUpdateData();
-                            updateTotalPrice();
+
                             break;
 
                         case R.id.cart_btn_minus:  // 마이너스 버튼
@@ -309,10 +309,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
                                 cart_price.setText(formattedStringPrice);
                             }
                             Log.v(TAG, "감소값::::" + et_quan);
-                            cartUpdateData();
-                            updateTotalPrice();
+
                             break;
                     }
+                    cartUpdateData();
+                    updateTotalPrice();
+                    data.get(getAdapterPosition()).setCartQty(Integer.parseInt(String.valueOf(editTextList.get(getAdapterPosition()).getText())));
+                    Log.v(TAG, "바뀐 수량 제대로 들어갔니?" + data.get(getAdapterPosition()).getCartQty());
                 }
             }
         };

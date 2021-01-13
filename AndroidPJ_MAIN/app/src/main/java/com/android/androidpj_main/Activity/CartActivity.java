@@ -48,8 +48,6 @@ public class CartActivity extends AppCompatActivity implements OnChangeCheckedPr
 
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,13 +147,14 @@ public class CartActivity extends AppCompatActivity implements OnChangeCheckedPr
         connectGetCart();
         Log.v(TAG, "onResume()");
         btnCartToOrder =findViewById(R.id.btn_cart_order);
+        btnCartToOrder.setText("총 0원 주문하기");
     }
 
 
     @Override
     public void changedPrice(int totalPrice) {
         Log.v(TAG, "**메인 가격변경 리스너 들어옴 **");
-        btnCartToOrder.setText("총" + totalPrice + "원 주문하기");
+        btnCartToOrder.setText("총 " + totalPrice + "원 주문하기");
 
     }
 }
