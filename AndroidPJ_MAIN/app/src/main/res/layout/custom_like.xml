@@ -1,24 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="15dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="90dp"
+    android:weightSum="10"
     android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/iv_likeimg"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+    <WebView
+        android:id="@+id/wv_likeimg"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
         android:src="@mipmap/ic_launcher"
         />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:orientation="vertical"
+        android:layout_weight="3"
         android:layout_marginLeft="16dp">
-
+        <TextView
+            android:id="@+id/tv_likebrand"
+            android:textColor="#8C8989"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="상품브랜드"
+            android:textStyle="bold"
+            />
         <TextView
             android:id="@+id/tv_likename"
             android:textColor="#000000"
@@ -27,7 +38,6 @@
             android:text="상품이름"
             android:textStyle="bold"
             />
-
         <TextView
             android:id="@+id/tv_likeprice"
             android:textColor="#000000"
@@ -43,6 +53,7 @@
         android:layout_gravity="center"
         android:orientation="vertical"
         android:layout_width="match_parent"
+        android:layout_weight="7"
         android:layout_height="wrap_content"
         >
 
@@ -53,8 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#fff"
-            android:src="@drawable/ic_like"
-            android:layout_marginRight="50dp"/>
+            android:src="@drawable/ic_like"/>
 
     </LinearLayout>
 

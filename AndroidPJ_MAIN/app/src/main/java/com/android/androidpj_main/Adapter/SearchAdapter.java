@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,7 +76,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
         holder.search_name.setText(data.get(position).getPrdName());
         // 상품 가격
         Log.v(TAG, String.valueOf(data.get(position).getPrdPrice()));
-        holder.search_price.setText(String.valueOf(data.get(position).getPrdPrice()));
+        holder.search_price.setText(String.valueOf(data.get(position).getPrdPrice())+" 원");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +84,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
 
                 Intent intent = new Intent(v.getContext(), ProductViewActivity.class);
                 intent.putExtra("prdName", data.get(position).getPrdName());
-
+                intent.putExtra("prdPrice", data.get(position).getPrdPrice());
+                intent.putExtra("prdName", data.get(position).getPrdName());
                 v.getContext().startActivity(intent);
 
                 Toast.makeText(v.getContext(), "상세보기 페이지 이동", Toast.LENGTH_SHORT).show();

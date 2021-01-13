@@ -5,12 +5,12 @@
 <%
     String user_userEmail = request.getParameter("userEmail");
     String goods_prdNo = request.getParameter("prdNo");
-    String cartOption = request.getParameter("option");
+    
 
 	String url_mysql = "jdbc:mysql://localhost/one?serverTimezone=Asia/Seoul&characterEncoding=utf8&useSSL=false";
  	String id_mysql = "root";
  	String pw_mysql = "qwer1234";
-    String WhereDefault = "select count(*) from cartdetail where user_userEmail = '" + user_userEmail + "' and goods_prdNo = '" + goods_prdNo + "'and cartOption = '" + cartOption + "';";
+    String WhereDefault = "select count(*) from cartdetail where user_userEmail = '" + user_userEmail + "' and goods_prdNo = '" + goods_prdNo + "'";
     
     int count = 0;
     

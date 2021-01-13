@@ -1,7 +1,9 @@
 package com.android.androidpj_main.Lip;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -10,44 +12,50 @@ import com.android.androidpj_main.Adapter.ViewPageAdapter;
 import com.android.androidpj_main.R;
 import com.google.android.material.tabs.TabLayout;
 
+
+// 지은 추가 21.01.13 ***************************
 public class LipMainActivity extends AppCompatActivity {
 
 
-    private TabLayout skinTab;
-    private ViewPager skinViewPager;
-    private ViewPageAdapter VPSkinAdapter;
+    private TabLayout lipTab;
+    private ViewPager lipViewPager;
+    private ViewPageAdapter VPLipAdapter;
     Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lipmain);
+        Intent intent = getIntent();
+        String color = intent.getStringExtra("color");
+        setTitle("LIPHAE [" + color + "]");
 
 
 
-        skinTab = findViewById(R.id.skinTab);
-        skinViewPager = findViewById(R.id.skinView);
 
-        VPSkinAdapter = new ViewPageAdapter(getSupportFragmentManager());
+        lipTab = findViewById(R.id.lipTab);
+        lipViewPager = findViewById(R.id.lipView);
+
+        VPLipAdapter = new ViewPageAdapter(getSupportFragmentManager());
 
         //     Add Fragment
-        VPSkinAdapter.AddFrmt(new Frmt_Lip_Tot(),"");   // 립전체
-        VPSkinAdapter.AddFrmt(new Frmt_Lip_Tick(),""); // 립스틱
-        VPSkinAdapter.AddFrmt(new Frmt_Lip_Tin(),""); // 립틴트
-        VPSkinAdapter.AddFrmt(new Frmt_Lip_Rose(),""); // 립글로즈
-        VPSkinAdapter.AddFrmt(new Frmt_Lip_Bam(),""); // 립케어/립밤
+        VPLipAdapter.AddFrmt(new Frmt_Lip_Tot(color),"");   // 립전체
+        VPLipAdapter.AddFrmt(new Frmt_Lip_Tick(color),""); // 립스틱
+        VPLipAdapter.AddFrmt(new Frmt_Lip_Tin(color),""); // 립틴트
+        VPLipAdapter.AddFrmt(new Frmt_Lip_Rose(color),""); // 립글로즈
+        VPLipAdapter.AddFrmt(new Frmt_Lip_Bam(color),""); // 립케어/립밤
 
-        skinViewPager.setAdapter(VPSkinAdapter);
-        skinTab.setupWithViewPager(skinViewPager);
+        lipViewPager.setAdapter(VPLipAdapter);
+        lipTab.setupWithViewPager(lipViewPager);
 
         mContext = this;
 
 
-        skinTab.getTabAt(0).setText("전체");      // Frmt_Skin_Tot
-        skinTab.getTabAt(1).setText("립스틱");  // Frmt_Lip_Tick
-        skinTab.getTabAt(2).setText("립틴트");      // Frmt_Lip_Tin
-        skinTab.getTabAt(3).setText("립글로즈");      // Frmt_Lip_Rose
-        skinTab.getTabAt(4).setText("립케어/립밤");      // Frmt_Lip_Bam
+        lipTab.getTabAt(0).setText("전체");      // Frmt_Skin_Tot
+        lipTab.getTabAt(1).setText("립스틱");  // Frmt_Lip_Tick
+        lipTab.getTabAt(2).setText("립틴트");      // Frmt_Lip_Tin
+        lipTab.getTabAt(3).setText("립글로즈");      // Frmt_Lip_Rose
+        lipTab.getTabAt(4).setText("립케어/립밤");      // Frmt_Lip_Bam
 
 
         //--------------------------------------------------------------------------------

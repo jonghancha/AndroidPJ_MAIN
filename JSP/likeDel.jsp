@@ -4,7 +4,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	String prdNo = request.getParameter("prdNo");
-	String useremail = request.getParameter("useremail");
+	String useremail = request.getParameter("email");
 	
 		
 //------

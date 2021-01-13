@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="1dp"
+        android:gravity="top"
+        android:orientation="vertical"
+        android:background="@color/white"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            >
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                />
+            <TextView
+                android:background="#FFBEBE"
+                android:id="@+id/tipTitle"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:gravity="right|center"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="right|center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="Tip Title"
+                />
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            >
+            <TextView
+                android:background="#FFE9BE"
+                android:id="@+id/tipContent"
+                android:gravity="left|center"
+                android:layout_gravity="left|center"
+                android:layout_width="match_parent"
+                android:layout_marginRight="20dp"
+                android:textSize="15dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Tip Content"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

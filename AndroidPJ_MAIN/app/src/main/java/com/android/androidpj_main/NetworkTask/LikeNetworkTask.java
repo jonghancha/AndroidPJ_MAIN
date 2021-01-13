@@ -132,6 +132,7 @@ public class LikeNetworkTask extends AsyncTask<Integer, String, Object> {
 
                 int prdNo = jsonObject1.getInt("prdNo");
                 String prdName = jsonObject1.getString("prdName");
+                String prdColor = jsonObject1.getString("prdColor");
                 String ctgType = jsonObject1.getString("ctgType");
                 String prdBrand = jsonObject1.getString("prdBrand");
                 int prdPrice = jsonObject1.getInt("prdPrice");
@@ -140,7 +141,7 @@ public class LikeNetworkTask extends AsyncTask<Integer, String, Object> {
                 String prdNFilname = jsonObject1.getString("prdNFilename");
 
 
-                Product product = new Product(prdNo, prdName, ctgType,
+                Product product = new Product(prdNo, prdName, prdColor, ctgType,
                         prdBrand, prdPrice, prdFilename, prdDFilename, prdNFilname);
 
                 products.add(product);
