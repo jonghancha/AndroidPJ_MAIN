@@ -6,7 +6,7 @@
 	String user_userEmail = request.getParameter("userEmail");
 	String cartQty = request.getParameter("cartQty");
 	String goods_prdNo = request.getParameter("prdNo");	
-	String cartOption = request.getParameter("option");
+	
 		
 //------
 	String url_mysql = "jdbc:mysql://localhost/one?serverTimezone=Asia/Seoul&characterEncoding=utf8&useSSL=false";
@@ -22,7 +22,7 @@
 		Statement stmt_mysql = conn_mysql.createStatement();
 	
 	    String A = "update cartdetail set cartQty = ?";
-	    String B = " where user_userEmail = '" + user_userEmail + "' and goods_prdNo = '" + goods_prdNo + "'and cartOption = '" + cartOption + "';";
+	    String B = " where user_userEmail = '" + user_userEmail + "' and goods_prdNo = '" + goods_prdNo + "'";
 		
 	
 	    ps = conn_mysql.prepareStatement(A+B);

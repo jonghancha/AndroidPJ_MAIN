@@ -22,6 +22,7 @@
             android:layout_weight="1"
             app:cardUseCompatPadding="true">
         <LinearLayout
+            android:id="@+id/goyou"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal"
@@ -60,6 +61,7 @@
             android:layout_weight="1"
             app:cardUseCompatPadding="true">
         <LinearLayout
+            android:id="@+id/goinsta"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal"
@@ -106,7 +108,10 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="이사배 유튜브 메이크업 영상"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:text="🥰이사배 유튜브 메이크업 영상🥰"
             />
     </LinearLayout>
 

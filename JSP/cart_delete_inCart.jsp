@@ -3,8 +3,8 @@
 <%@page import="java.sql.*"%>        
 <%
 	request.setCharacterEncoding("utf-8");
-	String prdNo = request.getParameter("prdNo");
-	String useremail = request.getParameter("email");
+	String prdName = request.getParameter("prdName");
+	String user_userEmail = request.getParameter("userEmail");
 	
 		
 //------
@@ -22,19 +22,30 @@
 	    Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 	    Statement stmt_mysql = conn_mysql.createStatement();
 	
-	    String A = "insert into one.like (user_userEmail, product_prdNo) values (?,?)";
+	    String A = "delete from cartdetail";
+        String B = " where goods_prdNo = (select prdNo from product where prdName = ?) and user_userEmail = ?";
 	
-	    ps = conn_mysql.prepareStatement(A);
+	    ps = conn_mysql.prepareStatement(A+B);
 	   
-		ps.setString(1, useremail);
-		ps.setString(2, prdNo);
+		ps.setString(1, prdName);
+		ps.setString(2, user_userEmail);
 	    
-	    ps.executeUpdate();
-	
+	    result = ps.executeUpdate();
+%>
+		{
+			"result" : "<%=result%>"
+		}
+
+<%	
 	    conn_mysql.close();
 	} 
 	
 	catch (Exception e){
+%>
+		{
+			"result" : "<%=result%>"
+		}
+<%	
 	    e.printStackTrace();
 	}
 	

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.androidpj_main.R;
 
+// 21.01.13 지은 시작
 public class HoneyTipActivity extends AppCompatActivity {
 
     @Override

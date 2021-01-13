@@ -1,5 +1,6 @@
 package com.android.androidpj_main.UserSign;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -57,7 +58,7 @@ import com.kakao.util.exception.KakaoException;
 //--------------------------------------------
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Activity {
 
                                 //로그인 - 이강후.
 
@@ -104,9 +105,6 @@ public class LoginActivity extends AppCompatActivity {
         ///////////////////////////////////////////////////////////////////////////
         //
         // 21.01.11 지은
-        // 건들지 말아주세요. 지은, 종한, 세미 사용해야 합니다.
-        // 로그인 만드실때 이부분 무시하고 만들어주세요.
-        // 로그인 다 만들어지면 저희가 지울겁니다.
         //
         ///////////////////////////////////////////////////////////////////////////
         Button gomain = findViewById(R.id.gomain);
