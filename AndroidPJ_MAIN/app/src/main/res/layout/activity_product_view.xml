@@ -75,9 +75,15 @@
                 android:layout_height="150dp"
                 />
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
             <Button
                 android:id="@+id/btn_prdreview"
-                android:text="리 뷰 쓰 기"
+                android:text="리 뷰 보 기"
                 android:textSize="20dp"
                 android:gravity="center"
                 android:layout_width="wrap_content"
@@ -89,6 +95,7 @@
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+            </LinearLayout>
             <WebView
                 android:id="@+id/wv_prdNFile"
                 android:layout_width="match_parent"
