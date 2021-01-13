@@ -21,13 +21,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.androidpj_main.Activity.CartActivity;
 import com.android.androidpj_main.Activity.PreferenceManager;
 import com.android.androidpj_main.Activity.ProductViewActivity;
 import com.android.androidpj_main.Bean.Cart;
+import com.android.androidpj_main.NetworkTask.CUDNetworkTask;
 import com.android.androidpj_main.NetworkTask.CartNetworkTask;
 import com.android.androidpj_main.R;
 import com.android.androidpj_main.Share.ShareVar;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,9 +50,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
     String userEmail;
 
+    CartHolder cartHolder;
+
     // 전체 체크용
     List<CheckBox> checkBoxList = new ArrayList<>();
 
+    ArrayList<Cart> sendCartData;
+
+    ArrayList<Integer> selectedPosition;
 
     public CartAdapter(Context mContext, int layout, ArrayList<Cart> data){
         this.mContext = mContext;
@@ -65,15 +73,58 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     public CartHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
         v = LayoutInflater.from(mContext).inflate(R.layout.item_cart, parent, false);
-        CartHolder cartHolder = new CartHolder(v);
+        cartHolder = new CartHolder(v);
         return cartHolder;
     }
 
+
+    /**
+     * 체크박스 리스트
+     * @param what
+     */
     public void checkBoxOperation(boolean what){
         for (CheckBox checkBox : checkBoxList ){
             checkBox.setChecked(what);
         }
     }
+
+    /**
+     *
+     * 결제 창으로 보낼 데이터 전송
+     */
+    public ArrayList<Cart> sendToOrder(){
+        return sendCartData;
+    }
+
+
+
+    /**
+     * 카트 삭제 메소드
+     */
+    // 장바구니 선택 제품 삭제
+    public void connectDeleteData() {
+
+        if (sendCartData.size() == 0) {
+            Toast.makeText(mContext, "삭제할 제품을 선택해주세요", Toast.LENGTH_SHORT).show();
+        } else {
+            String urlAddrDelete;
+
+            for (int i = 0; i < sendCartData.size(); i++) {
+                urlAddrDelete = "http://" + macIP + ":8080/JSP/cart_delete_inCart.jsp?userEmail=" + userEmail + "&prdName=";
+                urlAddrDelete = urlAddrDelete + sendCartData.get(i).getPrdName();
+                try {
+                    CartNetworkTask networkTask = new CartNetworkTask(mContext, urlAddrDelete, "delete");
+                    networkTask.execute().get();
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+    }
+
 
 
 
@@ -123,6 +174,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
     }
 
+
     @Override
     public int getItemCount() {
         return data.size();
@@ -147,6 +199,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
         // 체크박스
         protected CheckBox cartCbEach;
         protected CheckBox cartCbAll;
+
+//        // 체크 된 제품들 데이터만 들어감
+//        ArrayList<Cart> sendCartData;
 
         public CartHolder(@NonNull View itemView) {
             super(itemView);
@@ -177,7 +232,29 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
             // 체크박스 체크 리스너
             cartCbEach.setOnCheckedChangeListener(checkedChangeListener);
-           // cartCbAll.setOnCheckedChangeListener(checkedChangeListener);
+            // cartCbAll.setOnCheckedChangeListener(checkedChangeListener);
+
+            sendCartData = new ArrayList<Cart>();
+            userEmail = PreferenceManager.getString(itemView.getContext(), "email");
+
+            selectedPosition = new ArrayList<Integer>();
+
+            cart_price.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
 
 
         }
@@ -191,7 +268,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
                 // 수량
                 int et_quan = Integer.parseInt(cart_qty.getText().toString());
                 // 총 상품 금액
-                int total = Integer.parseInt(String.valueOf(cart_price.getText()));
+                int total = 0;
                 Log.v(TAG, "total ;;;" + total);
 
                 if (cartCbEach.isChecked()) {
@@ -201,7 +278,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
                             cart_qty.setText(String.valueOf(et_quan));
                             total = et_quan * data.get(getAdapterPosition()).getPrdPrice();
                             if (cartCbEach.isChecked()) {
-                                cart_price.setText(String.valueOf(total));
+                                DecimalFormat myFormatter = new DecimalFormat("###,###");
+                                String formattedStringPrice = myFormatter.format(total);
+                                cart_price.setText(formattedStringPrice);
                             }
                             Log.v(TAG, "증가값::::" + et_quan + "Total값:::: " + total);
                             cartUpdateData();
@@ -216,7 +295,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
                             cart_qty.setText(String.valueOf(et_quan));
                             total = et_quan * data.get(getAdapterPosition()).getPrdPrice();
                             if (cartCbEach.isChecked()) {
-                                cart_price.setText(String.valueOf(total));
+                                DecimalFormat myFormatter = new DecimalFormat("###,###");
+                                String formattedStringPrice = myFormatter.format(total);
+                                cart_price.setText(formattedStringPrice);
                             }
                             Log.v(TAG, "감소값::::" + et_quan);
                             cartUpdateData();
@@ -229,32 +310,47 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
         CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() { // CompoundButton = 체크박스
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { // 어느 버튼이냐. 체크가 되어있냐 안되어있냐
-                String str = ""; // 버튼 누를 때마다 toast는 초기화
 
-                ArrayList<Integer> btns = new ArrayList<Integer>();
-                btns.add(R.id.cart_cb_each);
+                sendCartData.clear();
+                selectedPosition.clear();
+
+                if (cartCbEach.isChecked()) {
+                    Log.v(TAG, String.valueOf(getAdapterPosition()));
+                    // 상품 가격
+                    Log.v(TAG, "제품 정보 위치  : " + String.valueOf(data.get(getAdapterPosition())));
+                    Log.v(TAG, "해당 위치 가격  : " + String.valueOf(data.get(getAdapterPosition()).getPrdPrice()));
+                    Log.v(TAG, "해당 위치 수량  : " + String.valueOf(cart_qty.getText()));
+                    int data_price = data.get(getAdapterPosition()).getPrdPrice();
+                    int data_qty = Integer.parseInt(String.valueOf(cart_qty.getText()));
+                    int data_mult_price = data_qty * data_price;
+
+                    Log.v(TAG, "해당 수량 * 가격 = " + data_mult_price);
+                    DecimalFormat myFormatter = new DecimalFormat("###,###");
+                    String formattedStringPrice = myFormatter.format(data_mult_price);
+                    cart_price.setText(formattedStringPrice);
+
+                } else {
+                    cart_price.setText("0");
+                }
 
 
-                for (int i = 0; i < btns.size(); i ++){
-                    cartCbEach = itemView.findViewById(btns.get(i));
-                    if (cartCbEach.isChecked() == true){
-
-                        str += cartCbEach.getText().toString();
-                        Log.v(TAG, String.valueOf(getAdapterPosition()));
-                        // 상품 가격
-                        Log.v(TAG, String.valueOf(data.get(getAdapterPosition()).getPrdPrice()));
-                        cart_price.setText(String.valueOf(Integer.parseInt(String.valueOf(cart_qty.getText()))*data.get(getAdapterPosition()).getPrdPrice()));
-                    }else {
-                        cart_price.setText("0");
-
+                for (int i = 0; i < checkBoxList.size(); i++) {
+                    if (checkBoxList.get(i).isChecked() == true) {
+                        sendCartData.add(data.get(i));
+                        selectedPosition.add(i);
                     }
+                }
+
+                Log.v(TAG, "sendCartData size ;;;;" + sendCartData.size());
+                for (int i = 0; i < sendCartData.size(); i++) {
+                    Log.v(TAG, "보낼 값 ;;;; " + i + " 번 째" + sendCartData.get(i).getPrdName());
+                    Log.v(TAG, "보낼 값 ;;;; " + i + " 번 째" + sendCartData.get(i).getPrdPrice());
+                    Log.v(TAG, "보낼 값 ;;;; " + i + " 번 째" + sendCartData.get(i).getCartQty());
 
                 }
 
-                if (str == ""){
-
-                }else {
-                    Log.v(TAG, "checkbox str ;;;" + str);
+                for (int i = 0; i < selectedPosition.size(); i++) {
+                    Log.v(TAG, "체크된 포지션 ;;;; " + i + " 번 째" + selectedPosition.get(i));
 
                 }
 
@@ -263,7 +359,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
         };
 
         // 장바구니에 상품 Update
-        private String cartUpdateData(){
+        private String cartUpdateData() {
             String result = null;
 
             String urlAddrUpdate = "http://" + macIP + ":8080/JSP/cart_update_inCart.jsp?userEmail=" + userEmail + "&prdName=" + data.get(getAdapterPosition()).getPrdName() + "&cartQty=";
@@ -291,20 +387,24 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
                 result = (String) obj;
                 ///////////////////////////////////////////////////////////////////////////////////////
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
             return result;
         }
 
-        public void cart_select_all(){
 
-        }
+
 
 
 
     }
+
+
+
+
+
 
 
 
