@@ -5,17 +5,14 @@
 <%-- test 폴더에 넣어주세요  --%>
 <%
     request.setCharacterEncoding("utf-8");
-    String searchText = request.getParameter("search_text");
+	String prdColor = request.getParameter("prdColor");
 
 	String url_mysql = "jdbc:mysql://localhost/one?serverTimezone=Asia/Seoul&characterEncoding=utf8&useSSL=false";
  	String id_mysql = "root";
  	String pw_mysql = "qwer1234";
-    String WhereDefault = "select * from product";
+    String WhereDefault = "select * from product where prdColor = ";
 
-    String Condition = " where (prdName LIKE '%" + searchText + "%' OR " +
-                        "ctgType LIKE '%" + searchText + "%' OR " +
-                        "prdBrand LIKE '%" + searchText + "%' OR " +
-			"prdPrice LIKE '%" + searchText + "%') order by prdName asc";
+    String Condition = "'" + prdColor  +"'";
     int count = 0;
     
     try {
