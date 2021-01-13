@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.androidpj_main.Adapter.HomeAdapter;
+import com.android.androidpj_main.Activity.HoneyTipActivity;
 import com.android.androidpj_main.Adapter.SliderAdapter;
 import com.android.androidpj_main.Bean.Product;
 import com.android.androidpj_main.Make_Youtube.YoutubeActivity;
@@ -190,6 +191,8 @@ public class Frmt_Home extends Fragment {
 
                 case R.id.fab_honey:
                     Toast.makeText(getContext(), "꿀팁 차차", Toast.LENGTH_SHORT).show();
+                    Intent Tintent = new Intent(getActivity(), HoneyTipActivity.class);
+                    startActivity(Tintent);
                     break;
 
                 case R.id.fabMake:
