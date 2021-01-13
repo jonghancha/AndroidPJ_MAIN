@@ -64,9 +64,12 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.ProductHolder> {
         holder.tipTitle.setText(data.get(position).getTipTitle());
 
         // 제목 배경 설정 ....
-//        holder.tipTitle.setBackground(HoneyTipActivity.getResources().getDrawable(R.drawable.tip_title));
+        holder.tipTitle.setBackground(mContext.getResources().getDrawable(R.drawable.tip_title));
+
         // 팁 내용
         holder.tipContent.setText(data.get(position).getTipContent());
+        //
+        holder.tipContent.setBackground(mContext.getResources().getDrawable(R.drawable.tip_content));
 
 
     }
@@ -92,4 +95,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.ProductHolder> {
 
         }
     }
+//    public void addItem(ArrayList<Tip> tip){
+//        data.addAll(tip);
+//    }
 }

@@ -5,12 +5,13 @@
     android:orientation="vertical"
     android:paddingHorizontal="32dp"
     android:paddingTop="24dp"
-    android:paddingBottom="40dp">
+    android:paddingBottom="20dp">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:layout_gravity="center"
         android:text="⭐LIPHAE 가 알려주는 꿀팁 ⭐️"
         android:textColor="@android:color/black"
         android:textSize="24sp" />
@@ -81,9 +82,10 @@
         android:id="@+id/btn_tip_sheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1c9d9e"
+        android:background="#AA4747"
         android:textColor="@android:color/white"
         android:textStyle="bold"
-        android:text="종료" />
+        android:textSize="20dp"
+        android:text="옵션 창 닫기" />
 
 </LinearLayout>

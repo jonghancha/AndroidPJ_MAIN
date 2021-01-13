@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `one` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `one`;
 -- MySQL dump 10.13  Distrib 8.0.17, for macos10.14 (x86_64)
 --
 -- Host: localhost    Database: one
@@ -102,6 +104,32 @@ LOCK TABLES `event` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `honeytip`
+--
+
+DROP TABLE IF EXISTS `honeytip`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `honeytip` (
+  `tipNo` int(11) NOT NULL AUTO_INCREMENT,
+  `tipTitle` text,
+  `tipContent` text,
+  `tipImg` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`tipNo`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `honeytip`
+--
+
+LOCK TABLES `honeytip` WRITE;
+/*!40000 ALTER TABLE `honeytip` DISABLE KEYS */;
+INSERT INTO `honeytip` VALUES (1,'피부 복합성 피부에 대한 꿀팁','아아아아ㅏ앙',NULL),(2,'피부 건성 피부에 대한 꿀팁','이이ㅣ잉',NULL),(3,'피부 지성 피부에 대한 꿀팁','ㄴㅋㅋㅋㅋ',NULL),(4,'퍼스널 컬러 봄 웜톤에 대한 꿀팁','ㄴㅇㅁㅇ',NULL),(5,'퍼스널 컬러 여름 쿨톤에 대한 꿀팁','ㅇㅇㅇㅇ',NULL),(6,'퍼스널 컬러 가을 웜톤에 대한 꿀팁','ㅃㅃ',NULL),(7,'퍼스널 컬러 겨울 쿨톤에 대한 꿀팁','ㄴㄴㄴㄴ',NULL);
+/*!40000 ALTER TABLE `honeytip` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `like`
 --
 
@@ -118,7 +146,7 @@ CREATE TABLE `like` (
   KEY `fk_like_product1_idx` (`product_prdNo`),
   CONSTRAINT `fk_like_product1` FOREIGN KEY (`product_prdNo`) REFERENCES `product` (`prdNo`),
   CONSTRAINT `fk_like_user1` FOREIGN KEY (`user_userEmail`) REFERENCES `user` (`userEmail`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,6 +155,7 @@ CREATE TABLE `like` (
 
 LOCK TABLES `like` WRITE;
 /*!40000 ALTER TABLE `like` DISABLE KEYS */;
+INSERT INTO `like` VALUES (1,'qkrwldms011@naver.com',1),(2,'qkrwldms011@naver.com',2);
 /*!40000 ALTER TABLE `like` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -364,7 +393,7 @@ CREATE TABLE `youtube` (
 
 LOCK TABLES `youtube` WRITE;
 /*!40000 ALTER TABLE `youtube` DISABLE KEYS */;
-INSERT INTO `youtube` VALUES ('1','holiday','특별한 날',NULL,'Vrysx6m3Iw4',NULL),('2','season','계절','으아아아아','xnA-HnNyXXs',NULL),('3','star','연예인',NULL,'Vrysx6m3Iw4',NULL),('4','basic','기초',NULL,'wqvs8vUpmLs',NULL),('5','color','색깔',NULL,'gYbJ-ywrKyA',NULL);
+INSERT INTO `youtube` VALUES ('1','holiday','특별한 날',NULL,'Vrysx6m3Iw4','test.png'),('2','season','계절','으아아아아','xnA-HnNyXXs','test.png'),('3','star','연예인',NULL,'Vrysx6m3Iw4','test.png'),('4','basic','기초',NULL,'wqvs8vUpmLs','test.png'),('5','color','색깔',NULL,'gYbJ-ywrKyA','test.png');
 /*!40000 ALTER TABLE `youtube` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -377,4 +406,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-13  1:26:07
+-- Dump completed on 2021-01-14  3:01:15
