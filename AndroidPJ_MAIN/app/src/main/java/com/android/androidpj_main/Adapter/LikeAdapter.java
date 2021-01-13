@@ -103,7 +103,7 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ProductHolder>
 //                intent.putExtra("prdName", data.get(position).getPrdName());
 //                intent.putExtra("ctgType", data.get(position).getCtgType());
 //                intent.putExtra("prdBrand", data.get(position).getPrdBrand());
-//                intent.putExtra("prdPrice", data.get(position).getPrdPrice());
+                intent.putExtra("prdPrice", data.get(position).getPrdPrice());
 //                intent.putExtra("prdFilename", data.get(position).getPrdFilename());
 //                intent.putExtra("prdDFilename", data.get(position).getPrdDFilename());
 //                intent.putExtra("prdNFilename", data.get(position).getPrdNFilename());
@@ -158,12 +158,12 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ProductHolder>
                    int prdNo = data.get(getAdapterPosition()).getPrdNo();
                    // 로그인한 아이디 받아와서 아이디 넘겨주기. 그 아이디에 있는 것을 삭제해야하기 때문.
                     String email = PreferenceManager.getString(v.getContext(), "email");
-                   urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/likeDel.jsp?prdNo="+prdNo+"&useremail="+email;
+                   urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/likeDel.jsp?prdNo="+prdNo+"&email="+email;
                     connectDeleteData();
 
                     data.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
-                    //notifyItemChanged(getAdapterPosition());
+                    notifyItemChanged(getAdapterPosition());
 
                    Toast.makeText(v.getContext(),"삭제되었습니다." + prdNo + "email:::: " + email, Toast.LENGTH_SHORT).show();
                 }

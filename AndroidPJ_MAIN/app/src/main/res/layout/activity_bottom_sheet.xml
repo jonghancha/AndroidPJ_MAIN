@@ -5,25 +5,20 @@
     android:orientation="vertical"
     android:paddingHorizontal="32dp"
     android:paddingTop="24dp"
-    android:paddingBottom="40dp">
-
-    <Spinner
-        android:id="@+id/sp_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10px"
-        />
+    android:paddingBottom="20dp">
 
 <LinearLayout
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
 
     <Button
         android:id="@+id/btn_minus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-"/>
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:background="@drawable/minusbtn"
+        android:layout_marginRight="10dp"/>
 
     <EditText
         android:id="@+id/et_quantity"
@@ -34,9 +29,11 @@
 
     <Button
         android:id="@+id/btn_plus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+"/>
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:background="@drawable/plusbtn"
+        android:layout_marginLeft="10dp"
+        />
 
 </LinearLayout>
 
@@ -44,13 +41,14 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="총 상품 금액"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:layout_weight="2"/>
 
         <TextView
@@ -65,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="원"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:layout_gravity="center"
             android:layout_weight="1"/>
 

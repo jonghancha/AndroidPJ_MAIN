@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="20px"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:gravity="center">
 
             <WebView
                 android:id="@+id/wv_prdimg"
@@ -78,13 +79,20 @@
                 android:id="@+id/btn_prdreview"
                 android:text="리 뷰 쓰 기"
                 android:textSize="20dp"
-                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/btn_prdview"
+                android:text="성 분 보 기"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <WebView
                 android:id="@+id/wv_prdNFile"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:text="상품 성분"
+                android:layout_height="1000dp"
                 />
 
         </LinearLayout>
