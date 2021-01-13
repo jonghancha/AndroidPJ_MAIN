@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.androidpj_main.Activity.HoneyTipActivity;
 import com.android.androidpj_main.Adapter.SliderAdapter;
 import com.android.androidpj_main.Make_Youtube.YoutubeActivity;
 import com.android.androidpj_main.R;
@@ -139,6 +140,8 @@ public class Frmt_Home extends Fragment {
 
                 case R.id.fab_honey:
                     Toast.makeText(getContext(), "꿀팁 차차", Toast.LENGTH_SHORT).show();
+                    Intent Tintent = new Intent(getActivity(), HoneyTipActivity.class);
+                    startActivity(Tintent);
                     break;
 
                 case R.id.fabMake:
