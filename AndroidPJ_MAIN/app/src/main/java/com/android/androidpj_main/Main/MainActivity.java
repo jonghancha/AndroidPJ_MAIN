@@ -16,6 +16,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.android.androidpj_main.Activity.CartActivity;
+import com.android.androidpj_main.Activity.ProductViewActivity;
 import com.android.androidpj_main.Activity.SearchActivity;
 import com.android.androidpj_main.Adapter.ViewPageAdapter;
 import com.android.androidpj_main.R;
@@ -140,6 +142,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentS);
                 break;
             case R.id.action_cart:
+                Intent intent = new Intent(MainActivity.this, CartActivity.class);
+
+
+                startActivity(intent);
                 Toast.makeText(MainActivity.this, "장바구니 클릭", Toast.LENGTH_SHORT).show();
                 break;
         }

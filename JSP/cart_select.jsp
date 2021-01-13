@@ -4,14 +4,15 @@
 
 <%
     String user_userEmail = request.getParameter("userEmail");
-    String goods_prdNo = request.getParameter("prdNo");
-    
 
 	String url_mysql = "jdbc:mysql://localhost/one?serverTimezone=Asia/Seoul&characterEncoding=utf8&useSSL=false";
  	String id_mysql = "root";
  	String pw_mysql = "qwer1234";
-    String WhereDefault = "select count(*) from cartdetail where user_userEmail = '" + user_userEmail + "' and goods_prdNo = '" + goods_prdNo + "'";
-    
+    String A = "select prdBrand, prdName, prdPrice, cartQty, prdFilename ";
+    String B = "from product p, cartdetail c ";
+    String C = "where c.goods_prdNo = p.prdNo and c.user_userEmail = '" + user_userEmail + "'";
+
+
     int count = 0;
     
     try {
@@ -19,7 +20,7 @@
         Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
         Statement stmt_mysql = conn_mysql.createStatement();
 
-        ResultSet rs = stmt_mysql.executeQuery(WhereDefault); // 
+        ResultSet rs = stmt_mysql.executeQuery(A + B + C);
 %>
 		{ 
   			"cart_info"  : [ 
@@ -34,7 +35,11 @@
             }
 %>            
 			{
-			"check" : "<%=rs.getString(1) %>"
+			"prdBrand" : "<%=rs.getString(1) %>", 
+			"prdName" : "<%=rs.getString(2) %>", 
+			"prdPrice" : "<%=rs.getString(3) %>", 
+			"cartQty" : "<%=rs.getString(4) %>",
+			"prdFilename" : "<%=rs.getString(5) %>"
 			}
 
 <%		
