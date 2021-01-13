@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.androidpj_main.Activity.CartActivity;
+import com.android.androidpj_main.Activity.OnChangeCheckedPrice;
 import com.android.androidpj_main.Activity.PreferenceManager;
 import com.android.androidpj_main.Activity.ProductViewActivity;
 import com.android.androidpj_main.Bean.Cart;
@@ -37,7 +38,10 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
     final static String TAG = "CartAdapter";
-
+    private OnChangeCheckedPrice onChangeCheckedPrice;
+//    public void setOnChangeCheckedPrice(OnChangeCheckedPrice l){
+//        onChangeCheckedPrice = l;
+//    }
     // 종한 추가 21.01.12 *************************************
 
     String macIP = ShareVar.macIP;
@@ -45,6 +49,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     Context mContext = null;
     int layout = 0;
     ArrayList<Cart> data = null;
+
     LayoutInflater inflater = null;
     String urlAddr;
 
@@ -54,15 +59,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
     // 전체 체크용
     List<CheckBox> checkBoxList = new ArrayList<>();
+    List<EditText> editTextList = new ArrayList<>();
 
     ArrayList<Cart> sendCartData;
 
     ArrayList<Integer> selectedPosition;
 
-    public CartAdapter(Context mContext, int layout, ArrayList<Cart> data){
+    public CartAdapter(Context mContext, int layout, ArrayList<Cart> data, OnChangeCheckedPrice onChangeCheckedPrice){
         this.mContext = mContext;
         this.layout = layout;
         this.data = data;
+        this.onChangeCheckedPrice = onChangeCheckedPrice;
         this.inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -134,6 +141,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
         // 체크박스 리스트에 전부 추가하기
         checkBoxList.add(holder.cartCbEach);
+        // 텍스트뷰 리스트에 전부 추가하기
+        editTextList.add(holder.cart_qty);
 
         urlAddr = "http://" + ShareVar.macIP + ":8080/Images/";  // Images 파일
         urlAddr = urlAddr + data.get(position).getPrdFilename(); // 경로에 이미지 이름 추가
@@ -283,7 +292,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
                                 cart_price.setText(formattedStringPrice);
                             }
                             Log.v(TAG, "증가값::::" + et_quan + "Total값:::: " + total);
-                            cartUpdateData();
+
                             break;
 
                         case R.id.cart_btn_minus:  // 마이너스 버튼
@@ -300,9 +309,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
                                 cart_price.setText(formattedStringPrice);
                             }
                             Log.v(TAG, "감소값::::" + et_quan);
-                            cartUpdateData();
+
                             break;
                     }
+                    cartUpdateData();
+                    updateTotalPrice();
+                    data.get(getAdapterPosition()).setCartQty(Integer.parseInt(String.valueOf(editTextList.get(getAdapterPosition()).getText())));
+                    Log.v(TAG, "바뀐 수량 제대로 들어갔니?" + data.get(getAdapterPosition()).getCartQty());
                 }
             }
         };
@@ -354,7 +367,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
                 }
 
-
+                updateTotalPrice();
             }
         };
 
@@ -392,6 +405,26 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             }
 
             return result;
+        }
+
+
+        public void updateTotalPrice(){
+            Log.v(TAG, "**viewholder 안 updateTotalPrice 들어옴 **");
+            int price_each;
+            int price_total = 0;
+
+
+            for (int i = 0; i < checkBoxList.size(); i++) {
+                if (checkBoxList.get(i).isChecked() == true) {
+                    price_each = Integer.parseInt(String.valueOf(editTextList.get(i).getText())) * data.get(i).getPrdPrice();
+                    price_total += price_each;
+                }
+            }
+            if (onChangeCheckedPrice != null){
+                Log.v(TAG, "**onChangeCheckedPrice != null **");
+                Log.v(TAG, "**전체 가격은 **" + price_total);
+                onChangeCheckedPrice.changedPrice(price_total);
+            }
         }
 
 

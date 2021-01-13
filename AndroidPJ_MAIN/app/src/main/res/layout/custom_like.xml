@@ -24,7 +24,7 @@
         android:layout_marginLeft="16dp">
         <TextView
             android:id="@+id/tv_likebrand"
-            android:textColor="#000000"
+            android:textColor="#8C8989"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="상품브랜드"

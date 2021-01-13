@@ -27,7 +27,7 @@ import com.android.androidpj_main.Share.ShareVar;
 
 import java.util.ArrayList;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity implements OnChangeCheckedPrice{
 
     final static String TAG = "CartActivity";
     String urlAddr = null;
@@ -48,12 +48,11 @@ public class CartActivity extends AppCompatActivity {
 
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
 
         setTitle("장바구니");
 
@@ -107,7 +106,17 @@ public class CartActivity extends AppCompatActivity {
             }
         });
         connectGetCart();
+
+//        cartAdapter.setOnChangeCheckedPrice(new OnChangeCheckedPrice() {
+//            @Override
+//            public void changedPrice(int totalPrice) {
+//                Log.v(TAG, "**메인 가격변경 리스너 들어옴 **");
+//                btnCartToOrder.setText("총" + totalPrice + "원 주문하기");
+//            }
+//        });
     }
+
+
 
     // 상품을 띄우는
     private void connectGetCart() {
@@ -120,7 +129,7 @@ public class CartActivity extends AppCompatActivity {
             //gridLayoutManager = new GridLayoutManager(this, 2);
             cart = (ArrayList<Cart>) object;
 
-            cartAdapter = new CartAdapter(CartActivity.this, R.layout.item_cart, cart);
+            cartAdapter = new CartAdapter(CartActivity.this, R.layout.item_cart, cart, this);
             cartRecyclerView.setAdapter(cartAdapter);
             cartRecyclerView.setHasFixedSize(true); // 리사이클러뷰 기존성능 강화
             layoutManager = new LinearLayoutManager(CartActivity.this);
@@ -138,7 +147,14 @@ public class CartActivity extends AppCompatActivity {
         connectGetCart();
         Log.v(TAG, "onResume()");
         btnCartToOrder =findViewById(R.id.btn_cart_order);
+        btnCartToOrder.setText("총 0원 주문하기");
     }
 
 
+    @Override
+    public void changedPrice(int totalPrice) {
+        Log.v(TAG, "**메인 가격변경 리스너 들어옴 **");
+        btnCartToOrder.setText("총 " + totalPrice + "원 주문하기");
+
+    }
 }
