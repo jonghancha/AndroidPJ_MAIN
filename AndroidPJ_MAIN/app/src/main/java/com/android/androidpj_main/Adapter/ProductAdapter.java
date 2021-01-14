@@ -89,7 +89,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
 
                 v.getContext().startActivity(intent);
 
-                Toast.makeText(v.getContext(), "상세보기 페이지 이동", Toast.LENGTH_SHORT).show();
             }
         });
 

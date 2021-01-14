@@ -8,12 +8,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-<<<<<<< HEAD
-=======
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.android.androidpj_main.Activity.MyViewActivity;
->>>>>>> 757b4ac6b538e379a53d46a0a0378bc1e353e363
 import com.android.androidpj_main.Main.MainActivity;
 import com.android.androidpj_main.Main.PreferenceManager;
 import com.android.androidpj_main.NetworkTask.CUDNetworkTask;
@@ -87,13 +81,7 @@ public class TestResultActivity extends Activity {
         }
 
         if(colorCool>colorWarm){
-<<<<<<< HEAD
-            tv_testR.setText("쿨톤");
-            //iv_testR.setImageResource(R.drawable.cool_result);
-        }else if(colorWarm > colorCool){
-            tv_testR.setText("웜톤");
-            //iv_testR.setImageResource(R.drawable.warm_result);
-=======
+
             tv_testR1.setText("퍼스널 컬러 결과는?");
             tv_testR2.setText("쿨톤이십니다.😊\n쿨톤에 관련된 TMI 방출\n하단을 확인해주세요:)");
             iv_testR1.setImageResource(R.drawable.cool01);
@@ -105,7 +93,6 @@ public class TestResultActivity extends Activity {
             iv_testR1.setImageResource(R.drawable.warm01);
             iv_testR2.setImageResource(R.drawable.warm02);
             colorResult = "웜톤";
->>>>>>> 757b4ac6b538e379a53d46a0a0378bc1e353e363
         }
     }
     //
