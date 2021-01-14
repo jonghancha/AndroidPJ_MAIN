@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.androidpj_main.Activity.MyViewActivity;
+import com.android.androidpj_main.Activity.OrderdetailActivity;
 import com.android.androidpj_main.Bean.User;
 import com.android.androidpj_main.NetworkTask.UserNetworkTask;
 import com.android.androidpj_main.R;
@@ -124,7 +125,9 @@ public class Frmt_Mypage extends Fragment {
                     startActivity(Mintent);
                     break;
                 case R.id.myOrder:
-                    Toast.makeText(getActivity(), "나의 주문/배송 조회", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "나의 주문/배송 조회", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), OrderdetailActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.myReview:
                     Toast.makeText(getActivity(), "나의 리뷰 조회", Toast.LENGTH_SHORT).show();

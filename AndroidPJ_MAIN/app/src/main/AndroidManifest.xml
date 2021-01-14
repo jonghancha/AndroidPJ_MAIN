@@ -17,39 +17,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".Activity.PurchaseActivity"></activity>
+        <activity android:name=".Activity.OrderdetailActivity"></activity>
+        <activity android:name=".Activity.PurchaseActivity" />
         <activity android:name=".Activity.ProductList" />
         <activity android:name=".Activity.EmptyCartActivity" />
-
-
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-
-        <activity android:name=".Activity.ProductList" />
-        <activity android:name=".Activity.EmptyCartActivity" />
-
-
-
-
-
         <activity android:name=".Activity.CartActivity" />
         <activity android:name=".Activity.ProductViewActivity" />
         <activity android:name=".Test.TestMainActivity" />
-
         <activity android:name=".Make_Youtube.YoutubeActivity" />
         <activity android:name=".Make_Youtube.YoutubeViewActivity" />
         <activity android:name=".Lip.LipMainActivity" />
         <activity android:name=".UserSign.FindPwActivity" />
         <activity android:name=".Activity.SearchActivity" />
         <activity android:name=".UserSign.LoginActivity" />
-
         <activity android:name=".Activity.HoneyTipActivity" />
         <activity android:name=".Activity.MyViewActivity" />
-        <activity android:name=".Activity.ProductSubList"/>
+        <activity android:name=".Activity.ProductSubList" />
         <activity
             android:name=".Main.MainActivity"
             android:windowSoftInputMode="adjustNothing" />

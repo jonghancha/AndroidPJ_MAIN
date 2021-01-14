@@ -71,7 +71,7 @@ public class ProductViewActivity extends AppCompatActivity {
         prdName = intent.getStringExtra("prdName");
 
         // 상품 이름에 대한 상품 정보 가져오기
-        urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/productViewSelect.jsp?prdName='" + prdName + "'";
+        urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/productViewSelect.jsp?prdNo=" + prdNo;
         productselect();
 
         // 정보 가져오기
