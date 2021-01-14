@@ -18,10 +18,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Activity.PurchaseActivity"></activity>
-        <activity android:name=".Activity.ProductList" />
-        <activity android:name=".Activity.EmptyCartActivity" />
 
+        <activity android:name=".Test.TestSub01Activity"/>
+        <activity android:name=".Test.TestSub02Activity"/>
+        <activity android:name=".Test.TestSub03Activity"/>
+        <activity android:name=".Test.TestSub04Activity"/>
+        <activity android:name=".Test.TestSub05Activity"/>
+        <activity android:name=".Test.TestResultActivity"/>
 
 
         <meta-data
@@ -29,12 +32,9 @@
             android:value="@string/kakao_app_key" />
 
 
+        <activity android:name=".Activity.PurchaseActivity"></activity>
         <activity android:name=".Activity.ProductList" />
         <activity android:name=".Activity.EmptyCartActivity" />
-
-
-
-
 
         <activity android:name=".Activity.CartActivity" />
         <activity android:name=".Activity.ProductViewActivity" />

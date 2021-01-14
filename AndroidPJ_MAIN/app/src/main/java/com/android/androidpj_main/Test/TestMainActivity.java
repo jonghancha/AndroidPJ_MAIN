@@ -29,7 +29,9 @@ public class TestMainActivity extends AppCompatActivity {
         test_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(TestMainActivity.this, TestSub01Activity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
