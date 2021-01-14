@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.android.androidpj_main.Adapter.CartAdapter;
+import com.android.androidpj_main.Adapter.PurchaseAdapter;
 import com.android.androidpj_main.Bean.Cart;
 import com.android.androidpj_main.NetworkTask.CartNetworkTask;
 import com.android.androidpj_main.R;
@@ -22,14 +23,14 @@ import com.android.androidpj_main.Share.ShareVar;
 
 import java.util.ArrayList;
 
-public class PurchaseActivity extends AppCompatActivity implements OnChangeCheckedPrice{
+public class PurchaseActivity extends Activity {
 
     final static String TAG = "PurchaseActivity";
     ArrayList<Cart> getCartData;
 
     String urlAddr = null;
     ArrayList<Cart> cart;
-    CartAdapter cartAdapter;
+    PurchaseAdapter purchaseAdapter;
     private RecyclerView.LayoutManager layoutManager;
     RecyclerView purchaseRecyclerView;
 
@@ -40,6 +41,8 @@ public class PurchaseActivity extends AppCompatActivity implements OnChangeCheck
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_purchase);
+
+        setTitle("주문/결제");
 
         // 카트에서 선택한 값 받아오기
         Intent intent = getIntent();
@@ -81,17 +84,15 @@ public class PurchaseActivity extends AppCompatActivity implements OnChangeCheck
 //            }
 //        });
 
-    }
+        }
 
     // 상품을 띄우는
     private void connectGetCart() {
 
-
-
-            cartAdapter = new CartAdapter(PurchaseActivity.this, R.layout.item_purchase, getCartData, this);
-        purchaseRecyclerView.setAdapter(cartAdapter);
+        purchaseAdapter = new PurchaseAdapter(PurchaseActivity.this, R.layout.item_purchase, getCartData);
+        purchaseRecyclerView.setAdapter(purchaseAdapter);
         purchaseRecyclerView.setHasFixedSize(true); // 리사이클러뷰 기존성능 강화
-            layoutManager = new LinearLayoutManager(PurchaseActivity.this);
+        layoutManager = new LinearLayoutManager(PurchaseActivity.this);
         purchaseRecyclerView.setLayoutManager(layoutManager);
 
 
@@ -105,8 +106,5 @@ public class PurchaseActivity extends AppCompatActivity implements OnChangeCheck
         Log.v(TAG, "onResume()");
     }
 
-    @Override
-    public void changedPrice(int totalPrice) {
 
-    }
 }// ----
