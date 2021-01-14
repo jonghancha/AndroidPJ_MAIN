@@ -17,11 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
         <activity android:name=".Activity.OrderdetailActivity"></activity>
-=======
         <activity android:name=".Activity.RegisterAddress"></activity>
->>>>>>> 0146cd0481c172238b9d706b9c5e406aee7a3592
         <activity android:name=".Activity.PurchaseActivity" />
         <activity android:name=".Activity.ProductList" />
         <activity android:name=".Activity.EmptyCartActivity" />

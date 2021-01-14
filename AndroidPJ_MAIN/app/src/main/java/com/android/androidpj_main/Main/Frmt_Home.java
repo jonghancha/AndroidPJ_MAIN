@@ -126,7 +126,8 @@ public class Frmt_Home extends Fragment {
 
         // 로그인한 user의 userColor가 null
          }else{
-             urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/colorSelect.jsp?userColor=" + result;
+             urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/colorrandSelect.jsp";
+             connectGetData();
          }
 
 
