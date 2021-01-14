@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,7 +49,8 @@ public class BottomSheet extends BottomSheetDialogFragment {
     TextView tv_total_price;
 
     // 장바구니, 구매하기 버튼
-    Button bottomCart, bottomBuy;
+    Button bottomBuy;
+    ImageButton bottomCart;
     String cartCheck, cartCount;
     String cartInsertQty;
     String cartUpdateQty;

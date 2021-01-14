@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.androidpj_main.Activity.PreferenceManager;
 import com.android.androidpj_main.Main.MainActivity;
@@ -115,7 +114,7 @@ public class LoginActivity extends Activity {
                 startActivity(intent);
 
                 // PreferenceManager 이메일 보내주기
-                PreferenceManager.setString(LoginActivity.this, "email", "qkrwldms011@naver.com");
+                PreferenceManager.setString(LoginActivity.this, "email", "qkrtpa12@naver.com");
                 finish();
             }
         });

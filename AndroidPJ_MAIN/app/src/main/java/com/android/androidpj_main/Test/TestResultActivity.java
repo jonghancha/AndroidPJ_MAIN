@@ -8,8 +8,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.androidpj_main.Main.MainActivity;
 import com.android.androidpj_main.R;
 
@@ -76,10 +74,10 @@ public class TestResultActivity extends Activity {
 
         if(colorCool>colorWarm){
             tv_testR.setText("쿨톤");
-            iv_testR.setImageResource(R.drawable.cool_result);
+            //iv_testR.setImageResource(R.drawable.cool_result);
         }else if(colorWarm > colorCool){
             tv_testR.setText("웜톤");
-            iv_testR.setImageResource(R.drawable.warm_result);
+            //iv_testR.setImageResource(R.drawable.warm_result);
         }
     }
     //

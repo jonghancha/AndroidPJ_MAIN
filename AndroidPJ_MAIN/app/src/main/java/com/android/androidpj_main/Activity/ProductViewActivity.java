@@ -18,7 +18,6 @@ import com.android.androidpj_main.Bean.Product;
 import com.android.androidpj_main.NetworkTask.CUDNetworkTask;
 import com.android.androidpj_main.NetworkTask.LikeCheckNetworkTask;
 import com.android.androidpj_main.NetworkTask.ProductViewNetworkTask;
-import com.android.androidpj_main.PrdDialogFragment;
 import com.android.androidpj_main.R;
 import com.android.androidpj_main.Share.ShareVar;
 
@@ -39,7 +38,7 @@ public class ProductViewActivity extends AppCompatActivity {
     String prdNo, prdName, prdName2;
     int prdPrice = 0;
     int result = 0;
-    Button btn_buy, btn_prdview;
+    Button btn_buy;
     BottomSheet bottomSheet;
     String urlAddr = null;
     String urlAddr1 = null;
@@ -47,11 +46,13 @@ public class ProductViewActivity extends AppCompatActivity {
     String prdFileName, prdDFileName, prdNFileName;
     ImageButton ib_like;
     ArrayList<Product> data = null;
+    ImageButton btn_prdview, btn_prdreview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_view);
+        setTitle("상세 보기");
         email = PreferenceManager.getString(ProductViewActivity.this, "email");
 
         // 연결하기
@@ -64,6 +65,7 @@ public class ProductViewActivity extends AppCompatActivity {
         wv_prdDFile = findViewById(R.id.wv_prdDFile);
         wv_prdNFile = findViewById(R.id.wv_prdNFile);
         btn_prdview = findViewById(R.id.btn_prdview);
+        btn_prdreview = findViewById(R.id.btn_prdreview);
 
         // intent 가져오기
         Intent intent = getIntent();
@@ -92,10 +94,8 @@ public class ProductViewActivity extends AppCompatActivity {
 
         // like체크 후 이미지 변경
         if (result == 1){
-            //Toast.makeText(ProductViewActivity.this, "찜한상품", Toast.LENGTH_SHORT).show();
             ib_like.setImageResource(R.drawable.ic_like);
         }else {
-            //Toast.makeText(ProductViewActivity.this, "안찜한상품", Toast.LENGTH_SHORT).show();
             ib_like.setImageResource(R.drawable.ic_hate);
         }
 
@@ -176,9 +176,6 @@ public class ProductViewActivity extends AppCompatActivity {
 
                 case R.id.btn_buy:
                         Intent intent = new Intent(ProductViewActivity.this, BottomSheet.class);
-//                        intent.putExtra("prdNo", prdNo);
-//                        intent.putExtra("prdPrice",prdPrice);
-//                        Log.v(TAG, "product price ::::::" + prdPrice);
                         bottomSheet = new BottomSheet();
                         bottomSheet.show(getSupportFragmentManager(),bottomSheet.getTag());
                         break;
@@ -208,7 +205,6 @@ public class ProductViewActivity extends AppCompatActivity {
                     break;
 
                 case R.id.btn_prdview:
-                        Toast.makeText(ProductViewActivity.this, "웹뷰클릭", Toast.LENGTH_SHORT).show();
                     PrdDialogFragment dialogFragment = new PrdDialogFragment();
                     dialogFragment.show(getSupportFragmentManager(), "MyFragment");
 
