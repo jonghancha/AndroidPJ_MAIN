@@ -253,7 +253,6 @@ public class BottomSheet extends BottomSheetDialogFragment {
     private String cartCheck() {
         cartCheck = "0";
         urlAddrCheck = "http://" + macIP + ":8080/JSP/cart_check.jsp?userEmail=" + userEmail + "&prdNo=" + prdNo;
-        urlAddrCheck = urlAddrCheck + spinner.getSelectedItem();
         try {
             CartNetworkTask cartNetworkTask = new CartNetworkTask(getContext(), urlAddrCheck, "select");
             Object obj = cartNetworkTask.execute().get();

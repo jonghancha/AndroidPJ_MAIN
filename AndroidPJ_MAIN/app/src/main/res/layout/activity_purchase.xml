@@ -37,6 +37,7 @@
                 android:textSize="20dp"
                 android:textStyle="bold"/>
             <EditText
+                android:id="@+id/purchase_userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="주문고객 이름을 입력해주세요"
@@ -46,18 +47,20 @@
                 android:paddingLeft="5dp"
                 android:singleLine="true"/>
             <EditText
+                android:id="@+id/purchase_userTel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="주문고객 이름을 입력해주세요"
+                android:hint="01000000000"
                 android:background="@drawable/border"
                 android:layout_marginVertical="5dp"
                 android:paddingVertical="10dp"
                 android:paddingLeft="5dp"
                 android:singleLine="true"/>
             <EditText
+                android:id="@+id/purchase_userEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="주문고객 이름을 입력해주세요"
+                android:hint="이메일을 입력해주세요"
                 android:background="@drawable/border"
                 android:layout_marginVertical="5dp"
                 android:paddingVertical="10dp"
@@ -75,6 +78,7 @@
                 android:layout_marginTop="20dp"
                 android:textStyle="bold"/>
             <Button
+                android:id="@+id/register_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="배송지 등록"
@@ -93,20 +97,15 @@
                 android:textStyle="bold"/>
 
             <Spinner
+                android:id="@+id/purchase_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:spinnerMode="dialog"
                 android:autofillHints="배송 요청 사항을 선택해주세요"
-                android:background="@drawable/border"
                 android:layout_marginVertical="5dp"
                 android:paddingVertical="10dp"
                 android:singleLine="true"/>
-            <Button
-                android:id="@+id/btn_makeET"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="직접 입력"
-                />
+
             <LinearLayout
                 android:id="@+id/ll"
                 android:orientation="vertical"
@@ -117,14 +116,50 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/purchase_recycleView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
             </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+
+
         </LinearLayout>
-
-
     </androidx.core.widget.NestedScrollView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right|center"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        >
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:text="총 결제 금액 : " />
+
+        <TextView
+            android:id="@+id/purchase_totalprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:text="10,000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:text="원" />
+
+
+    </LinearLayout>
 
 
         <Button
@@ -133,7 +168,10 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="결제하기"
-            android:textSize="20dp"/>
+            android:background="#FFBDBD"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
 
 
 

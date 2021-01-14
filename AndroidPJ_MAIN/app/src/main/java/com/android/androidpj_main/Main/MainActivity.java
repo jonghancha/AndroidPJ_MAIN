@@ -16,11 +16,15 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.android.androidpj_main.Activity.BottomSheet;
 import com.android.androidpj_main.Activity.CartActivity;
+import com.android.androidpj_main.Activity.EmptyCartActivity;
 import com.android.androidpj_main.Activity.ProductViewActivity;
 import com.android.androidpj_main.Activity.SearchActivity;
 import com.android.androidpj_main.Adapter.ViewPageAdapter;
+import com.android.androidpj_main.NetworkTask.CartNetworkTask;
 import com.android.androidpj_main.R;
+import com.android.androidpj_main.Share.ShareVar;
 import com.google.android.material.tabs.TabLayout;
 
 import java.text.SimpleDateFormat;
@@ -55,11 +59,22 @@ public class MainActivity extends AppCompatActivity {
     private String strSDFormatDay = "0";
     //****************************************
 
+    // 21.01.14 종한 추가
+    // 장바구니 빈지 여부 체크
+    String macIP = ShareVar.macIP;
+    // 로그인한 id 받아오기
+    String userEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("LIPHAE");
+
+        // 21.01.14 종한 추가
+        // 아이디 받아오기
+        userEmail = com.android.androidpj_main.Activity.PreferenceManager.getString(MainActivity.this,"email");
+
 
         //21.01.07 지은 추가 ******************************
         //검색창 눌렀을 때 탭레이아웃 올라오는거 막음
@@ -142,10 +157,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentS);
                 break;
             case R.id.action_cart:
-                Intent intent = new Intent(MainActivity.this, CartActivity.class);
 
 
-                startActivity(intent);
+
+                if (cartEmptyCheck().equals("0")){
+                    Toast.makeText(MainActivity.this, "장바구니 비었음", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, EmptyCartActivity.class);
+                    startActivity(intent);
+
+                }else {
+                    Intent intent = new Intent(MainActivity.this, CartActivity.class);
+                    startActivity(intent);
+                }
+
+
                 Toast.makeText(MainActivity.this, "장바구니 클릭", Toast.LENGTH_SHORT).show();
                 break;
         }
@@ -179,6 +204,26 @@ public class MainActivity extends AppCompatActivity {
     }
     //**********************************************
 
+
+    /**
+     * 장바구니가 비어있는지 여부 체크
+     * @return
+     */
+    private String cartEmptyCheck() {
+        String cartEmptyCheck = "0";
+        String urlAddrCheck = "http://" + macIP + ":8080/JSP/cart_empty_check.jsp?userEmail=" + userEmail;
+        try {
+            CartNetworkTask cartNetworkTask = new CartNetworkTask(MainActivity.this, urlAddrCheck, "select");
+            Object obj = cartNetworkTask.execute().get();
+            cartEmptyCheck = String.valueOf(obj);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        Log.v(TAG, cartEmptyCheck);
+        return cartEmptyCheck;
+    }
 
 
 }

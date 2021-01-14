@@ -42,7 +42,20 @@
 
             </androidx.cardview.widget.CardView>
         </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_weight="3"
+            android:layout_height="wrap_content">
 
+            <TextView
+                android:text="추 천 상 품"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_recycleView"
@@ -81,7 +94,7 @@
                 android:text="테스트 하러가기"
                 android:layout_weight="1"
                 />
-
+        </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

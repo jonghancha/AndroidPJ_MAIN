@@ -128,7 +128,6 @@ public class CartNetworkTask extends AsyncTask<Integer, String, Object> {
     }
 
 
-
     ///////////////////////////////////////////////////////////////////////////////////////
     // Date : 2020.01.11
     //

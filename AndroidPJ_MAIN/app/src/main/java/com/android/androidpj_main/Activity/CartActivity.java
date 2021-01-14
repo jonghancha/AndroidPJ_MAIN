@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.androidpj_main.Adapter.CartAdapter;
 
@@ -46,6 +47,8 @@ public class CartActivity extends AppCompatActivity implements OnChangeCheckedPr
     Button btnCartDelete;
     Button btnCartToOrder;
 
+    // 전체 가격 보내기
+    String sendTotalPrice;
 
 
     @Override
@@ -96,9 +99,19 @@ public class CartActivity extends AppCompatActivity implements OnChangeCheckedPr
                 }
 
 
-                Intent intent = new Intent(CartActivity.this, PurchaseActivity.class);
-                intent.putExtra("cartData", cartAdapter.sendToOrder());
-                startActivity(intent);
+                if (cartAdapter.sendToOrder().size() == 0){
+                    Toast.makeText(CartActivity.this, "상품을 선택해주세요.", Toast.LENGTH_SHORT).show();
+                }else {
+                    String str = String.valueOf(btnCartToOrder.getText());
+                    int end = str.indexOf("원");
+                    String strSubbed =  str.substring(2,end);
+                    Log.v(TAG, "총 가격 +++++++++++++++++++++++++++" + strSubbed);
+                    Intent intent = new Intent(CartActivity.this, PurchaseActivity.class);
+                    intent.putExtra("cartData", cartAdapter.sendToOrder());
+                    intent.putExtra("totalPrice", strSubbed);
+                    startActivity(intent);
+                }
+
             }
         });
 
