@@ -18,7 +18,6 @@ import com.android.androidpj_main.Bean.Product;
 import com.android.androidpj_main.NetworkTask.CUDNetworkTask;
 import com.android.androidpj_main.NetworkTask.LikeCheckNetworkTask;
 import com.android.androidpj_main.NetworkTask.ProductViewNetworkTask;
-import com.android.androidpj_main.PrdDialogFragment;
 import com.android.androidpj_main.R;
 import com.android.androidpj_main.Share.ShareVar;
 

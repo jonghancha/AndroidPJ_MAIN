@@ -1,4 +1,4 @@
-package com.android.androidpj_main;
+package com.android.androidpj_main.Activity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.android.androidpj_main.R;
 
 public class PrdDialogFragment extends DialogFragment {
 

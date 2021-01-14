@@ -22,8 +22,6 @@ public class TestSub05Activity extends Activity {
 
     String test01, test02, test03, test04, test05;
 
-    TextView tv_test05;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +49,6 @@ public class TestSub05Activity extends Activity {
         test03 = intent.getStringExtra("test03");
         test04 = intent.getStringExtra("test04");
 
-        tv_test05 = findViewById(R.id.tv_test05);
-        tv_test05.setText(test01 + " + " + test02 + " + " + test03 + " + " + test04);
 
         //
     }
@@ -63,7 +59,6 @@ public class TestSub05Activity extends Activity {
             switch (v.getId()){
                 case R.id.warm05:
                     test05 = "warm";
-                    Toast.makeText(TestSub05Activity.this, test05 + "sub05", Toast.LENGTH_SHORT).show();
                     Intent intentW = new Intent(TestSub05Activity.this, TestResultActivity.class);
                     intentW.putExtra("test01", test01);
                     intentW.putExtra("test02", test02);
@@ -76,7 +71,6 @@ public class TestSub05Activity extends Activity {
 
                 case R.id.cool05:
                     test05 = "cool";
-                    Toast.makeText(TestSub05Activity.this, test05 + "sub05", Toast.LENGTH_SHORT).show();
                     Intent intentC = new Intent(TestSub05Activity.this, TestResultActivity.class);
                     intentC.putExtra("test01", test01);
                     intentC.putExtra("test02", test02);

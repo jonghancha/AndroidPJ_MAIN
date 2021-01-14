@@ -5,14 +5,14 @@
 <%-- test 폴더에 넣어주세요  --%>
 <%
     request.setCharacterEncoding("utf-8");
-    String prdName = request.getParameter("prdName");
+    String prdNo = request.getParameter("prdNo");
 
 	String url_mysql = "jdbc:mysql://localhost/one?serverTimezone=Asia/Seoul&characterEncoding=utf8&useSSL=false";
  	String id_mysql = "root";
      String pw_mysql = "qwer1234";
      
-    String WhereDefault = "select prdNo, prdName, ctgType, prdBrand, prdPrice, prdFilename, prdDFilename, prdNFilename from product";
-    String Condition = " where prdName = " + prdName;
+    String WhereDefault = "select prdNo, prdName, prdColor, ctgType, prdBrand, prdPrice, prdFilename, prdDFilename, prdNFilename from product";
+    String Condition = " where prdNo = " + prdNo;
     int count = 0;
     
     try {
@@ -36,13 +36,14 @@
 %>            
 			{
 			"prdNo" : "<%=rs.getString(1) %>", 
-			"prdName" : "<%=rs.getString(2) %>",   
-			"ctgType" : "<%=rs.getString(3) %>",
-			"prdBrand" : "<%=rs.getString(4) %>",  
-            "prdPrice" : "<%=rs.getString(5) %>",
-            "prdFilename" : "<%=rs.getString(6) %>",
-            "prdDFilename" : "<%=rs.getString(7) %>",
-            "prdNFilename" : "<%=rs.getString(8) %>"
+            "prdName" : "<%=rs.getString(2) %>",
+            "prdColor" : "<%=rs.getString(3) %>",   
+			"ctgType" : "<%=rs.getString(4) %>",
+			"prdBrand" : "<%=rs.getString(5) %>",  
+            "prdPrice" : "<%=rs.getString(6) %>",
+            "prdFilename" : "<%=rs.getString(7) %>",
+            "prdDFilename" : "<%=rs.getString(8) %>",
+            "prdNFilename" : "<%=rs.getString(9) %>"
 			}
 
 <%		

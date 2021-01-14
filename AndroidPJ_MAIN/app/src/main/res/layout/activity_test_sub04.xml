@@ -33,11 +33,10 @@
         android:orientation="vertical"
         >
         <TextView
-            android:id="@+id/tv_test04"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="테스트 04"
-            android:textSize="30dp"
+            android:text="이 위에 손을 올려 비교해주세요.\n 당신의 피부톤이 더 밝아보이는 색상을 선택해주세요."
+            android:textSize="18dp"
             android:gravity="center"
             android:textColor="@color/black"
             />

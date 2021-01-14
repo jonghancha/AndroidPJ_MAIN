@@ -146,9 +146,9 @@ public class Frmt_Home extends Fragment {
     // 배너에 이용되는 메소드 분리-------
     public void MainBanner(){
         SliderAdapter adapter = new SliderAdapter(getContext());
-        adapter.addItem(new SliderItem("Demo Image 1","https://hi.esmplus.com/b/2019/06/05/1559701410921nltlm7c.jpg"));
-        adapter.addItem(new SliderItem("Demo Image 2","https://img1.daumcdn.net/thumb/R720x0/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fyookkystudio%2F25bbc5bf0ea74c98a9e0fa244e9dc7b1.JPG"));
-        adapter.addItem(new SliderItem("Demo Image 3","https://post-phinf.pstatic.net/MjAxNzA3MjhfMjY5/MDAxNTAxMjA1MzUyOTYz.wtBPmVQGbJp38EiyeZu5AzLnVb1jnqxIxLfV-hYO6gAg.TEQEeHgDem8EhaJczzIjP_B2QE7dv76aGC6p0DrYHAsg.JPEG/170728_%EB%A6%BD%EC%BB%AC%EB%9F%AC%EC%B0%BE%EA%B8%B0_%ED%94%84%EB%A1%9C%EB%AA%A8%EC%85%98_APP_02.jpg?type=w1200"));
+        adapter.addItem(new SliderItem("","https://hi.esmplus.com/b/2019/06/05/1559701410921nltlm7c.jpg"));
+        adapter.addItem(new SliderItem("","https://img1.daumcdn.net/thumb/R720x0/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fyookkystudio%2F25bbc5bf0ea74c98a9e0fa244e9dc7b1.JPG"));
+        adapter.addItem(new SliderItem("","https://post-phinf.pstatic.net/MjAxNzA3MjhfMjY5/MDAxNTAxMjA1MzUyOTYz.wtBPmVQGbJp38EiyeZu5AzLnVb1jnqxIxLfV-hYO6gAg.TEQEeHgDem8EhaJczzIjP_B2QE7dv76aGC6p0DrYHAsg.JPEG/170728_%EB%A6%BD%EC%BB%AC%EB%9F%AC%EC%B0%BE%EA%B8%B0_%ED%94%84%EB%A1%9C%EB%AA%A8%EC%85%98_APP_02.jpg?type=w1200"));
 
         sliderView.setSliderAdapter(adapter);
 
@@ -157,7 +157,7 @@ public class Frmt_Home extends Fragment {
         sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
         sliderView.setIndicatorSelectedColor(Color.WHITE);
         sliderView.setIndicatorUnselectedColor(Color.GRAY);
-        sliderView.setScrollTimeInSec(1);
+        sliderView.setScrollTimeInSec(3);
         sliderView.setAutoCycle(true);
         sliderView.startAutoCycle();
 
