@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +60,19 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.ProductHolder> {
     @Override
     public void onBindViewHolder(@NonNull ProductHolder holder, int position) {
 
+        urlAddr = "http://" + ShareVar.macIP + ":8080/Images/";  // Images 파일
+        urlAddr = urlAddr + data.get(position).getTipImg(); // 경로에 이미지 이름 추가
+
+        String htmlData = "<html>" +
+                "<head>" +
+                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
+                "</head>" +
+                "<body><center>" +
+                "<img src = \"" + urlAddr + "\"style=\"width: auto; height: 100%;\"" +
+                "</center></body>" +
+                "</html>";
+        holder.tipImg.loadData(htmlData,"text/html", "UTF-8");
+
 
         // 팁 제목
         holder.tipTitle.setText(data.get(position).getTipTitle());
@@ -69,7 +83,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.ProductHolder> {
         // 팁 내용
         holder.tipContent.setText(data.get(position).getTipContent());
         //
-        holder.tipContent.setBackground(mContext.getResources().getDrawable(R.drawable.tip_content));
+        holder.tipCo.setBackground(mContext.getResources().getDrawable(R.drawable.tip_content));
 
 
     }
@@ -88,14 +102,17 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.ProductHolder> {
         protected TextView tipTitle;
         protected TextView tipContent;
 
+        WebView tipImg;
+
+        LinearLayout tipCo;
+
         public ProductHolder(@NonNull View itemView) {
             super(itemView);
             tipTitle = itemView.findViewById(R.id.tipTitle);
             tipContent = itemView.findViewById(R.id.tipContent);
+            tipImg = itemView.findViewById(R.id.tipImg);
 
+            tipCo = itemView.findViewById(R.id.tipCo);
         }
     }
-//    public void addItem(ArrayList<Tip> tip){
-//        data.addAll(tip);
-//    }
 }

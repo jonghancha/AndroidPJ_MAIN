@@ -22,7 +22,6 @@ import java.util.ArrayList;
 public class HoneyTipActivity extends AppCompatActivity {
 
     // 지은 수정중 21.01.13 ***************************
-
     final static String TAG = "HoneyTipActivity";
     String urlAddr = null;
     ArrayList<Tip> tips;
@@ -47,23 +46,20 @@ public class HoneyTipActivity extends AppCompatActivity {
                 bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());
             }
         });
+
         tips = new ArrayList<Tip>();
 
         tip_recyclerView = findViewById(R.id.tip_recycleView);
 
-
-
         urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/HoneyTipList.jsp?";
 
-//        connectGetData();
     }
 
-    public void changeText(String text)
-    {
+    public void changeText(String text) {
          String url = urlAddr+"tipTitle="+text;
          connectGetData(url);
-//        tipAdapter.addItem(tips);
     }
+
 
     //메소드 = 로그인한 아이디값에 저장된 연락처 띄워주는
     private void connectGetData(String url){
@@ -87,9 +83,6 @@ public class HoneyTipActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
-
 
 
 

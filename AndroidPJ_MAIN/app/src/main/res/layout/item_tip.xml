@@ -23,19 +23,19 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             >
-            <TextView
-                android:layout_weight="1"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
+                android:layout_weight="1"
                 />
+
             <TextView
                 android:background="#FFBEBE"
                 android:id="@+id/tipTitle"
                 android:textColor="@color/black"
-                android:layout_weight="1"
                 android:gravity="right|center"
                 android:layout_marginLeft="20dp"
+                android:layout_weight="1"
                 android:layout_gravity="right|center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,6 +51,15 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             >
+            <LinearLayout
+                android:id="@+id/tipCo"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical"
+                android:layout_weight="1">
             <TextView
                 android:background="#FFE9BE"
                 android:id="@+id/tipContent"
@@ -64,6 +73,16 @@
                 android:text="Tip Content"
                 android:textColor="@color/black"
                 />
+
+            <WebView
+                android:id="@+id/tipImg"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginRight="20dp"
+                />
+            </LinearLayout>
+
+
             <TextView
                 android:layout_weight="1"
                 android:layout_width="match_parent"

@@ -83,7 +83,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ProductHol
             public void onClick(View v) {
 
                 Intent intent = new Intent(v.getContext(), ProductViewActivity.class);
-                intent.putExtra("prdName", data.get(position).getPrdName());
+                intent.putExtra("prdNo", data.get(position).getPrdNo());
                 intent.putExtra("prdPrice", data.get(position).getPrdPrice());
                 intent.putExtra("prdName", data.get(position).getPrdName());
                 v.getContext().startActivity(intent);
