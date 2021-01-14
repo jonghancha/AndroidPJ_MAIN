@@ -8,8 +8,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+<<<<<<< HEAD
+=======
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.androidpj_main.Activity.MyViewActivity;
+>>>>>>> 757b4ac6b538e379a53d46a0a0378bc1e353e363
 import com.android.androidpj_main.Main.MainActivity;
+import com.android.androidpj_main.Main.PreferenceManager;
+import com.android.androidpj_main.NetworkTask.CUDNetworkTask;
 import com.android.androidpj_main.R;
+import com.android.androidpj_main.Share.ShareVar;
 
 import java.util.ArrayList;
 
@@ -20,21 +29,26 @@ public class TestResultActivity extends Activity {
     Button test_end;
     String test01, test02, test03, test04, test05;
 
-    TextView tv_testR;
+    TextView tv_testR1, tv_testR2;
 
     ArrayList<String> color;
 
-    ImageView iv_testR;
+    ImageView iv_testR1, iv_testR2;
 
-    int colorCool=0;
-    int colorWarm=0;
+    int colorCool = 0;
+    int colorWarm = 0;
+
+    String colorResult;
+
+    String urlAddr_color = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_result);
 
-        iv_testR = findViewById(R.id.iv_testR);
+        iv_testR1 = findViewById(R.id.iv_testR1);
+        iv_testR2 = findViewById(R.id.iv_testR2);
 
         test_end = findViewById(R.id.test_end);
         color = new ArrayList<String>();
@@ -49,8 +63,8 @@ public class TestResultActivity extends Activity {
         test04 = intent.getStringExtra("test04");
         test05 = intent.getStringExtra("test05");
 
-        tv_testR = findViewById(R.id.tv_testR);
-        //tv_testR.setText(test01 + " + " + test02 + " + " + test03 + " + " + test04 + " + " + test05);
+        tv_testR1 = findViewById(R.id.tv_testR1);
+        tv_testR2 = findViewById(R.id.tv_testR2);
         color.add(test01);
         color.add(test02);
         color.add(test03);
@@ -73,11 +87,25 @@ public class TestResultActivity extends Activity {
         }
 
         if(colorCool>colorWarm){
+<<<<<<< HEAD
             tv_testR.setText("쿨톤");
             //iv_testR.setImageResource(R.drawable.cool_result);
         }else if(colorWarm > colorCool){
             tv_testR.setText("웜톤");
             //iv_testR.setImageResource(R.drawable.warm_result);
+=======
+            tv_testR1.setText("퍼스널 컬러 결과는?");
+            tv_testR2.setText("쿨톤이십니다.😊\n쿨톤에 관련된 TMI 방출\n하단을 확인해주세요:)");
+            iv_testR1.setImageResource(R.drawable.cool01);
+            iv_testR2.setImageResource(R.drawable.cool02);
+            colorResult = "쿨톤";
+        }else if(colorWarm > colorCool){
+            tv_testR1.setText("퍼스널 컬러 결과는?");
+            tv_testR2.setText("웜톤이십니다.😊\n웜톤에 관련된 TMI 방출\n하단을 확인해주세요:)");
+            iv_testR1.setImageResource(R.drawable.warm01);
+            iv_testR2.setImageResource(R.drawable.warm02);
+            colorResult = "웜톤";
+>>>>>>> 757b4ac6b538e379a53d46a0a0378bc1e353e363
         }
     }
     //
@@ -88,6 +116,9 @@ public class TestResultActivity extends Activity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.test_end:
+                    String email = PreferenceManager.getString(TestResultActivity.this, "email");
+                    urlAddr_color = "http://" + ShareVar.macIP + ":8080/JSP/myColor.jsp?userColor=" + colorResult + "&userEmail=" + email;
+                    connectUpdateColor();
                     Intent intent = new Intent(TestResultActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -98,4 +129,14 @@ public class TestResultActivity extends Activity {
 
 
 
+    // color 값 저장
+    private void connectUpdateColor(){
+        try {
+            CUDNetworkTask infonetworkTask = new CUDNetworkTask(TestResultActivity.this, urlAddr_color);
+            infonetworkTask.execute().get();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

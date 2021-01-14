@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,7 +34,7 @@ import com.android.androidpj_main.Share.ShareVar;
 
 import java.util.ArrayList;
 
-public class PurchaseActivity extends Activity {
+public class PurchaseActivity extends AppCompatActivity {
 
     final static String TAG = "PurchaseActivity";
     // intent 로 받을 값들
@@ -66,8 +67,18 @@ public class PurchaseActivity extends Activity {
     // 배송 요청 사항 스피너
     ArrayAdapter<CharSequence> adapter = null;
     Spinner purchaseSpinner = null;
+
     // 에딧텍스트 만들어주기 위해 아이디 받아옴
     LinearLayout ll;
+
+
+    /////////////////////////////////////////////
+    // 결제 수단
+    /////////////////////////////////////////////
+    Button payCard, payBank;
+    EditText card1, card2, card3, card4;
+    LinearLayout llCard, llBank;
+
 
 
     // 총 결제금액 넣어주기
@@ -116,6 +127,24 @@ public class PurchaseActivity extends Activity {
         purchaseRecyclerView = findViewById(R.id.purchase_recycleView);
 
 
+
+        /////////////////////////////////////////////
+        // 결제 수단
+        /////////////////////////////////////////////
+        payCard = findViewById(R.id.pay_card);
+        payBank = findViewById(R.id.pay_bank);
+        card1 = findViewById(R.id.card1);
+        card2 = findViewById(R.id.card2);
+        card3 = findViewById(R.id.card3);
+        card4 = findViewById(R.id.card4);
+
+        llCard = findViewById(R.id.ll_card);
+        llBank = findViewById(R.id.ll_bank);
+
+        payCard.setOnClickListener(paymentChoice);
+        payBank.setOnClickListener(paymentChoice);
+
+
         // 총 결제금액 넣어주기
         purchaseTotalPrice = findViewById(R.id.purchase_totalprice);
 
@@ -153,8 +182,8 @@ public class PurchaseActivity extends Activity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(PurchaseActivity.this, RegisterAddress.class);
-            intent.putExtra("purName", purchaseUserName.getText());
-            intent.putExtra("purTel", purchaseUserTel.getText());
+            intent.putExtra("purName", String.valueOf(purchaseUserName.getText()));
+            intent.putExtra("purTel", String.valueOf(purchaseUserTel.getText()));
             Log.v(TAG, "배송지 등록으로 가는 값들은 " + purchaseUserName.getText() +  purchaseUserTel.getText());
             startActivityForResult(intent, GET_ADDRESS_DATA);
         }
@@ -197,6 +226,7 @@ public class PurchaseActivity extends Activity {
                 et.setSingleLine();
                 et.setBackground(ContextCompat.getDrawable(PurchaseActivity.this,R.drawable.border));
 
+
                 ll.addView(et);
                 Log.v("Pur", String.valueOf(et.getText()));
             }else {
@@ -229,8 +259,50 @@ public class PurchaseActivity extends Activity {
         purchaseUserTel.setText(users.get(0).getUserTel());
         purchaseUserEmail.setText(users.get(0).getUserEmail());
 
+    }
 
+
+    /**
+     * 결제수단 선택 메소드
+     */
+    View.OnClickListener paymentChoice = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+
+                case R.id.pay_card:
+                    payCard.setBackground(ContextCompat.getDrawable(PurchaseActivity.this,R.drawable.border));
+                    payCard.setTextColor(Color.parseColor("#000000"));
+                    payBank.setBackground(ContextCompat.getDrawable(PurchaseActivity.this,R.drawable.border_lignt));
+                    payBank.setTextColor(Color.parseColor("#939393"));
+                    llCard.setVisibility(View.VISIBLE);
+                    llBank.setVisibility(View.INVISIBLE);
+                    break;
+
+                case R.id.pay_bank:
+                    payBank.setBackground(ContextCompat.getDrawable(PurchaseActivity.this,R.drawable.border));
+                    payBank.setTextColor(Color.parseColor("#000000"));
+                    payCard.setBackground(ContextCompat.getDrawable(PurchaseActivity.this,R.drawable.border_lignt));
+                    payCard.setTextColor(Color.parseColor("#939393"));
+                    llBank.setVisibility(View.VISIBLE);
+                    llCard.setVisibility(View.INVISIBLE);
+                    break;
+            }
+
+        }
+    };
+
+
+    /**
+     * null 체크 메소드
+     */
+    private void nullCheck(){
 
     }
+
+
+
+
+
 
 }// ----

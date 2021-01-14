@@ -23,10 +23,12 @@ public class PrdDialogFragment extends DialogFragment {
     CheckBox cbAdStop;
 
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+
 
         return inflater.inflate(R.layout.dialog_frmt_product, container, false);
 

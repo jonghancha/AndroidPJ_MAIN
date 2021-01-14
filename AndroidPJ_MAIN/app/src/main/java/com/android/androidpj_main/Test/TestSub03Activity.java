@@ -21,8 +21,6 @@ public class TestSub03Activity extends Activity {
     Button warm03, cool03;
     String test01, test02, test03;
 
-    TextView tv_test03;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +45,6 @@ public class TestSub03Activity extends Activity {
         test01 = intent.getStringExtra("test01");
         test02 = intent.getStringExtra("test02");
 
-        tv_test03 = findViewById(R.id.tv_test03);
-        tv_test03.setText(test01 + " + " + test02);
     }
 
     View.OnClickListener testClickListener = new View.OnClickListener() {
@@ -57,7 +53,6 @@ public class TestSub03Activity extends Activity {
             switch (v.getId()){
                 case R.id.warm03:
                     test03 = "warm";
-                    Toast.makeText(TestSub03Activity.this, test03 + "sub03", Toast.LENGTH_SHORT).show();
                     Intent intentW = new Intent(TestSub03Activity.this, TestSub04Activity.class);
                     intentW.putExtra("test01", test01);
                     intentW.putExtra("test02", test02);
@@ -68,7 +63,6 @@ public class TestSub03Activity extends Activity {
 
                 case R.id.cool03:
                     test03 = "cool";
-                    Toast.makeText(TestSub03Activity.this, test03 + "sub03", Toast.LENGTH_SHORT).show();
                     Intent intentC = new Intent(TestSub03Activity.this, TestSub04Activity.class);
                     intentC.putExtra("test01", test01);
                     intentC.putExtra("test02", test02);
