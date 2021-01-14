@@ -55,7 +55,6 @@
             android:text="주문날짜"
             android:gravity="right"
             android:layout_marginRight="10dp"
-            android:textStyle="bold"
             />
 
         </LinearLayout>

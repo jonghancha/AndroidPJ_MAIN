@@ -22,29 +22,12 @@ public class PrdDialogFragment extends DialogFragment {
     // 다시보지않기 체크박스
     CheckBox cbAdStop;
 
-//    // Debug tag, for logging
-//    static final String TAG = "MyDialogFragment";
-//
-//    // SharedPreferences 정의
-//    private SharedPreferences SPreferences;
-//
-//    // SharedPreferences 접근 이름, 저장 데이터 초기화
-//    private final String NameSPreferences = "Day";
-//    private String strSDFormatDay = "0";
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-
-//        // '오늘 그만 보기' 기능을 위한 날짜 획득
-//        long CurrentTime = System.currentTimeMillis(); // 현재 시간을 msec 단위로 얻음
-//        Date TodayDate = new Date(CurrentTime); // 현재 시간 Date 변수에 저장
-//        SimpleDateFormat SDFormat = new SimpleDateFormat("dd");
-//        strSDFormatDay = SDFormat.format(TodayDate); // 'dd' 형태로 포맷 변경
-//
-//        // SharedPreferences 획득
-//        SPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 
         return inflater.inflate(R.layout.dialog_frmt_product, container, false);
@@ -66,20 +49,5 @@ public class PrdDialogFragment extends DialogFragment {
             }
         });
 
-        //
-        //cbAdStop = getView().findViewById(R.id.cb_ad_stop);
-
-        //
-//        cbAdStop.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                SharedPreferences.Editor SPreferencesEditor = SPreferences.edit();
-//                SPreferencesEditor.putString(NameSPreferences, strSDFormatDay); // 오늘 '일(day)' 저장
-//                SPreferencesEditor.commit(); // important to save the preference
-//                Log.v(TAG, "Close for a day");
-//
-//                dismiss();
-//            }
-//        });
     }
 }

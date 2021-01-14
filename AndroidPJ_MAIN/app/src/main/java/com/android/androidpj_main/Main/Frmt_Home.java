@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -65,6 +66,7 @@ public class Frmt_Home extends Fragment {
     HomeAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
     private RecyclerView.LayoutManager layoutManager;
+    TextView home_usercolor;
     //*********************************************
 
 
@@ -107,24 +109,29 @@ public class Frmt_Home extends Fragment {
 
         // 세미 추가 21.01.13 ***************************
 
+        home_usercolor = v.findViewById(R.id.home_usercolor);
+
         // 로그인한 아이디 userColor 판단.
         urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/homeSelect.jsp?user_userEmail=" + email;
 
         // 판단한 결과로 추천상품 띄워주기
          result = userColorCheck();
 
+
         // 로그인한 user의 userColor가 웜톤
          if(result.equals("웜톤")){
              // productColor가 웜톤인 상품 5개 불러오기
-             urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/colorSelect.jsp?userColor= '" + result + "'";
+             urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/colorSelect.jsp?userColor=" + result;
              connectGetData();
+             home_usercolor.setText(result);
 
         // 로그인한 user의 userColor가 쿨톤
          }else if (result.equals("쿨톤")){
              urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/colorSelect.jsp?userColor=" + result;
              connectGetData();
+             home_usercolor.setText(result);
 
-        // 로그인한 user의 userColor가 null
+             // 로그인한 user의 userColor가 null
          }else{
              urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/colorrandSelect.jsp";
              connectGetData();

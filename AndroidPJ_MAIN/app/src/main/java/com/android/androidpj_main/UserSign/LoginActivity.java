@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.androidpj_main.Activity.PreferenceManager;
 import com.android.androidpj_main.Main.MainActivity;

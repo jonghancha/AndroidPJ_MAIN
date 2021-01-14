@@ -7,6 +7,15 @@
     android:orientation="vertical"
     tools:context=".Test.TestMainActivity">
 
+    <ImageView
+        android:id="@+id/iv_tip"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="right"
+        android:background="@drawable/ic_help"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,6 +32,7 @@
             android:textColor="@color/black"
             />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +43,7 @@
         android:id="@+id/test_Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="❤️(이름) 님❤️ "
+        android:text="❤️(이름) 님❤️"
         android:textColor="@color/black"
         android:textSize="30dp"
         android:gravity="center"
@@ -44,7 +54,7 @@
         android:text="검사에 나타나는 색상 위에 손을 올려주세요😊 \n
 그리고 더 화사하다고 느끼는 색상을 클릭해주세요!"
         android:textColor="@color/black"
-        android:textSize="17dp"
+        android:textSize="18dp"
         android:paddingTop="20dp"
         android:gravity="center|top"
         />
