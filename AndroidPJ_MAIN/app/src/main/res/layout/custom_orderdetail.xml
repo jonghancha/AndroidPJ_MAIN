@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="90dp"
     android:weightSum="10"
+    android:background="#ffffff"
     android:orientation="horizontal">
 
     <WebView
@@ -53,6 +54,7 @@
             android:layout_height="wrap_content"
             android:text="주문날짜"
             android:gravity="right"
+            android:layout_marginRight="10dp"
             android:textStyle="bold"
             />
 

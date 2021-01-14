@@ -5,14 +5,14 @@
 <%-- test 폴더에 넣어주세요  --%>
 <%
     request.setCharacterEncoding("utf-8");
-    String prdNo = request.getParameter("prdNo");
+    String userColor = request.getParameter("userColor");
 
 	String url_mysql = "jdbc:mysql://localhost/one?serverTimezone=Asia/Seoul&characterEncoding=utf8&useSSL=false";
  	String id_mysql = "root";
      String pw_mysql = "qwer1234";
      
     String WhereDefault = "select prdNo, prdName, prdColor, ctgType, prdBrand, prdPrice, prdFilename, prdDFilename, prdNFilename from product";
-    String Condition = " where prdNo = " + prdNo;
+    String Condition = " limit 5";
     int count = 0;
     
     try {
@@ -23,7 +23,7 @@
         ResultSet rs = stmt_mysql.executeQuery(WhereDefault + Condition); // 
 %>
 		{ 
-  			"product_select"  : [ 
+  			"color_select"  : [ 
 <%
         while (rs.next()) {
             if (count == 0) {
@@ -34,13 +34,14 @@
 <%
             }
 %>            
+			
 			{
 			"prdNo" : "<%=rs.getString(1) %>", 
-            "prdName" : "<%=rs.getString(2) %>",
-            "prdColor" : "<%=rs.getString(3) %>",   
-			"ctgType" : "<%=rs.getString(4) %>",
-			"prdBrand" : "<%=rs.getString(5) %>",  
-            "prdPrice" : "<%=rs.getString(6) %>",
+			"prdName" : "<%=rs.getString(2) %>",  
+            "prdColor" : "<%=rs.getString(3) %>", 
+            "ctgType" : "<%=rs.getString(4) %>", 
+			"prdBrand" : "<%=rs.getString(5) %>",
+			"prdPrice" : "<%=rs.getString(6) %>",  
             "prdFilename" : "<%=rs.getString(7) %>",
             "prdDFilename" : "<%=rs.getString(8) %>",
             "prdNFilename" : "<%=rs.getString(9) %>"

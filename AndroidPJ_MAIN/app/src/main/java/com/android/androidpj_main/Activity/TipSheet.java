@@ -64,27 +64,27 @@ public class TipSheet extends BottomSheetDialogFragment {
                     Toast.makeText(getActivity(), option, Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.tip_03:
-                    option = "피부 [ 지성 피부에 대한 꿀팁 ]";
+                    option = "피부 지성 피부에 대한 꿀팁";
                     ((HoneyTipActivity)getActivity()).changeText(option);
                     Toast.makeText(getActivity(), option, Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.tip_04:
-                    option = "퍼스널 컬러 [ 봄 웜톤에 대한 꿀팁 ]";
+                    option = "퍼스널 컬러 봄 웜톤에 대한 꿀팁";
                     ((HoneyTipActivity)getActivity()).changeText(option);
                     Toast.makeText(getActivity(), option, Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.tip_05:
-                    option = "퍼스널 컬러 [ 여름 쿨톤 대한 꿀팁 ]";
+                    option = "퍼스널 컬러 여름 쿨톤에 대한 꿀팁";
                     ((HoneyTipActivity)getActivity()).changeText(option);
                     Toast.makeText(getActivity(), option, Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.tip_06:
-                    option = "퍼스널 컬러 [ 가울 웜톤 대한 꿀팁 ]";
+                    option = "퍼스널 컬러 가을 웜톤에 대한 꿀팁";
                     ((HoneyTipActivity)getActivity()).changeText(option);
                     Toast.makeText(getActivity(), option, Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.tip_07:
-                    option = "퍼스널 컬러 [ 겨울 쿨톤 대한 꿀팁 ]";
+                    option = "퍼스널 컬러 겨울 쿨톤에 대한 꿀팁";
                     ((HoneyTipActivity)getActivity()).changeText(option);
                     Toast.makeText(getActivity(), option, Toast.LENGTH_SHORT).show();
                     break;
