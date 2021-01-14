@@ -116,7 +116,7 @@ public class Frmt_Home extends Fragment {
         // 로그인한 user의 userColor가 웜톤
          if(result.equals("웜톤")){
              // productColor가 웜톤인 상품 5개 불러오기
-             urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/colorSelect.jsp?userColor= '" + result + "'";
+             urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/colorSelect.jsp?userColor=" + result;
              connectGetData();
 
         // 로그인한 user의 userColor가 쿨톤

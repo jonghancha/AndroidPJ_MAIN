@@ -10,8 +10,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.androidpj_main.Activity.MyViewActivity;
 import com.android.androidpj_main.Main.MainActivity;
+import com.android.androidpj_main.Main.PreferenceManager;
+import com.android.androidpj_main.NetworkTask.CUDNetworkTask;
 import com.android.androidpj_main.R;
+import com.android.androidpj_main.Share.ShareVar;
 
 import java.util.ArrayList;
 
@@ -28,10 +32,12 @@ public class TestResultActivity extends Activity {
 
     ImageView iv_testR1, iv_testR2;
 
-    int colorCool=0;
-    int colorWarm=0;
+    int colorCool = 0;
+    int colorWarm = 0;
 
     String colorResult;
+
+    String urlAddr_color = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,11 +88,13 @@ public class TestResultActivity extends Activity {
             tv_testR2.setText("쿨톤이십니다.😊\n쿨톤에 관련된 TMI 방출\n하단을 확인해주세요:)");
             iv_testR1.setImageResource(R.drawable.cool01);
             iv_testR2.setImageResource(R.drawable.cool02);
+            colorResult = "쿨톤";
         }else if(colorWarm > colorCool){
             tv_testR1.setText("퍼스널 컬러 결과는?");
             tv_testR2.setText("웜톤이십니다.😊\n웜톤에 관련된 TMI 방출\n하단을 확인해주세요:)");
             iv_testR1.setImageResource(R.drawable.warm01);
             iv_testR2.setImageResource(R.drawable.warm02);
+            colorResult = "웜톤";
         }
     }
     //
@@ -97,6 +105,9 @@ public class TestResultActivity extends Activity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.test_end:
+                    String email = PreferenceManager.getString(TestResultActivity.this, "email");
+                    urlAddr_color = "http://" + ShareVar.macIP + ":8080/JSP/myColor.jsp?userColor=" + colorResult + "&userEmail=" + email;
+                    connectUpdateColor();
                     Intent intent = new Intent(TestResultActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -107,4 +118,14 @@ public class TestResultActivity extends Activity {
 
 
 
+    // color 값 저장
+    private void connectUpdateColor(){
+        try {
+            CUDNetworkTask infonetworkTask = new CUDNetworkTask(TestResultActivity.this, urlAddr_color);
+            infonetworkTask.execute().get();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
