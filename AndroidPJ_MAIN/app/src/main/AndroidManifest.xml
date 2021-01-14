@@ -27,6 +27,8 @@
         <activity android:name=".Test.TestSub04Activity"/>
         <activity android:name=".Test.TestSub05Activity"/>
         <activity android:name=".Test.TestResultActivity"/>
+        <activity android:name=".Activity.AddressWebViewActivity"/>
+
 
         <activity android:name=".Activity.PurchaseActivity" />
         <activity android:name=".Activity.ProductList" />

@@ -1,10 +1,12 @@
 package com.android.androidpj_main.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.DialogCompat;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,11 +18,11 @@ import android.widget.Toast;
 import com.android.androidpj_main.R;
 
 public class RegisterAddress extends Activity {
-
+    final static String TAG = "RegisterAddress";
 
     // PurchaseActivity 에서 값 받아오기
-    String purName;
-    String purTel;
+    String purName = null;
+    String purTel = null;
 
     // 주문자 정보 가져오기 체크박스
     CheckBox cbGetData;
@@ -48,6 +50,7 @@ public class RegisterAddress extends Activity {
         Intent intent = getIntent();
         purName = intent.getStringExtra("purName");
         purTel = intent.getStringExtra("purTel");
+
 
         // 타이틀
         setTitle("배송지 등록");
@@ -93,9 +96,12 @@ public class RegisterAddress extends Activity {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-            if (purName.length() == 0 || purTel.length() == 0){
-                Toast.makeText(RegisterAddress.this, "주문자 정보를 입력하지 않으셨습니다", Toast.LENGTH_SHORT);
-            }else {
+            if (purName.trim().length() == 0){
+                Toast.makeText(RegisterAddress.this, "주문자 정보를 입력하지 않으셨습니다", Toast.LENGTH_SHORT).show();
+                cbGetData.setChecked(false);
+            }else if (purTel.trim().length() == 0){Toast.makeText(RegisterAddress.this, "주문자 정보를 입력하지 않으셨습니다", Toast.LENGTH_SHORT).show();
+            cbGetData.setChecked(false);
+            } else {
                 if (cbGetData.isChecked()){ // 체크되었을 때
                     regiAdrUserName.setText(purName);
                     regiAdruserTel.setText(purTel);

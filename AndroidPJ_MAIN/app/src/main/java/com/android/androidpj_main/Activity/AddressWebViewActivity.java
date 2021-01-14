@@ -48,6 +48,6 @@ public class AddressWebViewActivity extends AppCompatActivity {
             }
         });
 
-        browser.loadUrl("http://" + macIP + ":8080/test/daum.html");
+        browser.loadUrl("http://" + macIP + ":8080/JSP/daum.html");
     }
 }
