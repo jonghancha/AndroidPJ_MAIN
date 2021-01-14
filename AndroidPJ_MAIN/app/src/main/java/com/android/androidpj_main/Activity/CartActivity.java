@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.androidpj_main.Adapter.CartAdapter;
 
@@ -96,9 +97,14 @@ public class CartActivity extends AppCompatActivity implements OnChangeCheckedPr
                 }
 
 
-                Intent intent = new Intent(CartActivity.this, PurchaseActivity.class);
-                intent.putExtra("cartData", cartAdapter.sendToOrder());
-                startActivity(intent);
+                if (cartAdapter.sendToOrder().size() == 0){
+                    Toast.makeText(CartActivity.this, "상품을 선택해주세요.", Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent = new Intent(CartActivity.this, PurchaseActivity.class);
+                    intent.putExtra("cartData", cartAdapter.sendToOrder());
+                    startActivity(intent);
+                }
+
             }
         });
 

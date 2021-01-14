@@ -171,7 +171,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             public void onClick(View v) {
 
                 Intent intent = new Intent(v.getContext(), ProductViewActivity.class);
-                intent.putExtra("prdName", data.get(position).getPrdName());
+                intent.putExtra("prdName", data.get(position).getPrdNo());
 
                 v.getContext().startActivity(intent);
 
