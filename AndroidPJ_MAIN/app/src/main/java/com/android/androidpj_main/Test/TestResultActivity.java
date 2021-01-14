@@ -76,10 +76,10 @@ public class TestResultActivity extends Activity {
 
         if(colorCool>colorWarm){
             tv_testR.setText("쿨톤");
-            iv_testR.setImageResource(R.drawable.cool_result);
+//            iv_testR.setImageResource(R.drawable.cool_result);
         }else if(colorWarm > colorCool){
             tv_testR.setText("웜톤");
-            iv_testR.setImageResource(R.drawable.warm_result);
+//            iv_testR.setImageResource(R.drawable.warm_result);
         }
     }
     //
