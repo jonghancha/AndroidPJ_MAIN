@@ -7,28 +7,58 @@
     android:orientation="vertical"
     tools:context=".Test.TestMainActivity">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="4"
-        android:text="큰 설명"
-        android:textSize="40dp"
+        android:layout_weight="1"
         android:gravity="center"
-        />
-    <TextView
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="퍼스널컬러를 알아볼까요?"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            />
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
-        android:text="작은 설명"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+    <TextView
+        android:id="@+id/test_Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="❤️(이름) 님❤️ "
+        android:textColor="@color/black"
         android:textSize="30dp"
         android:gravity="center"
         />
-
-
-    <Button
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="검사에 나타나는 색상 위에 손을 올려주세요😊 \n
+그리고 더 화사하다고 느끼는 색상을 클릭해주세요!"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:paddingTop="20dp"
+        android:gravity="center|top"
+        />
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/test_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorPrimary"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
         android:layout_gravity="bottom"
-        android:text="시작하기"/>
+        android:text="테스트 시작하기" />
 
 </LinearLayout>

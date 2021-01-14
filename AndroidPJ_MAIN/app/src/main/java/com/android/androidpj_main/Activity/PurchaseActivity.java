@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.androidpj_main.Adapter.CartAdapter;
 import com.android.androidpj_main.Adapter.PurchaseAdapter;
@@ -35,7 +36,9 @@ import java.util.ArrayList;
 public class PurchaseActivity extends Activity {
 
     final static String TAG = "PurchaseActivity";
+    // intent 로 받을 값들
     ArrayList<Cart> getCartData;
+    String totalPrice;
 
     String urlAddr = null;
     ArrayList<Cart> cart;
@@ -58,6 +61,7 @@ public class PurchaseActivity extends Activity {
     // 배송지 등록
     Button registerAddress;
 
+    private static final int GET_ADDRESS_DATA = 10101;
 
     // 배송 요청 사항 스피너
     ArrayAdapter<CharSequence> adapter = null;
@@ -65,6 +69,9 @@ public class PurchaseActivity extends Activity {
     // 에딧텍스트 만들어주기 위해 아이디 받아옴
     LinearLayout ll;
 
+
+    // 총 결제금액 넣어주기
+    TextView purchaseTotalPrice;
 
 
 
@@ -92,25 +99,26 @@ public class PurchaseActivity extends Activity {
         // 카트에서 선택한 값 받아오기
         Intent intent = getIntent();
         getCartData = (ArrayList<Cart>) intent.getSerializableExtra("cartData");
-
-        // 에딧텍스트 만들어주기 위해 아이디 받아옴
-        ll = findViewById(R.id.ll);
-
-
-        purchaseRecyclerView = findViewById(R.id.purchase_recycleView);
-//        Button button2 = findViewById(R.id.button2);
-
+        totalPrice = intent.getStringExtra("totalPrice");
 
         // 배송 요청 사항 스피너
         adapter = ArrayAdapter.createFromResource(PurchaseActivity.this, R.array.request, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-
         purchaseSpinner = findViewById(R.id.purchase_spinner);
         purchaseSpinner.setAdapter(adapter);
 
-
         purchaseSpinner.setOnItemSelectedListener(spinnerClickListener);
+
+        // 에딧텍스트 만들어주기 위해 아이디 받아옴
+        ll = findViewById(R.id.ll);
+
+        purchaseRecyclerView = findViewById(R.id.purchase_recycleView);
+
+
+        // 총 결제금액 넣어주기
+        purchaseTotalPrice = findViewById(R.id.purchase_totalprice);
+
 
 
 
@@ -134,6 +142,7 @@ public class PurchaseActivity extends Activity {
         super.onResume();
         getUserDate();
         connectGetCart();
+        purchaseTotalPrice.setText(totalPrice);
         Log.v(TAG, "onResume()");
     }
 
@@ -146,10 +155,30 @@ public class PurchaseActivity extends Activity {
             Intent intent = new Intent(PurchaseActivity.this, RegisterAddress.class);
             intent.putExtra("purName", purchaseUserName.getText());
             intent.putExtra("purTel", purchaseUserTel.getText());
-            startActivity(intent);
+            Log.v(TAG, "배송지 등록으로 가는 값들은 " + purchaseUserName.getText() +  purchaseUserTel.getText());
+            startActivityForResult(intent, GET_ADDRESS_DATA);
         }
     };
 
+    /**
+     * 배송지 등록 후 배송정보 가져오기
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GET_ADDRESS_DATA){
+            Toast.makeText(getApplicationContext(),
+                    "요청코드 : " + requestCode + " / 결과코드 : " + resultCode, Toast.LENGTH_LONG).show();
+            if (resultCode == RESULT_OK) {
+                String name = data.getExtras().getString("name");
+                Toast.makeText(getApplicationContext(), "응답값 : " + name, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 
     /**
      * 스피너 클릭 리스너
