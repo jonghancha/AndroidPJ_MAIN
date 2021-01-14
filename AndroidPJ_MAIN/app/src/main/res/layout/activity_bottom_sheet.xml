@@ -76,24 +76,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_bottomcart"
+            android:background="#E88080"
+            android:layout_marginRight="3dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#1c9d9e"
+            android:layout_height="50dp"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:layout_weight="1"
-            android:text="장바구니" />
+            android:src="@drawable/ic_shopping_cart"
+             />
 
     <Button
         android:id="@+id/btn_bottombuy"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#1c9d9e"
+        android:layout_height="50dp"
+        android:background="#E88080"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:layout_weight="5"
+        android:textSize="20dp"
         android:text="구매하기" />
     </LinearLayout>
 

@@ -152,9 +152,24 @@ public class RegisterAddress extends Activity {
             }else if (etAddress2.getText().toString().trim().length() == 0){
                 Toast.makeText(RegisterAddress.this, "상세 주소를 입력해주세요", Toast.LENGTH_SHORT).show();
             }else{
+                // 주문자 정보 텍스트박스
+                 String resultName = String.valueOf(regiAdrUserName.getText());
+                 String resultTel = String.valueOf(regiAdruserTel.getText());
+                 String address1 = String.valueOf(etAddress1.getText());
+                 String address2 = String.valueOf(etAddress2.getText());
+                 String resultAddress = address1 + " " + address2;
+
+
+                // 도로명 주소 텍스트 박스
+
+
+
+
                 //버튼 또는 서브 페이지 종료 시점, 리턴 되는 시점 작성
                 Intent intent = new Intent();
-                intent.putExtra("name", "Apple");
+                intent.putExtra("ordReceiver", resultName);
+                intent.putExtra("ordRcvAddress", resultAddress);
+                intent.putExtra("ordRcvPhone", resultTel);
                 setResult(RESULT_OK, intent);
 
                 finish();

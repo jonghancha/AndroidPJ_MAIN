@@ -198,6 +198,7 @@
                             android:gravity="center"
                             android:layout_marginHorizontal="5dp"
                             android:textSize="20dp"
+                            android:inputType="number"
                             />
                         <EditText
                             android:id="@+id/card2"
@@ -208,6 +209,7 @@
                             android:gravity="center"
                             android:layout_marginHorizontal="5dp"
                             android:textSize="20dp"
+                            android:inputType="number"
                             />
                         <EditText
                             android:id="@+id/card3"
@@ -218,6 +220,7 @@
                             android:gravity="center"
                             android:layout_marginHorizontal="5dp"
                             android:textSize="20dp"
+                            android:inputType="number"
                             />
                         <EditText
                             android:id="@+id/card4"
@@ -228,6 +231,7 @@
                             android:gravity="center"
                             android:layout_marginHorizontal="5dp"
                             android:textSize="20dp"
+                            android:inputType="number"
                             />
                     </LinearLayout>
                     <LinearLayout
@@ -254,6 +258,7 @@
                             android:gravity="center"
                             android:layout_marginHorizontal="5dp"
                             android:textSize="20dp"
+                            android:inputType="numberPassword"
                             />
 
 
@@ -293,13 +298,14 @@
                             android:layout_height="match_parent"
                             android:orientation="horizontal"
                             android:gravity="center"
+                            android:checkedButton="@id/btn_shinhan"
                             >
                             <RadioButton
+                                android:id="@+id/btn_shinhan"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="신한"
                                 android:layout_marginHorizontal="10dp"
-                                android:checked="true"
                                 />
                             <RadioButton
                                 android:layout_width="wrap_content"

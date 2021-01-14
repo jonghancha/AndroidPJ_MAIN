@@ -11,7 +11,7 @@
  	String id_mysql = "root";
      String pw_mysql = "qwer1234";
      
-    String WhereDefault = "select p.prdNo, p.prdName, p.ctgType, p.prdBrand, p.prdPrice, p.prdFilename, p.prdDFilename, p.prdNFilename from product p, one.like l";
+    String WhereDefault = "select p.prdNo, p.prdName, p.prdColor, p.ctgType, p.prdBrand, p.prdPrice, p.prdFilename, p.prdDFilename, p.prdNFilename from product p, one.like l";
     String Condition = " where user_userEmail = '" + user_email + "' and p.prdNo = l.product_prdNo";
     int count = 0;
     

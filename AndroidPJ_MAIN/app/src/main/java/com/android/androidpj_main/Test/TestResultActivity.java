@@ -8,9 +8,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.android.androidpj_main.Activity.MyViewActivity;
 import com.android.androidpj_main.Main.MainActivity;
 import com.android.androidpj_main.Main.PreferenceManager;
 import com.android.androidpj_main.NetworkTask.CUDNetworkTask;
@@ -84,6 +81,7 @@ public class TestResultActivity extends Activity {
         }
 
         if(colorCool>colorWarm){
+
             tv_testR1.setText("퍼스널 컬러 결과는?");
             tv_testR2.setText("쿨톤이십니다.😊\n쿨톤에 관련된 TMI 방출\n하단을 확인해주세요:)");
             iv_testR1.setImageResource(R.drawable.cool01);

@@ -118,7 +118,6 @@ public class ProductViewNetworkTask extends AsyncTask<Integer, String, Object> {
     private void parser(String s){
         Log.v(TAG, "Parser()");
         try {
-            Log.v(TAG, "s값 ::::::" +  s);
             // 배열이기 때문에 [] 이렇게 시작
             JSONObject jsonObject = new JSONObject(s);
             JSONArray jsonArray = new JSONArray(jsonObject.getString("product_select"));

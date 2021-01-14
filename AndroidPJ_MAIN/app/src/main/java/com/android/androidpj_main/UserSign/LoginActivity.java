@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.androidpj_main.Activity.PreferenceManager;
 import com.android.androidpj_main.Main.MainActivity;
@@ -140,7 +139,7 @@ public class LoginActivity extends Activity {
         Epw = findViewById(R.id.et_pw);
 
         //EditText에 입력시 자릿수 제한.
-        Eid.setFilters(new InputFilter[]{new InputFilter.LengthFilter(15)});
+        Eid.setFilters(new InputFilter[]{new InputFilter.LengthFilter(25)});
         Epw.setFilters(new InputFilter[]{new InputFilter.LengthFilter(15)});
 
         //[자동로그인] 이전에 로그인 정보를 저장시킨 기록이 있다면 -----------------------------------------------

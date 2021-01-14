@@ -111,7 +111,6 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ProductHolder>
 
                 v.getContext().startActivity(intent);
 
-                Toast.makeText(v.getContext(), "상세보기 페이지 이동", Toast.LENGTH_SHORT).show();
             }
         });
 
