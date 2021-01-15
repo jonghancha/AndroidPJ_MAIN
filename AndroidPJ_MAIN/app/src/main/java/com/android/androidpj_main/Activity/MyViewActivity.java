@@ -232,13 +232,11 @@ public class MyViewActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog,int which)
                         {
                             // 저장한 키 값으로 저장된 아이디와 암호를 불러와 String 값에 저장
-                            // String checkEmail = PreferenceManager.getString(getActivity(),"email");
+                            String email = com.android.androidpj_main.Main.PreferenceManager.getString(MyViewActivity.this, "email");
 
-                            //지은 실험
-                            String checkEmail = "qkrwldms011@naver.com";
 
                             // 로그인 한 id에 대한 이름 과 연락처를 띄우는 jsp
-                            urlAddr_de = "http://" + ShareVar.macIP + ":8080/JSP/myDelete.jsp?userEmail=" + checkEmail;
+                            urlAddr_de = "http://" + ShareVar.macIP + ":8080/JSP/myDelete.jsp?userEmail=" + email;
                             connectUpdateDelete();
                             Toast.makeText(MyViewActivity.this, "회원 탈퇴가 완료 되었습니다.", Toast.LENGTH_SHORT).show();
                         }

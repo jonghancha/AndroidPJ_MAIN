@@ -56,37 +56,37 @@ public class TipSheet extends BottomSheetDialogFragment {
                 case R.id.tip_01:
                     option = "피부 복합성 피부에 대한 꿀팁";
                     ((HoneyTipActivity)getActivity()).changeText(option);
-                    Toast.makeText(getActivity(), option, Toast.LENGTH_SHORT).show();
+                    dismiss();
                     break;
                 case R.id.tip_02:
                     option = "피부 건성 피부에 대한 꿀팁";
                     ((HoneyTipActivity)getActivity()).changeText(option);
-                    Toast.makeText(getActivity(), option, Toast.LENGTH_SHORT).show();
+                    dismiss();
                     break;
                 case R.id.tip_03:
                     option = "피부 지성 피부에 대한 꿀팁";
                     ((HoneyTipActivity)getActivity()).changeText(option);
-                    Toast.makeText(getActivity(), option, Toast.LENGTH_SHORT).show();
+                    dismiss();
                     break;
                 case R.id.tip_04:
                     option = "퍼스널 컬러 봄 웜톤에 대한 꿀팁";
                     ((HoneyTipActivity)getActivity()).changeText(option);
-                    Toast.makeText(getActivity(), option, Toast.LENGTH_SHORT).show();
+                    dismiss();
                     break;
                 case R.id.tip_05:
                     option = "퍼스널 컬러 여름 쿨톤에 대한 꿀팁";
                     ((HoneyTipActivity)getActivity()).changeText(option);
-                    Toast.makeText(getActivity(), option, Toast.LENGTH_SHORT).show();
+                    dismiss();
                     break;
                 case R.id.tip_06:
                     option = "퍼스널 컬러 가을 웜톤에 대한 꿀팁";
                     ((HoneyTipActivity)getActivity()).changeText(option);
-                    Toast.makeText(getActivity(), option, Toast.LENGTH_SHORT).show();
+                    dismiss();
                     break;
                 case R.id.tip_07:
                     option = "퍼스널 컬러 겨울 쿨톤에 대한 꿀팁";
                     ((HoneyTipActivity)getActivity()).changeText(option);
-                    Toast.makeText(getActivity(), option, Toast.LENGTH_SHORT).show();
+                    dismiss();
                     break;
             }
         }
