@@ -377,6 +377,21 @@ public class PurchaseActivity extends AppCompatActivity {
              Toast.makeText(PurchaseActivity.this, "ORDER INFO 입력 성공", Toast.LENGTH_SHORT).show();
             }
             orderDetailInsert(); // orderdetail 에 넣기
+            cartDetailDelete();
+
+
+
+            Intent intent = new Intent(PurchaseActivity.this, OrderFinished.class);
+            intent.putExtra("buy_name", String.valueOf(purchaseUserName.getText()));
+            intent.putExtra("buy_tel", String.valueOf(purchaseUserTel.getText()));
+            intent.putExtra("buy_email", String.valueOf(purchaseUserEmail.getText()));
+            intent.putExtra("buy_request", orderRequest);
+            intent.putExtra("rcv_name", ordReceiver);
+            intent.putExtra("rcv_tel", ordRcvPhone);
+            intent.putExtra("rcv_address", ordRcvAddress);
+            startActivity(intent);
+            finish();
+
 
 
         }
@@ -486,6 +501,29 @@ public class PurchaseActivity extends AppCompatActivity {
 
         } else {
             Toast.makeText(PurchaseActivity.this, "입력 실패하였습니다.", Toast.LENGTH_SHORT).show();
+
+        }
+
+    }
+
+    /**
+     * cartdetail 제품 삭제
+     * @return
+     */
+    private void cartDetailDelete() {
+        int count = 0;
+        String urlAddr4 = "http://" + macIP + ":8080/JSP/cartdetail_delete.jsp?userEmail=" + userEmail;
+        for (int i = 0; i < getCartData.size(); i++) {
+            String urlAddr5 = "&prdNo=" + getCartData.get(i).getPrdNo();
+            count += Integer.parseInt(connectInsertData(urlAddr4 + urlAddr5));
+            Log.v(TAG, "count : " + count);
+            Log.v(TAG, "urlAddr5 : " + urlAddr5);
+        }
+        if (count == getCartData.size()) {
+            Toast.makeText(PurchaseActivity.this, "삭제 성공하였습니다.", Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(PurchaseActivity.this, "삭제 실패하였습니다.", Toast.LENGTH_SHORT).show();
 
         }
 

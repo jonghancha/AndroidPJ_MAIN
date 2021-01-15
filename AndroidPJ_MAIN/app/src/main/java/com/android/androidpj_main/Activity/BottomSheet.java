@@ -18,11 +18,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.android.androidpj_main.Adapter.CartAdapter;
+import com.android.androidpj_main.Bean.Cart;
 import com.android.androidpj_main.NetworkTask.CartNetworkTask;
 import com.android.androidpj_main.R;
 import com.android.androidpj_main.Share.ShareVar;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import java.util.ArrayList;
 
 public class BottomSheet extends BottomSheetDialogFragment {
 
@@ -60,6 +65,9 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
     // 로그인한 id 받아오기
     String userEmail;
+
+    // 주문하기 버튼 누르면 담아서 보내기
+    ArrayList<Cart> buy;
 
 
     @Nullable
@@ -243,6 +251,12 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
                 case R.id.btn_bottombuy: // 구매하기 버튼
                     Intent intent = new Intent(getActivity(), PurchaseActivity.class);
+                    buy = connectGetCart();
+                    buy.get(0).setCartQty(Integer.parseInt(String.valueOf(et_quantity.getText())));
+                    intent.putExtra("cartData", buy);
+                    intent.putExtra("totalPrice", Integer.toString(buy.get(0).getCartQty()*buy.get(0).getPrdPrice()));
+
+
                     startActivity(intent);
                     break;
 
@@ -355,6 +369,25 @@ public class BottomSheet extends BottomSheetDialogFragment {
         }
 
         return result;
+    }
+
+    // 상품을 띄우는
+    private ArrayList<Cart> connectGetCart() {
+        ArrayList<Cart> cart = new ArrayList<>();
+        try {
+            urlAddr = "http://" + macIP + ":8080/JSP/buy_right_now.jsp?prdNo=" + prdNo;
+            CartNetworkTask cartNetworkTask = new CartNetworkTask(getContext(), urlAddr, "noQty");
+
+            // object 에서 선언은 되었지만 실질적으로 리턴한것은 arraylist
+            Object object = cartNetworkTask.execute().get();
+            //gridLayoutManager = new GridLayoutManager(this, 2);
+            cart = (ArrayList<Cart>) object;
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return cart;
     }
 
 
