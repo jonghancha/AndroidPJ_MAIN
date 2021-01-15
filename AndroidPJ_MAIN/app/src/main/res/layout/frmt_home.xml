@@ -97,7 +97,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:background="@color/white"
+                    android:background="#DDC5FB"
                     android:orientation="horizontal"
                     android:weightSum="2.5"
                     >
