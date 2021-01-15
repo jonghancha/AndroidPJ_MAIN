@@ -19,6 +19,7 @@
 
 
 - ShareVar Package 안 ShareVar 클래스에서 본인 IP로 변경하기
+
   <img src= "https://github.com/jonghancha/AndroidPJ_Documents/blob/main/share.jpg">
 
 ## 2. Database backup 
