@@ -17,22 +17,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.OrderdetailActivity"></activity>
-        <activity android:name=".Activity.RegisterAddress"></activity>
-
-
-        <activity android:name=".Test.TestSub01Activity"/>
-        <activity android:name=".Test.TestSub02Activity"/>
-        <activity android:name=".Test.TestSub03Activity"/>
-        <activity android:name=".Test.TestSub04Activity"/>
-        <activity android:name=".Test.TestSub05Activity"/>
-        <activity android:name=".Test.TestResultActivity"/>
-        <activity android:name=".Activity.AddressWebViewActivity"/>
-
-
+        <activity android:name=".Activity.OrderFinished"></activity>
+        <activity android:name=".Activity.OrderdetailActivity" />
+        <activity android:name=".Activity.RegisterAddress" />
+        <activity android:name=".Test.TestSub01Activity" />
+        <activity android:name=".Test.TestSub02Activity" />
+        <activity android:name=".Test.TestSub03Activity" />
+        <activity android:name=".Test.TestSub04Activity" />
+        <activity android:name=".Test.TestSub05Activity" />
+        <activity android:name=".Test.TestResultActivity" />
+        <activity android:name=".Activity.AddressWebViewActivity" />
         <activity android:name=".Activity.PurchaseActivity" />
         <activity android:name=".Activity.ProductList" />
         <activity android:name=".Activity.EmptyCartActivity" />
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />

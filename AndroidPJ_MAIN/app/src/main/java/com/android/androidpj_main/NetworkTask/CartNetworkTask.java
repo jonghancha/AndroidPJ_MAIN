@@ -101,7 +101,9 @@ public class CartNetworkTask extends AsyncTask<Integer, String, Object> {
                     result = parserCount(stringBuffer.toString());
                 }else if (where.equals("getdata")){
                     parser(stringBuffer.toString());
-                }else{
+                }else if (where.equals("noQty")){
+                    parserNoqty(stringBuffer.toString());
+                } else{
                     result = parserAction(stringBuffer.toString());
                 }
                 ///////////////////////////////////////////////////////////////////////////////////////
@@ -121,7 +123,9 @@ public class CartNetworkTask extends AsyncTask<Integer, String, Object> {
         }
         if(where.equals("getdata")){
             return carts;
-        }else{
+        }else if (where.equals("noQty")){
+          return carts;
+        } else{
             return result;
         }
 
@@ -196,6 +200,40 @@ public class CartNetworkTask extends AsyncTask<Integer, String, Object> {
 
     }
 
+    private void parserNoqty(String s){
+        Log.v(TAG,"parserNoqty()");
+        Log.v(TAG, s);
+        String check = null;
+        try {
+            JSONObject jsonObject = new JSONObject(s);
+            JSONArray jsonArray = new JSONArray(jsonObject.getString("cart_info"));
+
+            carts.clear();
+            for(int i = 0; i < jsonArray.length(); i++){
+                JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
+
+                int prdNo = jsonObject1.getInt("prdNo");
+                String prdBrand = jsonObject1.getString("prdBrand");
+                String prdName = jsonObject1.getString("prdName");
+                int prdPrice = Integer.parseInt(jsonObject1.getString("prdPrice"));
+
+                String prdFilename = jsonObject1.getString("prdFilename");
+
+
+                Log.v(TAG, "prdBrand : " + prdBrand);
+
+                Cart cart = new Cart(prdNo, prdBrand, prdName, prdPrice, 1, prdFilename);
+
+                carts.add(cart);
+                Log.v(TAG, "----------------------------------");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+
     private String parserCount(String s) {
 
             Log.v(TAG,"parserCount()");
@@ -225,6 +263,8 @@ public class CartNetworkTask extends AsyncTask<Integer, String, Object> {
         }
 
 
+
+
     ///////////////////////////////////////////////////////////////////////////////////////
     // Date : 2020.01.11
     //
@@ -249,5 +289,7 @@ public class CartNetworkTask extends AsyncTask<Integer, String, Object> {
         return returnValue;
     }
     ///////////////////////////////////////////////////////////////////////////////////////
+
+
 
 } // ----
