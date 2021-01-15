@@ -61,7 +61,6 @@
                 android:orientation="vertical"
                 android:layout_weight="1">
             <TextView
-                android:background="#FFE9BE"
                 android:id="@+id/tipContent"
                 android:gravity="left|center"
                 android:layout_gravity="left|center"

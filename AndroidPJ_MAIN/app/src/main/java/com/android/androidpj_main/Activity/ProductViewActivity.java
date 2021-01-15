@@ -183,11 +183,9 @@ public class ProductViewActivity extends AppCompatActivity {
                 case R.id.btn_like:
 
                     if(result == 1){    // 이미 찜 상태 - like테이블에서 삭제, 버튼 변경
-                        Log.v(TAG, "상세페이지 찜 삭제" + result);
                         urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/likeDel.jsp?prdNo=" + prdNo + "&email=" + email;
-
                         connectDeleteData();
-                        Toast.makeText(ProductViewActivity.this, "하트 해제", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProductViewActivity.this, "찜목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                         ib_like.setImageResource(R.drawable.ic_hate);
                         urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/likeCheck.jsp?user_userEmail=" + email + "&product_prdNo=" + prdNo;
                         result = likeCheck();
@@ -195,7 +193,7 @@ public class ProductViewActivity extends AppCompatActivity {
                     }else{              // 찜으로 변경 - like테이블에 insert, 버튼 변경
                         urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/likebtnChange.jsp?prdNo=" + prdNo + "&email=" + email;
                         connectDeleteData();
-                        Toast.makeText(ProductViewActivity.this, "하트 버튼", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProductViewActivity.this, "찜목록에 추가되었습니다.", Toast.LENGTH_SHORT).show();
                         ib_like.setImageResource(R.drawable.ic_like);
                         urlAddr = "http://" + ShareVar.macIP + ":8080/JSP/likeCheck.jsp?user_userEmail=" + email + "&product_prdNo=" + prdNo;
                         result = likeCheck();

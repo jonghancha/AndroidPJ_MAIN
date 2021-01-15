@@ -1,6 +1,7 @@
 package com.android.androidpj_main.Activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import com.android.androidpj_main.NetworkTask.CUDNetworkTask;
 import com.android.androidpj_main.NetworkTask.UserNetworkTask;
 import com.android.androidpj_main.R;
 import com.android.androidpj_main.Share.ShareVar;
+import com.android.androidpj_main.UserSign.LoginActivity;
 
 import java.util.ArrayList;
 
@@ -215,7 +217,9 @@ public class MyViewActivity extends AppCompatActivity {
                     break;
 
                 case R.id.MyLogout:
-                    Toast.makeText(MyViewActivity.this, "로그아웃 클릭", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MyViewActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(MyViewActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
                     break;
 
                 case R.id.MyDelete:
