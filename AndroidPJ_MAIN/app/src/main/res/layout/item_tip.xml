@@ -30,7 +30,6 @@
                 />
 
             <TextView
-                android:background="#FFBEBE"
                 android:id="@+id/tipTitle"
                 android:textColor="@color/black"
                 android:gravity="right|center"
