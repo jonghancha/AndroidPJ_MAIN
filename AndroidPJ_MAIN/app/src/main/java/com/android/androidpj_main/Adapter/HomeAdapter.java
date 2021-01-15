@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -102,7 +101,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ProductHolder>
 
                 v.getContext().startActivity(intent);
 
-                Toast.makeText(v.getContext(), "상세보기 페이지 이동", Toast.LENGTH_SHORT).show();
             }
         });
 
