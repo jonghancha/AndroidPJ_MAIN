@@ -18,8 +18,8 @@
     - Windows :  예시) "C:\\\Program Files ~\\\ROOT\\\test"와 같이 역슬래시 두번써줘야 합니다
 
 
-- Activity Package 안 ShareVar 클래스에서 본인 IP로 변경하기
-  <img src= "https://github.com/jonghancha/AddressProject/blob/main/mdImage/Inkedsharevar_LI.jpg">
+- ShareVar Package 안 ShareVar 클래스에서 본인 IP로 변경하기
+  <img src= "https://github.com/jonghancha/AndroidPJ_Documents/blob/main/share.jpg">
 
 ## 2. Database backup 
   - JSP와 마찬가지로 GitHub의 DB안 파일을 사용해주세요
