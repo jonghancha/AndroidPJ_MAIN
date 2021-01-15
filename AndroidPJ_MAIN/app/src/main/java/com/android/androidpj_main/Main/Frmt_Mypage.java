@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.Fragment;
 
 import com.android.androidpj_main.Activity.MyViewActivity;
@@ -58,8 +60,8 @@ public class Frmt_Mypage extends Fragment {
 
     // 이미지 업로드
     String imgAddr;
-    ImageView imageView = null;
-    Button button = null;
+//    ImageView imageView = null;
+
     private final int REQ_CODE_SELECT_IMAGE = 300; // Gallery Return Code
     private String img_path = null; // 최종 file name
     private String f_ext = null;    // 최종 file extension
@@ -136,22 +138,22 @@ public class Frmt_Mypage extends Fragment {
         ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, getContext().MODE_PRIVATE);
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        imageView = v.findViewById(R.id.insert_image);
-        button = v.findViewById(R.id.upload_btn);
+//        imageView = v.findViewById(R.id.insert_image);
 
-        imageView.setOnClickListener(mClickListener);
-        button.setOnClickListener(mClickListener);
+
+        insertImage.setOnClickListener(mClickListener);
+
 
 
         userEmail = com.android.androidpj_main.Activity.PreferenceManager.getString(getActivity(), "email");
 
         if (users_mypage.get(0).getUserFilename().length() == 0){
-            imageView.setImageResource(R.drawable.myaccount);
+            insertImage.setImageResource(R.drawable.myaccount);
         }else{
         imgAddr = "http://" + ShareVar.macIP + ":8080/Images/";
         imgAddr = imgAddr + users_mypage.get(0).getUserFilename();
 
-        ViewImageNetworkTask networkTask = new ViewImageNetworkTask(getActivity(), imgAddr, imageView);
+        ViewImageNetworkTask networkTask = new ViewImageNetworkTask(getActivity(), imgAddr, insertImage);
         networkTask.execute(100); // 10초. 이것만 쓰면 pre post do back 등 알아서 실행
 
         }
@@ -250,48 +252,8 @@ public class Frmt_Mypage extends Fragment {
                     intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(intent, REQ_CODE_SELECT_IMAGE);
                     break;
-                //////////////////////////////////////////////////////////////////////////////////////////////
-                //
-                //           Upload
-                //
-                //////////////////////////////////////////////////////////////////////////////////////////////
-                case R.id.upload_btn:
-                    urlAddr = urlAddr + userEmail;
-                    Log.v(TAG, urlAddr);
-                    ImageUploadNetworkTask networkTask = new ImageUploadNetworkTask(getActivity(), imageView, img_path, urlAddr);
-                    //////////////////////////////////////////////////////////////////////////////////////////////
-                    //
-                    //              NetworkTask Class의 doInBackground Method의 결과값을 가져온다.
-                    //
-                    //////////////////////////////////////////////////////////////////////////////////////////////
-                    try {
-                        Integer result = networkTask.execute(100).get();
-                        //////////////////////////////////////////////////////////////////////////////////////////////
-                        //
-                        //              doInBackground의 결과값으로 Toast생성
-                        //
-                        //////////////////////////////////////////////////////////////////////////////////////////////
-                        switch (result){
-                            case 1:
-                                Toast.makeText(getActivity(), "Success!", Toast.LENGTH_SHORT).show();
 
-                                //////////////////////////////////////////////////////////////////////////////////////////////
-                                //
-                                //              Device에 생성한 임시 파일 삭제
-                                //
-                                //////////////////////////////////////////////////////////////////////////////////////////////
-                                File file = new File(img_path);
-                                file.delete();
-                                break;
-                            case 0:
-                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
-                                break;
-                        }
-                        //////////////////////////////////////////////////////////////////////////////////////////////
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                    break;
+
             }
         }
     };
@@ -317,7 +279,12 @@ public class Frmt_Mypage extends Fragment {
 
                 //image_bitmap 으로 받아온 이미지의 사이즈를 임의적으로 조절함. width: 400 , height: 300
                 Bitmap image_bitmap_copy = Bitmap.createScaledBitmap(image_bitmap, 400, 300, true);
-                imageView.setImageBitmap(image_bitmap_copy);
+
+                RoundedBitmapDrawable roundBitmap = RoundedBitmapDrawableFactory.create(getContext().getResources(), image_bitmap_copy);
+                roundBitmap.setCircular(true);
+                insertImage.setImageDrawable(roundBitmap);
+
+//                insertImage.setImageBitmap(image_bitmap_copy);
 
                 // 파일 이름 및 경로 바꾸기(임시 저장, 경로는 임의로 지정 가능)
                 String date = new SimpleDateFormat("yyyyMMddHmsS").format(new Date());
@@ -332,7 +299,46 @@ public class Frmt_Mypage extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            //
+            //           Upload
+            //
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            urlAddr = urlAddr + userEmail;
+            Log.v(TAG, urlAddr);
+            ImageUploadNetworkTask networkTask = new ImageUploadNetworkTask(getActivity(), insertImage, img_path, urlAddr);
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            //
+            //              NetworkTask Class의 doInBackground Method의 결과값을 가져온다.
+            //
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            try {
+                Integer result = networkTask.execute(100).get();
+                //////////////////////////////////////////////////////////////////////////////////////////////
+                //
+                //              doInBackground의 결과값으로 Toast생성
+                //
+                //////////////////////////////////////////////////////////////////////////////////////////////
+                switch (result){
+                    case 1:
+                        Toast.makeText(getActivity(), "Success!", Toast.LENGTH_SHORT).show();
 
+                        //////////////////////////////////////////////////////////////////////////////////////////////
+                        //
+                        //              Device에 생성한 임시 파일 삭제
+                        //
+                        //////////////////////////////////////////////////////////////////////////////////////////////
+                        File file = new File(img_path);
+                        file.delete();
+                        break;
+                    case 0:
+                        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                //////////////////////////////////////////////////////////////////////////////////////////////
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
