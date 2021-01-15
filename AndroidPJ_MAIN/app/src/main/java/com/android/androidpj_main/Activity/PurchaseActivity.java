@@ -11,6 +11,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +56,7 @@ public class PurchaseActivity extends AppCompatActivity {
 
     // 유저 정보 가져올 때 필요한 변수
     ArrayList<User> users;
+
     // 로그인한 아이디에 대한 정보 띄움
     String urlAddr_user = null;
 
@@ -70,13 +74,14 @@ public class PurchaseActivity extends AppCompatActivity {
 
     // 에딧텍스트 만들어주기 위해 아이디 받아옴
     LinearLayout ll;
+    EditText et;
 
 
     /////////////////////////////////////////////
     // 결제 수단
     /////////////////////////////////////////////
     Button payCard, payBank;
-    EditText card1, card2, card3, card4;
+    EditText card1, card2, card3, card4, card5;
     LinearLayout llCard, llBank;
 
 
@@ -84,7 +89,11 @@ public class PurchaseActivity extends AppCompatActivity {
     // 총 결제금액 넣어주기
     TextView purchaseTotalPrice;
 
+    // 결제버튼
+    Button btnBuy;
 
+    // orderinfo 입력할 데이터
+    String ordReceiver, ordRcvAddress, ordRcvPhone, orderRequest, ordPay, ordCardNo, ordCardPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,18 +146,34 @@ public class PurchaseActivity extends AppCompatActivity {
         card2 = findViewById(R.id.card2);
         card3 = findViewById(R.id.card3);
         card4 = findViewById(R.id.card4);
+        card5 = findViewById(R.id.card5);
 
         llCard = findViewById(R.id.ll_card);
         llBank = findViewById(R.id.ll_bank);
 
+        // 버튼 클릭 시 frame 변경
         payCard.setOnClickListener(paymentChoice);
         payBank.setOnClickListener(paymentChoice);
 
+        // 카드번호 4개씩 자동이동
+        card1.addTextChangedListener(addTextChangedListener);
+        card2.addTextChangedListener(addTextChangedListener);
+        card3.addTextChangedListener(addTextChangedListener);
+        card4.addTextChangedListener(addTextChangedListener);
+
+        // EditText에 입력시 자릿수 제한.
+        card1.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
+        card2.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
+        card3.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
+        card4.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
+        card5.setFilters(new InputFilter[]{new InputFilter.LengthFilter(3)});
 
         // 총 결제금액 넣어주기
         purchaseTotalPrice = findViewById(R.id.purchase_totalprice);
 
-
+        // 결제버튼
+        btnBuy = findViewById(R.id.btn_buy);
+        btnBuy.setOnClickListener(buyButtonClickListener);
 
 
         }
@@ -203,8 +228,9 @@ public class PurchaseActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),
                     "요청코드 : " + requestCode + " / 결과코드 : " + resultCode, Toast.LENGTH_LONG).show();
             if (resultCode == RESULT_OK) {
-                String name = data.getExtras().getString("name");
-                Toast.makeText(getApplicationContext(), "응답값 : " + name, Toast.LENGTH_LONG).show();
+                ordReceiver = data.getExtras().getString("ordReceiver");
+                ordRcvAddress = data.getExtras().getString("ordRcvAddress");
+                ordRcvPhone = data.getExtras().getString("ordRcvPhone");
             }
         }
     }
@@ -216,7 +242,7 @@ public class PurchaseActivity extends AppCompatActivity {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             if (purchaseSpinner.getSelectedItemPosition() == 3){
-                EditText et = new EditText(getApplicationContext());
+                et = new EditText(getApplicationContext());
                 LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
 
@@ -294,11 +320,253 @@ public class PurchaseActivity extends AppCompatActivity {
 
 
     /**
+     * 텍스트 웟쳐
+     */
+    TextWatcher addTextChangedListener = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            if (card1.length() == 4) {               // edit1 맥스값을 4이라고 가정했을때
+                card2.requestFocus();             // 두번째로 포커스가 넘어간다
+            }
+            if (card2.length() == 4) {
+                card3.requestFocus();
+            }
+            if (card3.length() == 4) {
+                card4.requestFocus();
+            }
+            if (card4.length() == 4) {
+                card5.requestFocus();
+            }
+
+
+        }
+
+
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+
+
+
+    /**
      * null 체크 메소드
      */
     private void nullCheck(){
 
     }
+
+
+    /**
+     * ***************************제품 구매 버튼 ****************************
+     */
+    View.OnClickListener buyButtonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            collectData();
+            if (orderinfoInsert().equals("1")){
+             Toast.makeText(PurchaseActivity.this, "ORDER INFO 입력 성공", Toast.LENGTH_SHORT).show();
+            }
+            orderDetailInsert(); // orderdetail 에 넣기
+            cartDetailDelete();
+
+
+
+            Intent intent = new Intent(PurchaseActivity.this, OrderFinished.class);
+            intent.putExtra("buy_name", String.valueOf(purchaseUserName.getText()));
+            intent.putExtra("buy_tel", String.valueOf(purchaseUserTel.getText()));
+            intent.putExtra("buy_email", String.valueOf(purchaseUserEmail.getText()));
+            intent.putExtra("buy_request", orderRequest);
+            intent.putExtra("rcv_name", ordReceiver);
+            intent.putExtra("rcv_tel", ordRcvPhone);
+            intent.putExtra("rcv_address", ordRcvAddress);
+            startActivity(intent);
+            finish();
+
+
+
+        }
+    };
+
+
+    /**
+     * DB에 넣을 데이터 정리하기
+     */
+    private void collectData(){
+        if (purchaseSpinner.getSelectedItemPosition() == 3){
+            orderRequest = String.valueOf(et.getText());
+        }else {
+            orderRequest = String.valueOf(purchaseSpinner.getSelectedItem());
+        }
+
+        ordPay = totalPrice;
+
+        ordCardNo = card1.getText().toString() + card2.getText().toString() + card3.getText().toString() + card4.getText().toString();
+        Log.v(TAG,ordCardNo);
+        ordCardPass = String.valueOf(card5.getText());
+
+    }
+
+
+
+
+
+    /**
+     * orderinfo 에 INSERT DATA
+     */
+    private String orderinfoInsert(){
+        String result = null;
+//        String urlAddrInsert = "http://" + macIP + ":8080/JSP/orderinfo_insert.jsp?userEmail=" + userEmail + "&ordReceiver=" + ordReceiver + "&ordRcvAddress="+ ordRcvAddress + "&ordRcvPhone="+ ordRcvPhone + "&orderRequest="
+//                + orderRequest + "&ordPay="+ ordPay + "&ordCardNo="+ ordCardNo + "&ordCardPass=" + ordCardPass;
+
+        String urlAddrInsert = "http://" + macIP + ":8080/JSP/orderinfo_insert.jsp?userEmail=" + userEmail + "&ordReceiver=" + ordReceiver + "&ordRcvAddress='"+ ordRcvAddress + "'&ordRcvPhone="+ ordRcvPhone + "&orderRequest="
+                + orderRequest + "&ordPay="+ ordPay + "&ordCardNo="+ ordCardNo + "&ordCardPass=" + ordCardPass;
+        try {
+            ///////////////////////////////////////////////////////////////////////////////////////
+            // Date : 2020.01.11
+            //
+            // Description:
+            //  - 입력하고 리턴값을 받음
+            //
+            ///////////////////////////////////////////////////////////////////////////////////////
+            CartNetworkTask networkTask = new CartNetworkTask(PurchaseActivity.this, urlAddrInsert, "insert");
+            ///////////////////////////////////////////////////////////////////////////////////////
+
+            ///////////////////////////////////////////////////////////////////////////////////////
+            // Date : 2020.12.24
+            //
+            // Description:
+            //  - 입력 결과 값을 받기 위해 Object로 return후에 String으로 변환 하여 사용
+            //
+            ///////////////////////////////////////////////////////////////////////////////////////
+            Object obj = networkTask.execute().get();
+            result = (String) obj;
+            ///////////////////////////////////////////////////////////////////////////////////////
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return result;
+
+    }
+
+    /**
+     *
+     */
+    private String checkOrderNo(){
+        String result = null;
+
+        String urlAddrCheck = "http://" + macIP + ":8080/JSP/ordNo_select.jsp?userEmail=" + userEmail;
+        try {
+            CartNetworkTask cartNetworkTask = new CartNetworkTask(PurchaseActivity.this, urlAddrCheck, "select");
+            Object obj = cartNetworkTask.execute().get();
+            result = String.valueOf(obj);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        Log.v(TAG, result);
+        return result;
+
+
+    }
+
+
+    /**
+     * orderdetail 에 구매한 제품 입력
+     * @return
+     */
+    private void orderDetailInsert() {
+        int count = 0;
+        String urlAddr4 = "http://" + macIP + ":8080/JSP/orderdetail_insert.jsp?userEmail=" + userEmail + "&ordNo=" + checkOrderNo();
+        for (int i = 0; i < getCartData.size(); i++) {
+            String urlAddr5 = "&prdNo=" + getCartData.get(i).getPrdNo() + "&ordQty=" + getCartData.get(i).getCartQty();
+            count += Integer.parseInt(connectInsertData(urlAddr4 + urlAddr5));
+            Log.v(TAG, "count : " + count);
+            Log.v(TAG, "urlAddr5 : " + urlAddr5);
+        }
+        if (count == getCartData.size()) {
+            Toast.makeText(PurchaseActivity.this, "입력 성공하였습니다.", Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(PurchaseActivity.this, "입력 실패하였습니다.", Toast.LENGTH_SHORT).show();
+
+        }
+
+    }
+
+    /**
+     * cartdetail 제품 삭제
+     * @return
+     */
+    private void cartDetailDelete() {
+        int count = 0;
+        String urlAddr4 = "http://" + macIP + ":8080/JSP/cartdetail_delete.jsp?userEmail=" + userEmail;
+        for (int i = 0; i < getCartData.size(); i++) {
+            String urlAddr5 = "&prdNo=" + getCartData.get(i).getPrdNo();
+            count += Integer.parseInt(connectInsertData(urlAddr4 + urlAddr5));
+            Log.v(TAG, "count : " + count);
+            Log.v(TAG, "urlAddr5 : " + urlAddr5);
+        }
+        if (count == getCartData.size()) {
+            Toast.makeText(PurchaseActivity.this, "삭제 성공하였습니다.", Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(PurchaseActivity.this, "삭제 실패하였습니다.", Toast.LENGTH_SHORT).show();
+
+        }
+
+    }
+
+    private String connectInsertData(String urlAddrInsert){
+
+        String result = null;
+
+        try {
+            ///////////////////////////////////////////////////////////////////////////////////////
+            // Date : 2020.01.11
+            //
+            // Description:
+            //  - 입력하고 리턴값을 받음
+            //
+            ///////////////////////////////////////////////////////////////////////////////////////
+            CartNetworkTask networkTask = new CartNetworkTask(PurchaseActivity.this, urlAddrInsert, "insert");
+            ///////////////////////////////////////////////////////////////////////////////////////
+
+            ///////////////////////////////////////////////////////////////////////////////////////
+            // Date : 2020.12.24
+            //
+            // Description:
+            //  - 입력 결과 값을 받기 위해 Object로 return후에 String으로 변환 하여 F사용
+            //
+            ///////////////////////////////////////////////////////////////////////////////////////
+            Object obj = networkTask.execute().get();
+            result = (String) obj;
+            ///////////////////////////////////////////////////////////////////////////////////////
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return result;
+
+    }
+
+
+
+
+
 
 
 
